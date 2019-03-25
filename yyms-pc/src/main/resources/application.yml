@@ -1,0 +1,31 @@
+#服务器配置
+server:
+  port: 80
+#项目配置
+spring:
+  #资源配置
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+  resources:
+    static-locations: classpath:/static/
+  #数据访问配置
+  datasource:
+    url: jdbc:mysql://118.25.38.57:3306/yyms?characterEncoding=UTF-8
+    hikari:
+      username: root
+      password: zhangzhuo321..
+    driver-class-name: com.mysql.jdbc.Driver
+  #数据访问配置
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  #最大上传文件大小
+  servlet:
+    multipart:
+      max-file-size: 20MB
