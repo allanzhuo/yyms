@@ -14,7 +14,7 @@
     </parent>
 
     <modules>
-          <module>yyms-commom</module>
+          <module>yyms-common</module>
           <module>yyms-pc</module>
     </modules>
 
