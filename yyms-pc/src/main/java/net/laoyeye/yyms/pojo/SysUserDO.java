@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,14 +23,18 @@ import static java.time.LocalDateTime.now;
 @Builder
 @Entity
 @AllArgsConstructor
-@Table(name = "sys_user")
+@NoArgsConstructor
+@Table(name = "sys_user",
+        uniqueConstraints={@UniqueConstraint(name = "uniq_qq_num", columnNames="qqNum")},
+        indexes = {@Index(name = "idx_email", columnList = "email"),
+                @Index(name = "uniq_nickname", columnList = "nickname",unique = true)})
 public class SysUserDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false, nullable = false, length = 11)
+    @Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
     private Long id;
 
-    @Column(length = 20)
+    @Column(nullable = false, columnDefinition="varchar(20) COMMENT '用户名'", length = 20)
     private String username;
 
     @Column(length = 50)
@@ -39,12 +45,12 @@ public class SysUserDO implements Serializable {
 
     private String password;
 
-    @Column(updatable = false, name = "[create]")
+    @CreationTimestamp
     @Builder.Default
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime create = now();
+    private LocalDateTime createTime = now();
 
-    @Column(length = 20)
+    @Column(length = 20, columnDefinition = "varchar(30) COMMENT 'QQ号'")
     private String qqNum;
 
     private String email;
@@ -57,7 +63,7 @@ public class SysUserDO implements Serializable {
     @Builder.Default
     private Long defaultRoleId = 2L;
 
-    @Column(nullable = false, length = 1, columnDefinition = "tinyint(1)")
+    @Column(nullable = false, length = 1, columnDefinition = "tinyint(1) COMMENT '是否有效'")
     @Builder.Default
     private Boolean enable = TRUE;
 

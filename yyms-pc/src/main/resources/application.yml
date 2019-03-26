@@ -9,20 +9,20 @@ spring:
     mode: LEGACYHTML5
   resources:
     static-locations: classpath:/static/
-  #数据访问配置
+  #数据连接配置
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://118.25.38.57:3306/yyms?characterEncoding=UTF-8
     hikari:
       username: root
       password: zhangzhuo321..
-    driver-class-name: com.mysql.jdbc.Driver
   #数据访问配置
   jpa:
     database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
     show-sql: true
-
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   #最大上传文件大小
