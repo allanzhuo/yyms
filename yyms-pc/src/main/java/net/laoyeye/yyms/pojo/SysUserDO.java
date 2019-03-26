@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,49 +26,48 @@ import static java.time.LocalDateTime.now;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "sys_user",
-        uniqueConstraints={@UniqueConstraint(name = "uniq_qq_num", columnNames="qqNum")},
-        indexes = {@Index(name = "idx_email", columnList = "email"),
-                @Index(name = "uniq_nickname", columnList = "nickname",unique = true)})
+        uniqueConstraints={@UniqueConstraint(name = "uniq_user_name", columnNames="userName")},
+        indexes = {@Index(name = "uniq_qq_open_id", columnList = "qqOpenId", unique = true),
+                @Index(name = "uniq_wx_open_id", columnList = "wxOpenId", unique = true)})
+@org.hibernate.annotations.Table(appliesTo = "sys_user",comment="用户表")
 public class SysUserDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
     private Long id;
 
-    @Column(nullable = false, columnDefinition="varchar(20) COMMENT '用户名'", length = 20)
-    private String username;
+    @Column(columnDefinition="varchar(20) COMMENT '用户名'")
+    private String userName;
 
-    @Column(length = 50)
-    private String nickname;
+    @Column(columnDefinition="varchar(50) COMMENT '昵称'")
+    private String nickName;
 
-    @Column(length = 100)
+    @Column(columnDefinition="varchar(50) COMMENT '密码'")
+    private String password;
+
+    @Column(columnDefinition="varchar(255) COMMENT '头像'")
     private String avatar;
 
-    private String password;
+    @Column(columnDefinition="varchar(100) COMMENT '邮箱'")
+    private String email;
+
+    @Column(nullable = false, columnDefinition = "tinyint(1) COMMENT '是否有效'")
+    @Builder.Default
+    private Boolean enable = TRUE;
+
+    @Column(columnDefinition = "varchar(32) COMMENT 'qqOpenId'")
+    private String qqOpenId;
+
+    @Column(columnDefinition = "varchar(32) COMMENT 'wxOpenId'")
+    private String wxOpenId;
 
     @CreationTimestamp
     @Builder.Default
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime = now();
 
-    @Column(length = 20, columnDefinition = "varchar(30) COMMENT 'QQ号'")
-    private String qqNum;
-
-    private String email;
-
-    /**
-     * 默认为普通访客用户
-     * 一个用户可能有多个角色，此字段为默认角色
-     */
-    @Column(nullable = false, length = 11)
+    @UpdateTimestamp
     @Builder.Default
-    private Long defaultRoleId = 2L;
-
-    @Column(nullable = false, length = 1, columnDefinition = "tinyint(1) COMMENT '是否有效'")
-    @Builder.Default
-    private Boolean enable = TRUE;
-
-    private String qqOpenId;
-
-    private String wechatOpenId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime = now();
 }
