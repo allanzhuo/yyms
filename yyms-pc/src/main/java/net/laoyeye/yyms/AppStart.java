@@ -7,8 +7,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * @author laoyeye
- * @Description: ${todo}
+ * @author laoyeye.net
+ * @Description: 启动入口
  * @date 2019/3/25 21:56
  */
 @SpringBootApplication

@@ -16,7 +16,7 @@ import static java.lang.Boolean.TRUE;
 import static java.time.LocalDateTime.now;
 
 /**
- * @author laoyeye
+ * @author laoyeye.net
  * @Description: user实体类
  * @date 2019/3/25 21:48
  */
