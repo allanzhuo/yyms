@@ -27,5 +27,14 @@ public class AppTest {
         System.out.println("hello world");
         List<SysUserDO> all = userRepository.findAll();
         System.out.println(all);
+
+        SysUserDO user = SysUserDO.builder()
+                .id((long)2)
+                .nickName("ceshi")
+                .email("bgood@sina.com")
+                .build();
+        userRepository.save(user);
+        List<SysUserDO> all2 = userRepository.findAll();
+        System.out.println(all2);
     }
 }
