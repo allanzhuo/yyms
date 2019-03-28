@@ -1,4 +1,4 @@
-package net.laoyeye.yyms.pojo;
+package net.laoyeye.yyms.pojo.DO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ import static java.time.LocalDateTime.now;
  * @date 2019/3/25 21:48
  */
 @Data
-@Builder
+@Builder(toBuilder=true)
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,7 +33,8 @@ import static java.time.LocalDateTime.now;
 @org.hibernate.annotations.Table(appliesTo = "sys_user",comment="用户表")
 public class SysUserDO implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "id")
+    @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")
     @Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
     private Long id;
 
@@ -51,23 +53,31 @@ public class SysUserDO implements Serializable {
     @Column(columnDefinition="varchar(100) COMMENT '邮箱'")
     private String email;
 
-    @Column(nullable = false, columnDefinition = "tinyint(1) COMMENT '是否有效'")
-    @Builder.Default
-    private Boolean enable = TRUE;
-
     @Column(columnDefinition = "varchar(32) COMMENT 'qqOpenId'")
     private String qqOpenId;
 
     @Column(columnDefinition = "varchar(32) COMMENT 'wxOpenId'")
     private String wxOpenId;
 
+    @Column(nullable = false, columnDefinition = "tinyint(1) COMMENT '是否有效'")
+    @Builder.Default
+    private Boolean status = TRUE;
+
+    @Column(updatable = false, nullable = false, length = 20)
+    private String createUser;
+
     @CreationTimestamp
     @Builder.Default
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createTime = now();
+
+    @Column(nullable = false, length = 20)
+    private String updateUser;
 
     @UpdateTimestamp
     @Builder.Default
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(nullable = false)
     private LocalDateTime updateTime = now();
 }
