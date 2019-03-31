@@ -1,4 +1,4 @@
-package net.laoyeye.yyms.pojo;
+package net.laoyeye.yyms.pojo.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

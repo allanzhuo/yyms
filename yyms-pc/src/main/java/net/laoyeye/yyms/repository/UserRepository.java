@@ -1,7 +1,8 @@
 package net.laoyeye.yyms.repository;
 
-import net.laoyeye.yyms.pojo.DO.SysUserDO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import net.laoyeye.yyms.pojo.domain.SysUserDO;
+
 
 /**
  * @description: 用户类数据访问
