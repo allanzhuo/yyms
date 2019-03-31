@@ -26,7 +26,7 @@ import static java.time.LocalDateTime.now;
 @NoArgsConstructor
 @Table(name = "sys_log")
 @org.hibernate.annotations.Table(appliesTo = "sys_log",comment="系统日志表")
-public class SysLog {
+public class SysLogDO {
     @Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")

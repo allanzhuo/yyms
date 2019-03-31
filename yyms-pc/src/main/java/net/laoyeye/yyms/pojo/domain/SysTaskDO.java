@@ -29,7 +29,7 @@ import static java.time.LocalDateTime.now;
 @NoArgsConstructor
 @Table(name = "sys_task")
 @org.hibernate.annotations.Table(appliesTo = "sys_task",comment="任务配置表")
-public class SysTask {
+public class SysTaskDO {
     @Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")
