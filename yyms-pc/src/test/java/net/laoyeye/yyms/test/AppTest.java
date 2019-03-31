@@ -1,7 +1,7 @@
 package net.laoyeye.yyms.test;
 
 import net.laoyeye.yyms.AppStart;
-import net.laoyeye.yyms.pojo.DO.SysUserDO;
+import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +28,6 @@ public class AppTest {
         System.out.println("hello world");
         List<SysUserDO> all = userRepository.findAll();
         System.out.println(all);
-
         SysUserDO user = SysUserDO.builder()
                 .nickName("ceshi")
                 .email("bgood@sina.com")
