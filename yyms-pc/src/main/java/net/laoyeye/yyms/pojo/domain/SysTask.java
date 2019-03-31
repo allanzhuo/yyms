@@ -19,61 +19,41 @@ import static java.time.LocalDateTime.now;
 
 /**
  * @author laoyeye.net
- * @Description: 菜单表
- * @date 2019/3/31 17:17
+ * @Description: 任务配置
+ * @date 2019/3/31 17:41
  */
 @Data
 @Builder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "sys_menu")
-@org.hibernate.annotations.Table(appliesTo = "sys_menu",comment="菜单表")
-public class SysMenuDO {
+@Table(name = "sys_task")
+@org.hibernate.annotations.Table(appliesTo = "sys_task",comment="任务配置表")
+public class SysTask {
     @Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")
     @Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
     private Long id;
 
-    @Column(columnDefinition="bigint(20) COMMENT '父菜单ID'")
-    private Long pid;
+    @Column(columnDefinition = "varchar(255) COMMENT '任务名称'")
+    private String jobName;
 
-    @Column(columnDefinition="varchar(255) COMMENT '菜单名称'")
-    private String title;
+    @Column(columnDefinition = "varchar(255) COMMENT '任务描述'")
+    private String description;
 
-    @Column(columnDefinition="int(1) COMMENT '菜单类型'")
-    private int type;
+    @Column(columnDefinition = "varchar(50) COMMENT 'cron表达式'")
+    private String cronExpression;
 
-    @Column(columnDefinition="varchar(50) COMMENT '菜单图标类型'")
-    private String font;
-
-    @Column(columnDefinition="varchar(50) COMMENT '菜单图标'")
-    private String icon;
-
-    @Column(columnDefinition="varchar(255) COMMENT '菜单URL'")
-    private String url;
-
-    @Column(columnDefinition="varchar(255) COMMENT '权限标识'")
-    private String perms;
-
-    @Column(columnDefinition="int(11) COMMENT '排序'")
-    private int sort;
-
-    @Column(columnDefinition="tinyint(1) COMMENT '是否展开'")
-    @Builder.Default
-    private boolean spread = FALSE;
-
-    @Column(columnDefinition="tinyint(1) COMMENT '是否有子菜单'")
-    @Builder.Default
-    private boolean children = FALSE;
-
-    @Column(columnDefinition="varchar(255) COMMENT '备注'")
-    private String remark;
+    @Column(columnDefinition = "varchar(255) COMMENT '任务类（全路径）'")
+    private String beanClass;
 
     @Column(nullable = false, columnDefinition = "tinyint(1) COMMENT '是否有效'")
     @Builder.Default
-    private Boolean status = TRUE;
+    private Boolean status = FALSE;
+
+    @Column(columnDefinition = "varchar(50) COMMENT '任务类（任务分组）'")
+    private String jobGroup;
 
     @Column(updatable = false, nullable = false, length = 20)
     private String createUser;
@@ -92,4 +72,5 @@ public class SysMenuDO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false)
     private LocalDateTime updateTime = now();
+
 }
