@@ -1,4 +1,4 @@
-package net.laoyeye.yyms.pojo;
+package net.laoyeye.yyms.pojo.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -10,36 +10,61 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+
 import java.time.LocalDateTime;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.time.LocalDateTime.now;
 
 /**
- * @description: 角色表
- * @author: laoyeye.net
- * @date: 2019/3/27 10:53
+ * @author laoyeye.net
+ * @Description: 菜单表
+ * @date 2019/3/31 17:17
  */
 @Data
 @Builder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "sys_role",
-        indexes = {@Index(name = "uniq_role_code", columnList = "roleCode", unique = true)})
-@org.hibernate.annotations.Table(appliesTo = "sys_role",comment="角色表")
-public class SysRoleDO {
+@Table(name = "sys_menu")
+@org.hibernate.annotations.Table(appliesTo = "sys_menu",comment="菜单表")
+public class SysMenuDO {
     @Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")
     @Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
     private Long id;
 
-    @Column(columnDefinition="varchar(50) COMMENT '角色名称'")
-    private String roleName;
+    @Column(columnDefinition="bigint(20) COMMENT '父菜单ID'")
+    private Long pid;
 
-    @Column(columnDefinition="varchar(50) COMMENT '角色标识'")
-    private String roleCode;
+    @Column(columnDefinition="varchar(255) COMMENT '菜单名称'")
+    private String title;
+
+    @Column(columnDefinition="int(1) COMMENT '菜单类型'")
+    private int type;
+
+    @Column(columnDefinition="varchar(50) COMMENT '菜单图标类型'")
+    private String font;
+
+    @Column(columnDefinition="varchar(50) COMMENT '菜单图标'")
+    private String icon;
+
+    @Column(columnDefinition="varchar(255) COMMENT '菜单URL'")
+    private String url;
+
+    @Column(columnDefinition="varchar(255) COMMENT '权限标识'")
+    private String perms;
+
+    @Column(columnDefinition="int(11) COMMENT '排序'")
+    private int sort;
+
+    @Column(columnDefinition="tinyint(1) COMMENT '是否展开'")
+    private boolean spread = FALSE;
+
+    @Column(columnDefinition="tinyint(1) COMMENT '是否有子菜单'")
+    private boolean children = FALSE;
 
     @Column(columnDefinition="varchar(255) COMMENT '备注'")
     private String remark;
@@ -65,5 +90,4 @@ public class SysRoleDO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false)
     private LocalDateTime updateTime = now();
-
 }
