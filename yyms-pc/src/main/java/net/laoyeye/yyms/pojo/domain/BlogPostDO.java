@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import static java.lang.Boolean.FALSE;
@@ -27,17 +28,17 @@ import static java.time.LocalDateTime.now;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "blog_post",
-        indexes = {@Index(name = "idx_cate_id", columnList = "cateId")})
+        indexes = {@Index(name = "idx_cate_code", columnList = "cateCode")})
 @org.hibernate.annotations.Table(appliesTo = "blog_post",comment="文章随笔表")
-public class BlogPostDO {
+public class BlogPostDO implements Serializable {
     @Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")
     @Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
     private Long id;
 
-    @Column(columnDefinition="bigint(20) COMMENT '分类ID'")
-    private String cateId;
+    @Column(columnDefinition="varchar(255) COMMENT '分类Code'")
+    private String cateCode;
 
     @Column(nullable = false, columnDefinition="varchar(255) COMMENT '标题'")
     private String postTitle;

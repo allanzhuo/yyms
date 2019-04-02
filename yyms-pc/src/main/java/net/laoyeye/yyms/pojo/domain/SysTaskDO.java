@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import static java.lang.Boolean.FALSE;
@@ -29,7 +30,7 @@ import static java.time.LocalDateTime.now;
 @NoArgsConstructor
 @Table(name = "sys_task")
 @org.hibernate.annotations.Table(appliesTo = "sys_task",comment="任务配置表")
-public class SysTaskDO {
+public class SysTaskDO implements Serializable {
     @Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")
@@ -52,7 +53,7 @@ public class SysTaskDO {
     @Builder.Default
     private Boolean status = FALSE;
 
-    @Column(columnDefinition = "varchar(50) COMMENT '任务类（任务分组）'")
+    @Column(columnDefinition = "varchar(50) COMMENT '任务分组'")
     private String jobGroup;
 
     @Column(updatable = false, nullable = false, length = 20)

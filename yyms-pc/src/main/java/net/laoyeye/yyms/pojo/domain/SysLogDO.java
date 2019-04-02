@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -26,7 +27,7 @@ import static java.time.LocalDateTime.now;
 @NoArgsConstructor
 @Table(name = "sys_log")
 @org.hibernate.annotations.Table(appliesTo = "sys_log",comment="系统日志表")
-public class SysLogDO {
+public class SysLogDO implements Serializable {
     @Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")

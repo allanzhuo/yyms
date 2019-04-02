@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author laoyeye.net
@@ -20,7 +21,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "sys_role_menu")
 @org.hibernate.annotations.Table(appliesTo = "sys_role_menu",comment="角色菜单表")
-public class SysRoleMenuDO {
+public class SysRoleMenuDO implements Serializable {
     @Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")

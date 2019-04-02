@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import static java.lang.Boolean.TRUE;
@@ -28,7 +29,7 @@ import static java.time.LocalDateTime.now;
 @Table(name = "sys_role",
         indexes = {@Index(name = "uniq_role_code", columnList = "roleCode", unique = true)})
 @org.hibernate.annotations.Table(appliesTo = "sys_role",comment="角色表")
-public class SysRoleDO {
+public class SysRoleDO implements Serializable {
     @Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")
