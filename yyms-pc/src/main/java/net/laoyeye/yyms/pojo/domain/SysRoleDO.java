@@ -36,7 +36,7 @@ public class SysRoleDO implements Serializable {
     @Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
     private Long id;
 
-    @Column(columnDefinition="varchar(50) COMMENT '角色名称'")
+    @Column(columnDefinition="varchar(255) COMMENT '角色名称'")
     private String roleName;
 
     @Column(columnDefinition="varchar(50) COMMENT '角色标识'")

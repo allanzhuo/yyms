@@ -37,7 +37,7 @@ public class BlogPostDO implements Serializable {
     @Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
     private Long id;
 
-    @Column(columnDefinition="varchar(255) COMMENT '分类Code'")
+    @Column(columnDefinition="varchar(50) COMMENT '分类Code'")
     private String cateCode;
 
     @Column(nullable = false, columnDefinition="varchar(255) COMMENT '标题'")

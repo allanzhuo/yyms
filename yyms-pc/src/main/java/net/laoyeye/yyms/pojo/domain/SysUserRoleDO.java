@@ -29,7 +29,7 @@ public class SysUserRoleDO implements Serializable {
     private Long id;
 
     @Column(columnDefinition="bigint(20) COMMENT '用户ID'")
-    private String userId;
+    private Long userId;
 
     @Column(columnDefinition="varchar(50) COMMENT '角色标识'")
     private String roleCode;

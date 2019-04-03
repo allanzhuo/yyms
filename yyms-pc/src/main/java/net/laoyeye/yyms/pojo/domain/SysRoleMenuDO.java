@@ -32,5 +32,5 @@ public class SysRoleMenuDO implements Serializable {
     private String roleCode;
 
     @Column(columnDefinition="bigint(20) COMMENT '菜单ID'")
-    private String menuId;
+    private Long menuId;
 }

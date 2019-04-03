@@ -34,6 +34,6 @@ public class BlogPostTagDO implements Serializable {
     private Long postId;
 
     @NotBlank(message = "标签编码不能为空")
-    @Column(nullable = false, columnDefinition="varchar(255) COMMENT '标签编码'")
+    @Column(nullable = false, columnDefinition="varchar(50) COMMENT '标签编码'")
     private String tagCode;
 }

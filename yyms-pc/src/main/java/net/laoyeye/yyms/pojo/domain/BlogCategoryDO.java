@@ -36,7 +36,7 @@ public class BlogCategoryDO implements Serializable {
     private String cateName;
 
     @NotBlank(message = "分类编码不能为空")
-    @Column(nullable = false, columnDefinition="varchar(255) COMMENT '分类编码'")
+    @Column(nullable = false, columnDefinition="varchar(50) COMMENT '分类编码'")
     private String cateCode;
 
     @Column(nullable = false, columnDefinition="varchar(255) COMMENT '分类描述'")
