@@ -10,7 +10,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static java.time.LocalDateTime.now;
@@ -18,7 +17,7 @@ import static java.time.LocalDateTime.now;
 /**
  * @author laoyeye
  * @Description: 系统日志表
- * @date 2019/3/31 17:51
+ * @date 2019/3/31 21:51
  */
 @Data
 @Builder

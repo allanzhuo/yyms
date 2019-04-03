@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * @author laoyeye.net
  * @Description: 用户角色表
- * @date 2019/3/31 17:11
+ * @date 2019/3/31 22:11
  */
 @Data
 @Builder

@@ -10,18 +10,16 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 import static java.time.LocalDateTime.now;
 
 /**
  * @author laoyeye.net
  * @Description: 任务配置
- * @date 2019/3/31 17:41
+ * @date 2019/3/31 22:41
  */
 @Data
 @Builder
