@@ -22,7 +22,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Table(name = "blog_link")
 @org.hibernate.annotations.Table(appliesTo = "blog_link",comment="友情链接表")
-public class BlogLink implements Serializable{
+public class BlogLinkDO implements Serializable{
 
     @Id
     @GeneratedValue(generator = "id")

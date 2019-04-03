@@ -21,7 +21,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Table(name = "sys_options")
 @org.hibernate.annotations.Table(appliesTo = "sys_options",comment="系统配置表")
-public class SysOptions implements Serializable{
+public class SysOptionsDO implements Serializable{
     @Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")
