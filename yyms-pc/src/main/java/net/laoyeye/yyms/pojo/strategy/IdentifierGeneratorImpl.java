@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * @description: 自定义ID生成策略
  * @author: laoyeye.net
- * @date: 2019/3/28 10:13
+ * @date: 2019/3/28 20:13
  */
 public class IdentifierGeneratorImpl implements IdentifierGenerator {
 

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import static java.time.LocalDateTime.now;
 
 /**
- * @author laoyeye
+ * @author laoyeye.net
  * @Description: 系统日志表
  * @date 2019/3/31 21:51
  */
