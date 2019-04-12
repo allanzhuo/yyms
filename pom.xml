@@ -15,7 +15,7 @@
 
     <modules>
           <module>yyms-common</module>
-          <module>yyms-pc</module>
+          <module>yyms-web</module>
     </modules>
 
     <properties>
