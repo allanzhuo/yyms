@@ -3,6 +3,7 @@ package net.laoyeye.yyms.realm;
 import lombok.extern.slf4j.Slf4j;
 import net.laoyeye.utils.ApplicationContextUtils;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
+import net.laoyeye.yyms.service.MenuService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
