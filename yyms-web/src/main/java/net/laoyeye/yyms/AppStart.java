@@ -13,10 +13,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan(basePackages = "net.laoyeye.yyblog.mapper")
+@MapperScan(basePackages = "net.laoyeye.yyms.dao.mapper")
 @EnableCaching
 public class AppStart {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(AppStart.class, args);
     }
 }
+
