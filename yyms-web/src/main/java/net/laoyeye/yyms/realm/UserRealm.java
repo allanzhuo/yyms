@@ -3,6 +3,7 @@ package net.laoyeye.yyms.realm;
 import lombok.extern.slf4j.Slf4j;
 import net.laoyeye.utils.ApplicationContextUtils;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
+import net.laoyeye.yyms.repository.UserRepository;
 import net.laoyeye.yyms.service.MenuService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -13,8 +14,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.DigestUtils;
 
-import java.util.Set;
-
 @Slf4j
 public class UserRealm extends AuthorizingRealm {
     @Value("${login.url}")
@@ -23,9 +22,9 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
         Long userId = ((SysUserDO)SecurityUtils.getSubject().getPrincipal()).getId();
         MenuService menuService = ApplicationContextUtils.getBean(MenuService.class);
-        Set<String> perms = menuService.listPerms(userId);
+        //Set<String> perms = menuService.listPerms(userId);
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.setStringPermissions(perms);
+        // info.setStringPermissions(perms);
         return info;
     }
 
@@ -35,7 +34,7 @@ public class UserRealm extends AuthorizingRealm {
 
         String password = new String((char[]) token.getCredentials());
 
-        UserMapper userMapper = ApplicationContextUtils.getBean(UserMapper.class);
+        UserRepository userRepository = ApplicationContextUtils.getBean(UserRepository.class);
         // 查询用户信息
         SysUserDO user = null;
         if (username.length() > 12) {
