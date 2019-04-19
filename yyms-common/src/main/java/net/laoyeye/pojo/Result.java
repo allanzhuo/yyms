@@ -1,41 +1,20 @@
 package net.laoyeye.pojo;
 
+import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
 /**
  * 通用响应体
  * @author laoyeye.net
  * @date 2018年3月19日
  */
+@Getter
+@Setter
 public class Result {
     private int code;
     private String msg;
     private long count;
     private List<?> data;
-
-    public int getCode() {
-        return code;
-    }
-    public void setCode(int code) {
-        this.code = code;
-    }
-    public String getMsg() {
-        return msg;
-    }
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-    public long getCount() {
-        return count;
-    }
-    public void setCount(long count) {
-        this.count = count;
-    }
-    public List<?> getData() {
-        return data;
-    }
-    public void setData(List<?> data) {
-        this.data = data;
-    }
     
     public static Result build(Integer code, String msg, List<?> data) {
         return new Result(code, msg, data);
