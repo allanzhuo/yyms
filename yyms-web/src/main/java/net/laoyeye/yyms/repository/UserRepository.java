@@ -1,7 +1,9 @@
 package net.laoyeye.yyms.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
 
 
 /**
@@ -10,4 +12,7 @@ import net.laoyeye.yyms.pojo.domain.SysUserDO;
  * @date: 2019/3/26 18:24
  */
 public interface UserRepository extends JpaRepository<SysUserDO, Long> {
+    Optional<SysUserDO> findByQqOpenId(String qqOpenId);
+
+    Optional<SysUserDO> findByUserName(String userName);
 }

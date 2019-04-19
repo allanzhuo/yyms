@@ -26,7 +26,7 @@ import java.util.LinkedHashMap;
 
 /**
  * Shiro配置文件
- * @author zhangzhuo
+ * @author laoyeye.net
  *
  */
 @Configuration

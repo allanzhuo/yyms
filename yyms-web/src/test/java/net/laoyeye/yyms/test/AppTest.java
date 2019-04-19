@@ -50,6 +50,7 @@ public class AppTest {
         user2.setUpdateUser("sy");
         userRepository.save(user2);
     }
+
     @Test
     public void test() {
         Optional<SysUserDO> byId = userRepository.findById(560784148479086592L);
@@ -59,5 +60,13 @@ public class AppTest {
                 .build();
         SysUserDO sysUserDO1 = userRepository.saveAndFlush(women);
         System.out.println(sysUserDO1);
+    }
+
+    @Test
+    public void testUser() {
+        Optional<SysUserDO> userDO = userRepository.findByUserName("admin");
+        SysUserDO sysUserDO = userDO.orElse(SysUserDO.builder().nickName("没有值").build());
+
+        System.out.println(sysUserDO);
     }
 }

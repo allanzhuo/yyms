@@ -14,6 +14,12 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.DigestUtils;
 
+import java.util.Optional;
+
+/**
+ * shiro自定义Realm
+ * laoyeye.net
+ */
 @Slf4j
 public class UserRealm extends AuthorizingRealm {
     @Value("${login.url}")
@@ -36,31 +42,27 @@ public class UserRealm extends AuthorizingRealm {
 
         UserRepository userRepository = ApplicationContextUtils.getBean(UserRepository.class);
         // 查询用户信息
-        SysUserDO user = null;
+        Optional<SysUserDO> user = null;
         if (username.length() > 12) {
-            user = userMapper.getUserByOpenId(username);
+            user = userRepository.findByQqOpenId(username);
             // 账号不存在
-            if (user == null) {
-                throw new UnknownAccountException("账号或密码不正确");
-            }
+            user.orElseThrow(()->new UnknownAccountException("账号或密码不正确"));
             // 账号锁定
-            if (user.getEnable() == false) {
+            if (user.get().getStatus() == false) {
                 throw new LockedAccountException("账号已被锁定,请联系管理员");
             }
         } else {
-            user = userMapper.getUserByName(username);
+            user = userRepository.findByUserName(username);
             // 账号不存在
-            if (user == null) {
-                throw new UnknownAccountException("账号或密码不正确");
-            }
+            user.orElseThrow(()->new UnknownAccountException("账号或密码不正确"));
 
             // 密码错误
-            if (!DigestUtils.md5DigestAsHex(password.getBytes()).equals(user.getPassword())) {
+            if (!DigestUtils.md5DigestAsHex(password.getBytes()).equals(user.get().getPassword())) {
                 throw new IncorrectCredentialsException("账号或密码不正确");
             }
 
             // 账号锁定
-            if (user.getEnable() == false) {
+            if (user.get().getStatus() == false) {
                 throw new LockedAccountException("账号已被锁定,请联系管理员");
             }
         }
