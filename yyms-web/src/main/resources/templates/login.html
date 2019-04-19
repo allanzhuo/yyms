@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
@@ -54,9 +55,9 @@
     </p>
 </div>
 
-<script src="/plus/layui/layui.js"></script>
-<script src="/plus/md5/md5.min.js"></script>
-<script src="/js/common.js"></script>
-<script src="/js/login.js"></script>
+<script th:src="${@mvcResourceUrlProvider.getForLookupPath('/plus/layui/layui.js')}"></script>
+<script th:src="${@mvcResourceUrlProvider.getForLookupPath('/plus/md5/md5.min.js')}"></script>
+<script th:src="${@mvcResourceUrlProvider.getForLookupPath('/js/common.js')}"></script>
+<script th:src="${@mvcResourceUrlProvider.getForLookupPath('/js/login.js')}"></script>
 </body>
 </html>

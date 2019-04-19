@@ -1,4 +1,4 @@
-package net.laoyeye.utils;
+package net.laoyeye.yyms.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
  * @date 2018年6月18日
  */
 @Component
-public class ApplicationContextUtils implements ApplicationContextAware {
-    private static Logger logger = LoggerFactory.getLogger(ApplicationContextUtils.class);
+public class ApplicationContextRegister implements ApplicationContextAware {
+    private static Logger logger = LoggerFactory.getLogger(ApplicationContextRegister.class);
     private static ApplicationContext APPLICATION_CONTEXT;
     /**
      * 设置spring上下文

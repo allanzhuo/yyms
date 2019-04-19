@@ -76,7 +76,7 @@ public class ShiroConfig {
         // 自定义缓存实现 使用EhCache
         securityManager.setCacheManager(ehCacheManager());
         //设置realm.
-        //securityManager.setRealm(userRealm());
+        securityManager.setRealm(userRealm());
         securityManager.setRememberMeManager(rememberMeManager());
         securityManager.setSessionManager(sessionManager());
         return securityManager;
