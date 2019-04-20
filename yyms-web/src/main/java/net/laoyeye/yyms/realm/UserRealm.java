@@ -26,7 +26,7 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
         Long userId = ((SysUserDO)SecurityUtils.getSubject().getPrincipal()).getId();
-        MenuService menuService = SpringBeanFactory.getBean(MenuService.class);
+       // MenuService menuService = SpringBeanFactory.getBean(MenuService.class);
         //Set<String> perms = menuService.listPerms(userId);
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         // info.setStringPermissions(perms);
@@ -67,7 +67,7 @@ public class UserRealm extends AuthorizingRealm {
         }
 
         //不使用shiro自带的密码验证
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.get(), password, getName());
         return info;
     }
 
