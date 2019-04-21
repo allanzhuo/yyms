@@ -1,6 +1,7 @@
-package net.laoyeye.yyms.controller;
+package net.laoyeye.yyms.controller.admin;
 
 import lombok.extern.slf4j.Slf4j;
+import net.laoyeye.yyms.controller.BaseController;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @Controller
-public class AdminIndexController extends BaseController{
+public class AdminIndexController extends BaseController {
 
 //    @Autowired
 //    private ArticleService articleService;

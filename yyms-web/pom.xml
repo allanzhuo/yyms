@@ -57,6 +57,12 @@
             <groupId>com.github.theborakompanioni</groupId>
             <artifactId>thymeleaf-extras-shiro</artifactId>
         </dependency>
+        <!--热更新-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
@@ -65,7 +71,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <executable>true</executable>
+                    <fork>true</fork><!-- 如果没有该配置，热部署的devtools不生效 -->
                 </configuration>
             </plugin>
             <plugin>
