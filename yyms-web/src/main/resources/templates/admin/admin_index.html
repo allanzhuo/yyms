@@ -11,15 +11,15 @@
     <link rel="stylesheet" type="text/css" th:href="${@mvcResourceUrlProvider.getForLookupPath('/plus/font-awesome/css/font-awesome.min.css')}">
     <link rel="stylesheet" type="text/css" th:href="${@mvcResourceUrlProvider.getForLookupPath('/plus/layuiadmin/admin.css')}">
 </head>
-<body class="layui-layout-body layadmin-tabspage-none">
+<body class="layui-layout-body">
 <div id="LAY_app">
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
             <!-- 头部区域 -->
             <ul class="layui-nav layui-layout-left" lay-filter="nav-icon">
                 <li class="layui-nav-item layadmin-flexible" lay-unselect>
-                    <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
-                        <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                    <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩" id="flexible">
+                        <i class="layui-icon layui-icon-shrink-right" id="flexible-icon"></i>
                     </a>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
@@ -94,8 +94,8 @@
                     <i class="fa fa-send-o"></i>
                     <span>layuiAdmin</span>
                 </div>
-                <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
-                    lay-filter="layadmin-system-side-menu">
+                <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="left-menu-temp"
+                    lay-filter="left-menu-temp">
                     <li data-name="home" class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:;" lay-tips="主页" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
@@ -483,6 +483,13 @@
 //            if (event === "comment") {
 //                location.hash = vipspa.stringifyDefault("/comment");
 //            }
+        });
+
+        element.on('nav(left-menu-temp)', function(elem){
+            $("#flexible").removeAttr("lay-select");
+            $("body").removeClass("layadmin-side-shrink").removeClass("layadmin-side-spread-sm");
+            $("#left-menu-temp").removeClass("side-shrink");
+            $("#flexible-icon").removeClass("layui-icon-spread-left").addClass("layui-icon-spread-right");
         });
 
         $('*[lay-tips]').on('mouseenter', function() {
