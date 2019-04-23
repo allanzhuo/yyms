@@ -41,12 +41,15 @@ layui.use(['element', 'layer'], function () {
     });
 
     $('*[lay-tips]').on('mouseenter', function () {
-        var content = $(this).attr('lay-tips');
-        this.index = layer.tips('<div >' + content + '</div>', this, {
-            time: -1,
-            maxWidth: 280,
-            tips: [2, '#000']
-        });
+        var select = $("#flexible").attr("lay-select");
+        if (select != undefined) {
+            var content = $(this).attr('lay-tips');
+            this.index = layer.tips('<div >' + content + '</div>', this, {
+                time: -1,
+                maxWidth: 280,
+                tips: [2, '#000']
+            });
+        }
     }).on('mouseleave', function () {
         layer.close(this.index);
     });
