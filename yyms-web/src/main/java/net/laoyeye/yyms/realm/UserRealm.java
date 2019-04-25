@@ -3,7 +3,6 @@ package net.laoyeye.yyms.realm;
 import lombok.extern.slf4j.Slf4j;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.repository.UserRepository;
-import net.laoyeye.yyms.service.MenuService;
 import net.laoyeye.yyms.utils.SpringBeanFactory;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -11,7 +10,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 import org.springframework.util.DigestUtils;
 
 import java.util.Optional;

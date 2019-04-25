@@ -49,7 +49,7 @@ public class SysTaskDO implements Serializable {
 
     @Column(nullable = false, columnDefinition = "tinyint(1) COMMENT '是否有效'")
     @Builder.Default
-    private Boolean status = FALSE;
+    private Boolean taskStatus = FALSE;
 
     @Column(columnDefinition = "varchar(50) COMMENT '任务分组'")
     private String jobGroup;

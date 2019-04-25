@@ -74,7 +74,7 @@ public class SysMenuDO implements Serializable {
 
     @Column(nullable = false, columnDefinition = "tinyint(1) COMMENT '是否有效'")
     @Builder.Default
-    private Boolean status = TRUE;
+    private Boolean menuStatus = TRUE;
 
     @Column(updatable = false, nullable = false, length = 20)
     private String createUser;

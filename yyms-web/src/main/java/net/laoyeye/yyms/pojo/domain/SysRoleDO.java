@@ -42,12 +42,12 @@ public class SysRoleDO implements Serializable {
     @Column(columnDefinition="varchar(50) COMMENT '角色标识'")
     private String roleCode;
 
-    @Column(columnDefinition="varchar(255) COMMENT '备注'")
-    private String remark;
-
     @Column(nullable = false, columnDefinition = "tinyint(1) COMMENT '是否有效'")
     @Builder.Default
-    private Boolean status = TRUE;
+    private Boolean roleStatus = TRUE;
+
+    @Column(columnDefinition="varchar(255) COMMENT '备注'")
+    private String remark;
 
     @Column(updatable = false, nullable = false, length = 20)
     private String createUser;
