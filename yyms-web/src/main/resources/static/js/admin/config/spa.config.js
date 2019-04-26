@@ -8,9 +8,9 @@ $(function () {
                 templateUrl: url_prefix + 'console',
                 controller: js_prefix + 'console.js'
             },
-            'blog': {
-                templateUrl: url_prefix + 'blog',
-                controller: js_prefix + '/blog.js'
+            'menu': {
+                templateUrl: url_prefix + 'menu',
+                controller: js_prefix + 'menu.js'
             },
             'blog_edit': {
                 templateUrl: url_prefix + 'blog/edit',
@@ -92,7 +92,7 @@ $(function () {
                 templateUrl: url_prefix + 'online',
                 controller: js_prefix + '/online.js'
             },
-            'defaults': 'console' //默认路由
+            'defaults': 'menu' //默认路由
         },
         errorTemplateId: '#error'
     });
