@@ -1,3 +1,8 @@
+layui.config({
+    base: '../../../larryms/',
+}).extend({
+    larry: 'js/base'
+}).use('larry');
 layui.use(['form', 'table'], function () {
     var $ = layui.$,
     form = layui.form,
