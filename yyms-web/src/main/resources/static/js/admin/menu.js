@@ -1,12 +1,10 @@
 layui.config({
-    base: '../../../larryms/',
-}).extend({
-    larry: 'js/base'
-}).use('larry');
-layui.use(['form', 'table'], function () {
+    base: '/plus/lib/',
+}).use(['form', 'table','treeTable'], function () {
     var $ = layui.$,
-    form = layui.form,
-    table = layui.table;
+        form = layui.form,
+        table = layui.table,
+        treeTable = layui.treeTable;
 
     laydate.render({
         elem: '#query-date'
