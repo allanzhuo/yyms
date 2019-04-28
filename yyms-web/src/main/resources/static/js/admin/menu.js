@@ -15,9 +15,9 @@ layui.config({
         //         key: 'id',
         //         data: [0,1,4,10,11,5,2,6,7,3,8,9],
         //     },
-            // end: function(e){
-            //     form.render();
-            // },
+        ,end: function(e){
+                form.render();
+            }
         ,cols: [
             {
                 key: 'id',
@@ -39,12 +39,11 @@ layui.config({
                 }
             },
             {
-                key: 'pid',
+                key: 'icon',
                 title: '图标',
                 width: '100px',
                 align: 'center',
                 template: function(item){
-                    /*return "'<i class='" + d.font + ' ' + d.icon + "'></i>'";*/
                     return "'<i class='" + item.icon + "'></i>'";
                 }
             },
@@ -63,12 +62,12 @@ layui.config({
                 }
             },
             {
-                key: 'pid',
+                key: 'url',
                 title: '地址',
                 align: 'center',
             },
             {
-                key: 'pid',
+                key: 'perms',
                 title: '权限标识',
                 align: 'center',
             },
