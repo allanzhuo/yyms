@@ -6,11 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -32,8 +30,7 @@ import static java.time.LocalDateTime.now;
 @org.hibernate.annotations.Table(appliesTo = "sys_menu",comment="菜单表")
 public class SysMenuDO implements Serializable {
     @Id
-    @GeneratedValue(generator = "id")
-    @GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
     private Long id;
 
@@ -74,7 +71,7 @@ public class SysMenuDO implements Serializable {
 
     @Column(nullable = false, columnDefinition = "tinyint(1) COMMENT '是否有效'")
     @Builder.Default
-    private Boolean menuStatus = TRUE;
+    private Boolean status = TRUE;
 
     @Column(updatable = false, nullable = false, length = 20)
     private String createUser;

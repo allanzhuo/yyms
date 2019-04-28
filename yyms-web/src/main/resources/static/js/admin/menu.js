@@ -1,74 +1,111 @@
 layui.config({
     base: '/plus/lib/',
-}).use(['form', 'table','treeTable'], function () {
+}).use(['form','treeTable'], function () {
     var $ = layui.$,
         form = layui.form,
-        table = layui.table,
         treeTable = layui.treeTable;
 
-    laydate.render({
-        elem: '#query-date'
-        ,range: true
+    treeTable.render({
+        elem: '#menu-table'
+        // , url: "/analysis/repayment/list"
+        , data: [{"id":1,"pid":0,"title":"首页","type":0},{"id":2,"pid":0,"title":"系统管理","type":0},{"id":3,"pid":0,"title":"1-3","type":0},{"id":4,"pid":2,"title":"1-1-1","type":0},{"id":5,"pid":2,"title":"网站设置","type":1},{"id":6,"pid":2,"title":"1-2-1","type":1},{"id":7,"pid":2,"title":"1-2-3","type":1},{"id":8,"pid":3,"title":"1-3-1","type":1},{"id":9,"pid":3,"title":"1-3-2","type":1},{"id":10,"pid":4,"title":"1-1-1-1","type":1},{"id":11,"pid":4,"title":"1-1-1-2","type":1}]
+        , icon_key: 'title'
+        , is_checkbox: true
+        // , checked: {
+        //         key: 'id',
+        //         data: [0,1,4,10,11,5,2,6,7,3,8,9],
+        //     },
+            // end: function(e){
+            //     form.render();
+            // },
+        ,cols: [
+            {
+                key: 'id',
+                title: '编号',
+                width: '60px',
+                align: 'center',
+            },
+            {
+                key: 'title',
+                title: '名称',
+                template: function(item){
+                    if(item.level == 0){
+                        return '<span style="color:red;">'+item.title+'</span>';
+                    }else if(item.level == 1){
+                        return '<span style="color:green;">'+item.title+'</span>';
+                    }else if(item.level == 2){
+                        return '<span style="color:#aaa;">'+item.title+'</span>';
+                    }
+                }
+            },
+            {
+                key: 'pid',
+                title: '图标',
+                width: '100px',
+                align: 'center',
+            },
+            {
+                key: 'type',
+                title: '类型',
+                width: '100px',
+                template: function(item){
+                    if(item.type == 0){
+                        return '<button class="layui-btn layui-btn-xs">目录</button>';
+                    }else if(item.type == 1){
+                        return '<button class="layui-btn layui-btn-xs layui-btn-normal">菜单</button>';
+                    }else if(item.type == 2){
+                        return '<button class="layui-btn layui-btn-xs layui-btn-warm">按钮</button>';
+                    }
+                }
+            },
+            {
+                key: 'pid',
+                title: '地址',
+                align: 'center',
+            },
+            {
+                key: 'pid',
+                title: '权限标识',
+                align: 'center',
+            },
+            {
+                title: '菜单状态',
+                align: 'center',
+                template: function(item){
+                    return '<input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">';
+                }
+            },
+            {
+                title: '操作',
+                align: 'center',
+                template: function(item){
+                    return '<a lay-filter="add">添加</a> | <a target="_blank" href="/detail?id='+item.id+'">编辑</a>';
+                }
+            }
+        ]
     });
 
-    var queryDate = $('#query-date').val();
-    var startDate = queryDate.substring(0,10);
-    var endDate = queryDate.substring(13,23);
-    table.render({
-        elem: '#menu-table'
-        , url: "/analysis/repayment/list"
-        , cellMinWidth: 80
-        , method: 'post'
-        , where: {
-            startDate: startDate
-            ,endDate: endDate
-        }
-        ,cols: [ [
-            {field:'returnDate', title: '日期',width: 150}
-            ,{field:'customerName', title: '客户姓名',width: 150}
-            ,{field:'celphone', title: '手机号',width: 150}
-            ,{field:'login', title: '账号',width: 150}
-            ,{field:'sex', title: '性别',width: 80}
-            ,{field:'age', title: '年龄',width: 80}
-            ,{field:'channelCode', title: '注册渠道',width: 150}
-            ,{field:'createTime', title: '注册时间',width: 200}
-            ,{field:'recommendName', title: '推荐人',width: 150}
-            ,{field:'recommendCelphone', title: '推荐人手机号',width: 150}
-            ,{field:'recommendLevel', title: '推荐级数',width: 150}
-            ,{field:'customerType', title: '客户类别',width: 150}
-            ,{field:'userType', title: '客户类型',width: 150}
-            ,{field:'vip', title: '客户等级',width: 150}
-            ,{field:'highestInvestAmount', title: '最高在投本金',width: 150, templet:'<span>{{moneyFormatter(d.highestInvestAmount)}}</span>'}
-            ,{field:'presentShare', title: '在投本金',width: 150, templet:'<span>{{moneyFormatter(d.presentShare)}}</span>'}
-            ,{field:'teamName', title: '所属业务团队',width: 150}
-            ,{field:'investCode', title: '所属业务团队',width: 150}
-            ,{field:'returnCapital', title: '回款本金',width: 200, templet:'<span>{{moneyFormatter(d.returnCapital)}}</span>'}
-            ,{field:'returnProfit', title: '回款利息',width: 250, templet:'<span>{{moneyFormatter(d.returnProfit)}}</span>'}
-            ,{field:'lastDueFlg', title: '是否最后一笔回款',width: 200}
-        ] ]
-        , page: true
-    });
 
     //搜索用户
-    $('#searchBtn').on('click', function() {
-        var queryDate = $('#query-date').val();
-        var startDate = queryDate.substring(0,10);
-        var endDate = queryDate.substring(13,23);
-        table.reload('menu-table', {
-            page: {
-                curr: 1
-            },
-            where: {
-                startDate: startDate
-                ,endDate: endDate
-            }
-        })
-    });
-
-    $('#downBtn').on('click', function() {
-        $("#queryForm").attr('action', '/analysis/repayment/download');
-        $("#queryForm").submit();
-    });
+    // $('#searchBtn').on('click', function() {
+    //     var queryDate = $('#query-date').val();
+    //     var startDate = queryDate.substring(0,10);
+    //     var endDate = queryDate.substring(13,23);
+    //     table.reload('menu-table', {
+    //         page: {
+    //             curr: 1
+    //         },
+    //         where: {
+    //             startDate: startDate
+    //             ,endDate: endDate
+    //         }
+    //     })
+    // });
+    //
+    // $('#downBtn').on('click', function() {
+    //     $("#queryForm").attr('action', '/analysis/repayment/download');
+    //     $("#queryForm").submit();
+    // });
 
 
 });
