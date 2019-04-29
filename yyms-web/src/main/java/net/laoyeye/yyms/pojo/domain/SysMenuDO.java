@@ -43,9 +43,6 @@ public class SysMenuDO implements Serializable {
     @Column(columnDefinition="int(1) COMMENT '菜单类型'")
     private int type;
 
-    @Column(columnDefinition="varchar(50) COMMENT '菜单图标类型'")
-    private String font;
-
     @Column(columnDefinition="varchar(50) COMMENT '菜单图标'")
     private String icon;
 
@@ -56,15 +53,7 @@ public class SysMenuDO implements Serializable {
     private String perms;
 
     @Column(columnDefinition="int(11) COMMENT '排序'")
-    private int sort;
-
-    @Column(columnDefinition="tinyint(1) COMMENT '是否展开'")
-    @Builder.Default
-    private boolean spread = FALSE;
-
-    @Column(columnDefinition="tinyint(1) COMMENT '是否有子菜单'")
-    @Builder.Default
-    private boolean children = FALSE;
+    private Integer sort;
 
     @Column(columnDefinition="varchar(255) COMMENT '备注'")
     private String remark;

@@ -7,8 +7,8 @@ layui.config({
 
     treeTable.render({
         elem: '#menu-table'
-        // , url: "/analysis/repayment/list"
-        , data: [{"id":1,"pid":0,"title":"首页","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":2,"pid":0,"title":"系统管理","type":0,"icon":"fa fa-send-o"},{"id":3,"pid":0,"title":"1-3","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":4,"pid":2,"title":"1-1-1","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":5,"pid":2,"title":"网站设置","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":6,"pid":2,"title":"1-2-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":7,"pid":2,"title":"1-2-3","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":8,"pid":3,"title":"1-3-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":9,"pid":3,"title":"1-3-2","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":10,"pid":4,"title":"1-1-1-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":11,"pid":4,"title":"1-1-1-2","type":1,"icon":"layui-icon layui-icon-face-smile"}]
+       // , url: "/admin/menu/list"
+        , data: [{"id":1,"pid":0,"title":null,"type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":2,"pid":0,"title":"系统管理","type":0,"icon":"fa fa-send-o"},{"id":3,"pid":0,"title":"1-3","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":4,"pid":2,"title":"1-1-1","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":5,"pid":2,"title":"网站设置","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":6,"pid":2,"title":"1-2-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":7,"pid":2,"title":"1-2-3","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":8,"pid":3,"title":"1-3-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":9,"pid":3,"title":"1-3-2","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":10,"pid":4,"title":"1-1-1-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":11,"pid":4,"title":"1-1-1-2","type":1,"icon":"layui-icon layui-icon-face-smile"}]
         , icon_key: 'title'
         , is_checkbox: true
         // , checked: {
@@ -72,6 +72,7 @@ layui.config({
                 align: 'center',
             },
             {
+                key: 'status',
                 title: '菜单状态',
                 align: 'center',
                 template: function(item){

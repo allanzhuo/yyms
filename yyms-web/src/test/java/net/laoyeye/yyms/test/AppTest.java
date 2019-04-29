@@ -1,8 +1,10 @@
 package net.laoyeye.yyms.test;
 
 import net.laoyeye.yyms.AppStart;
+import net.laoyeye.yyms.pojo.domain.SysMenuDO;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
-import net.laoyeye.yyms.repository.UserRepository;
+import net.laoyeye.yyms.repository.SysMenuRepository;
+import net.laoyeye.yyms.repository.SysUserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,9 @@ import java.util.Optional;
 @SpringBootTest(classes = AppStart.class)
 public class AppTest {
     @Autowired
-    private UserRepository userRepository;
+    private SysUserRepository userRepository;
+    @Autowired
+    protected SysMenuRepository sysMenuRepository;
 
     @Test
     public void hello() {
@@ -64,9 +68,8 @@ public class AppTest {
 
     @Test
     public void testUser() {
-        Optional<SysUserDO> userDO = userRepository.findByUserName("admin");
-        SysUserDO sysUserDO = userDO.orElse(SysUserDO.builder().nickName("没有值").build());
-
-        System.out.println(sysUserDO);
+//
+        List<SysMenuDO> all = sysMenuRepository.findAllByOrderBySortAsc();
+        System.out.println(all);
     }
 }

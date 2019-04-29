@@ -10,7 +10,7 @@ import java.util.Optional;
  * @author: laoyeye.net
  * @date: 2019/3/26 18:24
  */
-public interface UserRepository extends JpaRepository<SysUserDO, Long> {
+public interface SysUserRepository extends JpaRepository<SysUserDO, Long> {
     Optional<SysUserDO> findByQqOpenId(String qqOpenId);
 
     Optional<SysUserDO> findByUserName(String userName);

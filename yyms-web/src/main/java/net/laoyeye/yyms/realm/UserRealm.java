@@ -2,7 +2,7 @@ package net.laoyeye.yyms.realm;
 
 import lombok.extern.slf4j.Slf4j;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
-import net.laoyeye.yyms.repository.UserRepository;
+import net.laoyeye.yyms.repository.SysUserRepository;
 import net.laoyeye.yyms.utils.SpringBeanFactory;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -37,7 +37,7 @@ public class UserRealm extends AuthorizingRealm {
 
         String password = new String((char[]) token.getCredentials());
 
-        UserRepository userRepository = SpringBeanFactory.getBean(UserRepository.class);
+        SysUserRepository userRepository = SpringBeanFactory.getBean(SysUserRepository.class);
         // 查询用户信息
         Optional<SysUserDO> user = null;
         if (username.length() > 12) {

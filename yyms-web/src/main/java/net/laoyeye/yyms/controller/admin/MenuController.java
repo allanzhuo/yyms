@@ -1,9 +1,15 @@
 package net.laoyeye.yyms.controller.admin;
 
+import net.laoyeye.yyms.pojo.domain.SysMenuDO;
+import net.laoyeye.yyms.service.MenuService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @description: 后台菜单
@@ -13,10 +19,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class MenuController {
+    @Autowired
+    private MenuService menuService;
 
     @GetMapping("/menu")
     public String index(Model model) {
 
         return "admin/menu";
+    }
+
+    @RequestMapping("/menu/list")
+    @ResponseBody
+    public List<SysMenuDO> listMenu() {
+        System.out.println("sssss");
+        return menuService.listMenus();
     }
 }
