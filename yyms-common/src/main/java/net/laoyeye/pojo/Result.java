@@ -20,14 +20,17 @@ public class Result {
         return new Result(code, msg, data);
     }
 
-    public static Result ok(List<?> data) {
-        return new Result(data);
+    public static Result ok(List<?> data,String msg) {
+        return new Result(data,msg);
+    }
+
+    public static Result ok(String msg) {
+        return new Result(null,msg);
     }
 
     public static Result ok() {
-        return new Result(null);
+        return new Result(null,null);
     }
-
     public Result() {
 
     }
@@ -42,9 +45,9 @@ public class Result {
         this.data = data;
     }
 
-    public Result(List<?> data) {
+    public Result(List<?> data,String msg) {
         this.code = 200;
-        this.msg = "OK";
+        this.msg = msg;
         this.data = data;
     }
 }

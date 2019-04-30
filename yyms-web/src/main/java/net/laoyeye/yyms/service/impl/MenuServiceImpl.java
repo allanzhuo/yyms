@@ -36,7 +36,13 @@ public class MenuServiceImpl implements MenuService {
                     .build();
             SysMenuDO newMenu = sysMenuRepository.save(menu);
         }
-        return Result.ok();
+        return Result.ok("修改菜单状态成功！");
+    }
+
+    @Override
+    public Result saveMenu(SysMenuDO menuDO) {
+        sysMenuRepository.save(menuDO);
+        return Result.ok("新增菜单成功！");
     }
 
     @Override

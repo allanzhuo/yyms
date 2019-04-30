@@ -6,7 +6,7 @@ layui.config({
         treeTable = layui.treeTable,
         layer = layui.layer;
 
-    treeTable.render({
+    var	table = treeTable.render({
         elem: '#menu-table'
         , url: "/admin/menu/list"
         //, data: [{"id":1,"pid":0,"title":null,"type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":2,"pid":0,"title":"系统管理","type":0,"icon":"fa fa-send-o"},{"id":3,"pid":0,"title":"1-3","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":4,"pid":2,"title":"1-1-1","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":5,"pid":2,"title":"网站设置","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":6,"pid":2,"title":"1-2-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":7,"pid":2,"title":"1-2-3","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":8,"pid":3,"title":"1-3-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":9,"pid":3,"title":"1-3-2","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":10,"pid":4,"title":"1-1-1-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":11,"pid":4,"title":"1-1-1-2","type":1,"icon":"layui-icon layui-icon-face-smile"}]
@@ -97,7 +97,7 @@ layui.config({
 
     form.on('switch(status)', function (obj) {
         var status = obj.elem.checked;
-        $.post("/admin/menu/edit",{id:this.value, status: obj.elem.checked},function(res){
+        $.post("/admin/menu/edit/status",{id:this.value, status: obj.elem.checked},function(res){
             if (res.code == 200) {
                 layer.msg("修改状态成功");
             } else {
@@ -106,20 +106,8 @@ layui.config({
         });
     });
 
-    var active = {
+    var $ = layui.$, active = {
         add: function () {
-            /*var username = $('#log-username-search');
-            var operation = $('#log-operation-search');
-            //执行重载
-            table.reload('log-table', {
-                page: {
-                    curr: 1 //重新从第 1 页开始
-                }
-                , where: {
-                    username: username.val(),
-                    operation: operation.val()
-                }
-            });*/
             layer.open({
                 type: 2,
                 title: '新增菜单',
@@ -163,37 +151,11 @@ layui.config({
         active[type] ? active[type].call(this) : '';
     });
 
+    function refresh(){
+        treeTable.render(table);
+    }
 
-    //搜索用户
-    // $('#searchBtn').on('click', function() {
-    //     var queryDate = $('#query-date').val();
-    //     var startDate = queryDate.substring(0,10);
-    //     var endDate = queryDate.substring(13,23);
-    //     table.reload('menu-table', {
-    //         page: {
-    //             curr: 1
-    //         },
-    //         where: {
-    //             startDate: startDate
-    //             ,endDate: endDate
-    //         }
-    //     })
-    // });
-    //
-    // $('#downBtn').on('click', function() {
-    //     $("#queryForm").attr('action', '/analysis/repayment/download');
-    //     $("#queryForm").submit();
-    // });
-
-    $('#submitAdd').on('click', function() {
-        $("#queryForm").attr('action', '/analysis/repayment/download');
-        $("#queryForm").submit();
-    });
-
-    // $(document).on('#submitAdd', 'click', function () {
-    //    console.log("ddd")
-    // });
-
+    window.refresh = refresh;
 });
 
 

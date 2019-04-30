@@ -36,9 +36,9 @@
             <div class="layui-inline">
                 <label class="layui-form-label">菜单类型</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="type" lay-filter='menutype' value="0" title="目录" checked>
-                    <input type="radio" name="type" lay-filter='menutype' value="1" title="菜单">
-                    <input type="radio" name="type" lay-filter='menutype' value="2" title="按钮">
+                    <input type="radio" name="type" value="0" title="目录" checked>
+                    <input type="radio" name="type" value="1" title="菜单">
+                    <input type="radio" name="type" value="2" title="按钮">
                 </div>
             </div>
         </div>
@@ -72,8 +72,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">图标</label>
             <div class="layui-input-block">
-                <input type="text" name="font" placeholder="请输入字体名称,默认使用larry-icon / fa" class="layui-input"
-                       id="{{d.MENUICONFONT}}" lay-verify="required" value="" autocomplete="off">
+                <input type="text" name="icon" placeholder="请输入字体名称,支持layui-icon / fa" class="layui-input"
+                      lay-verify="required" autocomplete="off">
             </div>
         </div>
         <div class="layui-form-item">
@@ -86,13 +86,12 @@
             <label class="layui-form-label layui-inline">状态</label>
             <div class="layui-inline">
                 <input type="checkbox" checked="" name="status" lay-skin="switch" lay-filter="status"
-                       lay-text="开启|关闭" value="1">
+                       lay-text="开启|关闭" value="1" >
             </div>
         </div>
         <div class="yyms-layer-btn">
-            <a class="layui-btn layui-btn layui-btn-sm left" lay-submit="" lay-filter="menuadd" id="submitAdd">确定</a>
-            <button class="layui-btn layui-btn layui-btn-sm layui-btn-danger" type="reset" id="resetAdd">重置</button>
-            <!--  <a class="layui-btn layui-btn layui-btn-sm  layui-btn-danger" id="closeAdd">关闭</a> -->
+            <a class="layui-btn" lay-submit="" lay-filter="submitAdd" id="submitAdd">新增</a>
+            <button class="layui-btn layui-btn-danger" type="reset" id="resetAdd">重置</button>
         </div>
     </form>
 

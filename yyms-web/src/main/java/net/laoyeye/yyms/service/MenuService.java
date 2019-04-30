@@ -15,6 +15,8 @@ public interface MenuService {
     List<SysMenuDO> listMenus();
     /**修改菜单属性*/
     Result updateStatusById(Boolean status,Long id);
+    /**新增菜单属性*/
+    Result saveMenu(SysMenuDO menuDO);
     /**修改菜单属性*/
     Result updateMenu();
 }

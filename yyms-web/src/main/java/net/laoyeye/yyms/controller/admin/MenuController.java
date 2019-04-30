@@ -1,12 +1,14 @@
 package net.laoyeye.yyms.controller.admin;
 
 import net.laoyeye.pojo.Result;
+import net.laoyeye.yyms.controller.BaseController;
 import net.laoyeye.yyms.pojo.domain.SysMenuDO;
 import net.laoyeye.yyms.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/admin")
-public class MenuController {
+public class MenuController extends BaseController{
     @Autowired
     private MenuService menuService;
 
@@ -42,10 +44,18 @@ public class MenuController {
         return menuService.listMenus();
     }
 
-    @RequestMapping("/menu/edit")
+    @PostMapping("/menu/edit/status")
     @ResponseBody
-    public Result editMenu(Boolean status, Long id) {
+    public Result editMenuStatus(Boolean status, Long id) {
 
         return menuService.updateStatusById(status,id);
+    }
+
+    @PostMapping("/menu/add")
+    @ResponseBody
+    public Result addMenu(SysMenuDO menuDO) {
+        menuDO.setCreateUser(getUser().getUserName());
+        menuDO.setUpdateUser(getUser().getUserName());
+        return menuService.saveMenu(menuDO);
     }
 }
