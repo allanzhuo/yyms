@@ -26,7 +26,7 @@ layui.use('form', function () {
     form.on('submit(submit)', function (data) {
         data.field.password = md5(data.field.password);
         $.post("/login", data.field, function (res) {
-                if (res.code === common.status.ok) {
+                if (res.code === 200) {
                     layer.msg("登录成功！");
                     setTimeout(function () {
                         location.href = common.url.admin_index;

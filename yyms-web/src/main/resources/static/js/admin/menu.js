@@ -1,9 +1,10 @@
 layui.config({
     base: '/plus/lib/',
-}).use(['form','treeTable'], function () {
+}).use(['form','treeTable','layer'], function () {
     var $ = layui.$,
         form = layui.form,
-        treeTable = layui.treeTable;
+        treeTable = layui.treeTable,
+        layer = layui.layer;
 
     treeTable.render({
         elem: '#menu-table'
@@ -105,6 +106,64 @@ layui.config({
         });
     });
 
+    var active = {
+        add: function () {
+            /*var username = $('#log-username-search');
+            var operation = $('#log-operation-search');
+            //执行重载
+            table.reload('log-table', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                , where: {
+                    username: username.val(),
+                    operation: operation.val()
+                }
+            });*/
+            layer.open({
+                type: 2,
+                title: '新增菜单',
+                shadeClose: true,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['700px', '480px'], //宽高
+                content: "/admin/menu/add"
+                ,success:function(layero, index) {
+                    form.render('select');
+                }
+            });
+        },
+        removeBatch: function () {
+            var checkStatus = table.checkStatus('log-table');
+            var data = checkStatus.data;
+            if (data.length == 0) {
+                layer.msg("请选择要删除的数据");
+                return;
+            }
+            layer.confirm("确认要删除选中的【" + data.length + "】条数据吗?", function (index) {
+                var ids = new Array();
+                // 遍历所有选择的行数据，取每条数据对应的ID
+                for (var i = 0; i < data.length; i++) {
+                    ids[i] = data[i].id;
+                }
+                common.ajax(common.url.prefix + "/log/removeBatch", {ids: ids}, function (json) {
+                    if (json.code === common.status.ok) {
+                        layer.msg('删除成功！');
+                        active.reload();
+                    } else {
+                        layer.msg("删除失败！" + json.message);
+                    }
+                });
+                layer.close(index);
+            });
+        }
+    };
+
+    $('#table-tools').find('.layui-btn').on('click', function () {
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
+    });
+
+
     //搜索用户
     // $('#searchBtn').on('click', function() {
     //     var queryDate = $('#query-date').val();
@@ -126,6 +185,14 @@ layui.config({
     //     $("#queryForm").submit();
     // });
 
+    $('#submitAdd').on('click', function() {
+        $("#queryForm").attr('action', '/analysis/repayment/download');
+        $("#queryForm").submit();
+    });
+
+    // $(document).on('#submitAdd', 'click', function () {
+    //    console.log("ddd")
+    // });
 
 });
 

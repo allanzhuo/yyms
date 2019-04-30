@@ -5,3 +5,27 @@
 .yyms-header {
     display: block !important;
 }
+
+.yyms-menu {
+    background: #ffffff;
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.yyms-menu-form {
+    margin: 0px;
+    height: auto;
+    padding: 20px 45px;
+    padding-bottom: 55px;
+    overflow-x: hidden;
+    overflow: visible !important;
+    max-height: 720px;
+}
+
+.yyms-layer-btn{
+    text-align: center;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding-top: 15px;
+}

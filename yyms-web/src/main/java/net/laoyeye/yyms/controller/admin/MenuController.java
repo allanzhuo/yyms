@@ -29,6 +29,12 @@ public class MenuController {
         return "admin/menu";
     }
 
+    @GetMapping("/menu/add")
+    public String add(Model model) {
+
+        return "admin/menu_add";
+    }
+
     @RequestMapping("/menu/list")
     @ResponseBody
     public List<SysMenuDO> listMenu() {

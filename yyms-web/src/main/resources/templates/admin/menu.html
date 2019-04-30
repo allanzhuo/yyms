@@ -8,72 +8,90 @@
     </div>
     <div class="layui-fluid">
         <div class="layui-card">
-            <div class="layui-form layui-card-header layuiadmin-card-header-auto"
-                 lay-filter="layadmin-useradmin-formlist">
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">登录名</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="loginname" placeholder="请输入" autocomplete="off"
-                                   class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">手机</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="telphone" placeholder="请输入" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">邮箱</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="email" placeholder="请输入" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">角色</label>
-                        <div class="layui-input-block">
-                            <select name="role">
-                                <option value="0">管理员</option>
-                                <option value="1">超级管理员</option>
-                                <option value="2">纠错员</option>
-                                <option value="3">采购员</option>
-                                <option value="4">推销员</option>
-                                <option value="5">运营人员</option>
-                                <option value="6">编辑</option>
-                            </select>
-                            <div class="layui-unselect layui-form-select">
-                                <div class="layui-select-title"><input type="text" placeholder="请选择" value="管理员"
-                                                                       readonly="" class="layui-input layui-unselect"><i
-                                        class="layui-edge"></i></div>
-                                <dl class="layui-anim layui-anim-upbit">
-                                    <dd lay-value="0" class="layui-this">管理员</dd>
-                                    <dd lay-value="1" class="">超级管理员</dd>
-                                    <dd lay-value="2" class="">纠错员</dd>
-                                    <dd lay-value="3" class="">采购员</dd>
-                                    <dd lay-value="4" class="">推销员</dd>
-                                    <dd lay-value="5" class="">运营人员</dd>
-                                    <dd lay-value="6" class="">编辑</dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <button class="layui-btn layuiadmin-btn-admin" lay-submit="" lay-filter="LAY-user-back-search">
-                            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
 
             <div class="layui-card-body">
-                <div style="padding-bottom: 10px;">
-                    <button class="layui-btn layuiadmin-btn-admin" data-type="batchdel">删除</button>
+                <div style="padding-bottom: 10px;" id="table-tools">
                     <button class="layui-btn layuiadmin-btn-admin" data-type="add">添加</button>
+                    <button class="layui-btn layuiadmin-btn-admin layui-btn-danger" data-type="batchdel">删除</button>
                 </div>
 
                 <table class="layui-table layui-form" id="menu-table" lay-filter="menu-table" lay-size="md"></table>
             </div>
         </div>
+    </div>
+</div>
+
+
+<div class="larry-menu-add" id="menuAddTpl" style="display: none;">
+    <div style="height:100%;overflow-y:scroll;">
+        <form class="layui-form layui-form-pane yyms-menu-form" id="{{d.SELECTID}}" lay-filter="{{d.LARRYFILTER}}" action="/system/menus/add">
+            <div class="layui-form-item">
+                    <label class="layui-form-label">父级菜单</label>
+                    <div class="layui-input-block">
+                        <select name="pid" multiple="" lay-verify="required" lay-search="">
+                            <option value="0" selected="selected">顶级菜单</option>
+                            <option th:each="menu:${menus}" th:value="${menu.id}"
+                                    th:text="${menu.title}" ></option>
+                        </select>
+                    </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">菜单类型</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="type" lay-filter='menutype' value="0" title="目录" checked>
+                        <input type="radio" name="type" lay-filter='menutype' value="1" title="菜单">
+                        <input type="radio" name="type" lay-filter='menutype' value="2" title="按钮">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                    <label class="layui-form-label">菜单名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" placeholder="请输入菜单名称" class="layui-input" lay-verify="required" value="" autocomplete="off">
+                    </div>
+            </div>
+            <div class="layui-form-item">
+                    <label class="layui-form-label">菜单地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="url" placeholder="请输入菜单地址" class="layui-input" value="" autocomplete="off">
+                    </div>
+            </div>
+            <div class="layui-form-item">
+                    <label class="layui-form-label">权限标识</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="perms" id="perms" placeholder="请输入权限标识 如：user:save 若不限制权限可不输入" class="layui-input" value="" autocomplete="off">
+                    </div>
+            </div>
+            <div class="layui-form-item">
+                    <label class="layui-form-label">排序</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="sort" placeholder="请输入排序编号" class="layui-input" lay-verify="required" autocomplete="off">
+                    </div>
+            </div>
+            <div class="layui-form-item">
+                    <label class="layui-form-label">图标</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="font" placeholder="请输入字体名称,默认使用larry-icon / fa" class="layui-input" id="{{d.MENUICONFONT}}" lay-verify="required" value="" autocomplete="off">
+                    </div>
+            </div>
+            <div class="layui-form-item">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <textarea name="remark" placeholder="请输入该菜单的描述信息" class="layui-textarea" autocomplete="off"></textarea>
+                    </div>
+            </div>
+            <div class="layui-form-item">
+                    <label class="layui-form-label layui-inline">状态</label>
+                    <div class="layui-inline">
+                        <input type="checkbox" checked="" name="status" lay-skin="switch" lay-filter="switchTest" lay-text="开启|关闭" value="1">
+                    </div>
+            </div>
+            <div class="yyms-layer-btn">
+                <a class="layui-btn layui-btn layui-btn-sm left" lay-submit="" lay-filter="menuadd" id="submitAdd">确定</a>
+                <button class="layui-btn layui-btn layui-btn-sm layui-btn-danger" type="reset" id="resetAdd">重置</button>
+                <!--  <a class="layui-btn layui-btn layui-btn-sm  layui-btn-danger" id="closeAdd">关闭</a> -->
+            </div>
+        </form>
     </div>
 </div>
