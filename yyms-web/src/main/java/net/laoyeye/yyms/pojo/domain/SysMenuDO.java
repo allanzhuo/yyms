@@ -12,7 +12,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.time.LocalDateTime.now;
 
@@ -41,7 +40,7 @@ public class SysMenuDO implements Serializable {
     private String title;
 
     @Column(columnDefinition="int(1) COMMENT '菜单类型'")
-    private int type;
+    private Integer type;
 
     @Column(columnDefinition="varchar(50) COMMENT '菜单图标'")
     private String icon;
