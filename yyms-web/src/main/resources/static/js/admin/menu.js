@@ -7,8 +7,8 @@ layui.config({
 
     treeTable.render({
         elem: '#menu-table'
-       // , url: "/admin/menu/list"
-        , data: [{"id":1,"pid":0,"title":null,"type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":2,"pid":0,"title":"系统管理","type":0,"icon":"fa fa-send-o"},{"id":3,"pid":0,"title":"1-3","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":4,"pid":2,"title":"1-1-1","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":5,"pid":2,"title":"网站设置","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":6,"pid":2,"title":"1-2-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":7,"pid":2,"title":"1-2-3","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":8,"pid":3,"title":"1-3-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":9,"pid":3,"title":"1-3-2","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":10,"pid":4,"title":"1-1-1-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":11,"pid":4,"title":"1-1-1-2","type":1,"icon":"layui-icon layui-icon-face-smile"}]
+        , url: "/admin/menu/list"
+        //, data: [{"id":1,"pid":0,"title":null,"type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":2,"pid":0,"title":"系统管理","type":0,"icon":"fa fa-send-o"},{"id":3,"pid":0,"title":"1-3","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":4,"pid":2,"title":"1-1-1","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":5,"pid":2,"title":"网站设置","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":6,"pid":2,"title":"1-2-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":7,"pid":2,"title":"1-2-3","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":8,"pid":3,"title":"1-3-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":9,"pid":3,"title":"1-3-2","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":10,"pid":4,"title":"1-1-1-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":11,"pid":4,"title":"1-1-1-2","type":1,"icon":"layui-icon layui-icon-face-smile"}]
         , icon_key: 'title'
         , is_checkbox: true
         // , checked: {
@@ -44,13 +44,14 @@ layui.config({
                 width: '100px',
                 align: 'center',
                 template: function(item){
-                    return "'<i class='" + item.icon + "'></i>'";
+                    return "<i class='" + item.icon + "'></i>";
                 }
             },
             {
                 key: 'type',
                 title: '类型',
                 width: '100px',
+                align: 'center',
                 template: function(item){
                     if(item.type == 0){
                         return '<button class="layui-btn layui-btn-xs">目录</button>';
@@ -76,7 +77,11 @@ layui.config({
                 title: '菜单状态',
                 align: 'center',
                 template: function(item){
-                    return '<input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">';
+                    if(item.status == 1){
+                        return "<input type='checkbox' name='status' value='" + item.id + "' lay-filter='status' lay-skin='switch' lay-text='启用|禁用' checked>";
+                    } else {
+                        return "<input type='checkbox' name='status' value='" + item.id + "' lay-filter='status' lay-skin='switch' lay-text='启用|禁用'>";
+                    }
                 }
             },
             {
@@ -89,6 +94,15 @@ layui.config({
         ]
     });
 
+    form.on('switch(status)', function (obj) {
+        $.post("/system/menus/remove",{id:this.value, status: obj.elem.checked},function(res){
+            if (res.code == 0) {
+                layer.msg("修改状态成功");
+            } else {
+                layer.msg("修改失败,"+res.msg);
+            }
+        });
+    });
 
     //搜索用户
     // $('#searchBtn').on('click', function() {
