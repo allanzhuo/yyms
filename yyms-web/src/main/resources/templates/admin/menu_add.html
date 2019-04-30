@@ -27,8 +27,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">父级菜单</label>
             <div class="layui-input-block">
-                <select name="pid" multiple="" lay-verify="required" lay-search="">
-                    <option value="0" selected="selected">顶级菜单</option>
+                <select name="pid" multiple="" lay-verify="required" disabled>
+                    <option th:value="${pid}" th:text="${title}" selected="selected">顶级菜单</option>
                 </select>
             </div>
         </div>
@@ -86,7 +86,7 @@
             <label class="layui-form-label layui-inline">状态</label>
             <div class="layui-inline">
                 <input type="checkbox" checked="" name="status" lay-skin="switch" lay-filter="status"
-                       lay-text="开启|关闭" value="1" >
+                       lay-text="开启|关闭" value="true" >
             </div>
         </div>
         <div class="yyms-layer-btn">

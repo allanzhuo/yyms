@@ -29,15 +29,7 @@ layui.config({
             {
                 key: 'title',
                 title: '名称',
-                template: function(item){
-                    if(item.level == 0){
-                        return '<span style="color:red;">'+item.title+'</span>';
-                    }else if(item.level == 1){
-                        return '<span style="color:green;">'+item.title+'</span>';
-                    }else if(item.level == 2){
-                        return '<span style="color:#aaa;">'+item.title+'</span>';
-                    }
-                }
+                align: 'center',
             },
             {
                 key: 'icon',
@@ -74,6 +66,11 @@ layui.config({
                 align: 'center',
             },
             {
+                key: 'sort',
+                title: '排序',
+                align: 'center',
+            },
+            {
                 key: 'status',
                 title: '菜单状态',
                 align: 'center',
@@ -89,7 +86,8 @@ layui.config({
                 title: '操作',
                 align: 'center',
                 template: function(item){
-                    return '<a lay-filter="add">添加</a> | <a target="_blank" href="/detail?id='+item.id+'">编辑</a>';
+                    return '<a class="layui-btn layui-btn-normal layui-btn-sm" lay-filter="add">添加</a>'
+                    +'<a class="layui-btn layui-btn-warm layui-btn-sm" lay-filter="edit">编辑</a>';
                 }
             }
         ]
@@ -106,15 +104,30 @@ layui.config({
         });
     });
 
+    // 监听自定义
+    treeTable.on('tree(add)',function(data){
+        layer.open({
+            type: 2,
+            title: '添加菜单',
+            shadeClose: true,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['700px', '480px'], //宽高
+            content: "/admin/menu/add?pid="+data.item.id+"&title="+data.item.title
+            ,success:function(layero, index) {
+                form.render('select');
+            }
+        });
+    })
+
     var $ = layui.$, active = {
         add: function () {
             layer.open({
                 type: 2,
-                title: '新增菜单',
+                title: '添加菜单',
                 shadeClose: true,
                 maxmin: true, //开启最大化最小化按钮
                 area: ['700px', '480px'], //宽高
-                content: "/admin/menu/add"
+                content: "/admin/menu/add?pid=0&title=顶级菜单"
                 ,success:function(layero, index) {
                     form.render('select');
                 }

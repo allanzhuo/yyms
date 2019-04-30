@@ -32,8 +32,9 @@ public class MenuController extends BaseController{
     }
 
     @GetMapping("/menu/add")
-    public String add(Model model) {
-
+    public String add(Model model,Long pid,String title) {
+        model.addAttribute("pid",pid);
+        model.addAttribute("title",title);
         return "admin/menu_add";
     }
 
