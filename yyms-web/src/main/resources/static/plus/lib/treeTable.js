@@ -1,3 +1,4 @@
+/** treeTable 修改版 by 小卖铺的老爷爷 */
 layui.define(['jquery'], function(exports) {
 	var MOD_NAME = 'treeTable',
 		o = layui.jquery,
@@ -51,7 +52,8 @@ layui.define(['jquery'], function(exports) {
 				var left = (obj.key == e.icon_key ? level[item[e.primary_key]] * e.icon.left + 'px' : '');
 				icon = icon.replace('>', ' style="margin-left:' + left + ';">');
 				// 拼接行
-				tr += '<td ' + style + (left ? 'data-down' : '') + '>' + icon + (is_table ? '' : (is_checked ? checked : checkbox)) + (obj.template ? obj.template(item) : item[obj.key]) + '</td>';
+				tr += '<td ' + style + (left ? 'data-down' : '') + '>' + icon + (is_table ? '' : (is_checked ? checked : checkbox)) + (obj.template ? obj.template(item) : (item[obj.key] == null) ? "" : item[obj.key]) + '</td>';
+				console.log(tr);
 			});
 			var box = is_table ? o(is_checked ? checked : checkbox).wrap('<td style="width:28px;">').parent().prop('outerHTML') : '';
 			tbody += '<tr class="' + hide_class + '" data-id="' + item[e.primary_key] + '" data-pid="' + item[e.parent_key] + '">' + box + tr + '</tr>';
