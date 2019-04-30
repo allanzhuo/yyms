@@ -95,8 +95,9 @@ layui.config({
     });
 
     form.on('switch(status)', function (obj) {
-        $.post("/system/menus/remove",{id:this.value, status: obj.elem.checked},function(res){
-            if (res.code == 0) {
+        var status = obj.elem.checked;
+        $.post("/admin/menu/edit",{id:this.value, status: obj.elem.checked},function(res){
+            if (res.code == 200) {
                 layer.msg("修改状态成功");
             } else {
                 layer.msg("修改失败,"+res.msg);

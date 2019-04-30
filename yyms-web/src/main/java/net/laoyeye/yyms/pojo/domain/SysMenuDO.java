@@ -21,7 +21,7 @@ import static java.time.LocalDateTime.now;
  * @date 2019/3/31 19:17
  */
 @Data
-@Builder
+@Builder(toBuilder=true)
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

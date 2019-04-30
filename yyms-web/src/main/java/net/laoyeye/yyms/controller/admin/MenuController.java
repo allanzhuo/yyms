@@ -1,5 +1,6 @@
 package net.laoyeye.yyms.controller.admin;
 
+import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.pojo.domain.SysMenuDO;
 import net.laoyeye.yyms.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,14 @@ public class MenuController {
     @RequestMapping("/menu/list")
     @ResponseBody
     public List<SysMenuDO> listMenu() {
-        System.out.println("sssss");
+
         return menuService.listMenus();
+    }
+
+    @RequestMapping("/menu/edit")
+    @ResponseBody
+    public Result editMenu(Boolean status, Long id) {
+
+        return menuService.updateStatusById(status,id);
     }
 }

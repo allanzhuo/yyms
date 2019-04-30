@@ -13,4 +13,8 @@ import java.util.List;
 public interface MenuService {
     /**查询所有的菜单*/
     List<SysMenuDO> listMenus();
+    /**修改菜单属性*/
+    Result updateStatusById(Boolean status,Long id);
+    /**修改菜单属性*/
+    Result updateMenu();
 }
