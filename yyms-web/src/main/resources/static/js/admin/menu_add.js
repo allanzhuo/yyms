@@ -6,7 +6,7 @@ layui.use(['form', 'laydate'], function () {
         $("#submit").addClass("layui-btn-disabled");
         $("#submit").attr('disabled', 'disabled');
         data.field.status = data.field.status == undefined ? false : data.field.status;
-        $.post("/admin/menu/add", data.field, function (res) {
+        $.post(data.form.action, data.field, function (res) {
             if (res.code == 200) {
                 layer.alert(res.msg, {}, function () {
                         var curIfr = parent.layer.getFrameIndex(window.name);

@@ -18,5 +18,7 @@ public interface MenuService {
     /**新增菜单属性*/
     Result saveMenu(SysMenuDO menuDO);
     /**修改菜单属性*/
-    Result updateMenu();
+    Result updateMenu(SysMenuDO menuDO);
+    /**根据id取得菜单*/
+    SysMenuDO getMenuById(Long id);
 }

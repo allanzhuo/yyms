@@ -28,7 +28,6 @@ layui.config({
             {
                 key: 'title',
                 title: '名称',
-                align: 'center',
             },
             {
                 key: 'icon',
@@ -116,7 +115,21 @@ layui.config({
                 form.render('select');
             }
         });
-    })
+    });
+
+    treeTable.on('tree(edit)',function(data){
+        layer.open({
+            type: 2,
+            title: '编辑菜单',
+            shadeClose: true,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['700px', '480px'], //宽高
+            content: "/admin/menu/edit?id="+data.item.id
+            ,success:function(layero, index) {
+                form.render('select');
+            }
+        });
+    });
 
     var $ = layui.$, active = {
         add: function () {
@@ -161,6 +174,7 @@ layui.config({
     $('#table-tools').find('.layui-btn').on('click', function () {
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
+        return false;
     });
 
     function refresh(){

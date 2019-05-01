@@ -23,11 +23,12 @@
 <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-    <form class="layui-form layui-form-pane yyms-menu-form" id="menu-form">
+    <form class="layui-form layui-form-pane yyms-menu-form" id="menu-form" th:attr="action=${url}" >
+        <input type="text" name="id" class="layui-input layui-hide" th:value="${menu?.id}">
         <div class="layui-form-item">
             <label class="layui-form-label">父级菜单</label>
             <div class="layui-input-block">
-                <select name="pid" multiple="" lay-verify="required" disabled>
+                <select name="pid" disabled>
                     <option th:value="${pid}" th:text="${title}" selected="selected">顶级菜单</option>
                 </select>
             </div>
@@ -36,9 +37,9 @@
             <div class="layui-inline">
                 <label class="layui-form-label">菜单类型</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="type" value="0" title="目录" checked>
-                    <input type="radio" name="type" value="1" title="菜单">
-                    <input type="radio" name="type" value="2" title="按钮">
+                    <input type="radio" name="type" value="0" title="目录" th:checked="${menu==null ? true : menu?.type==0}">
+                    <input type="radio" name="type" value="1" title="菜单" th:checked="${menu==null ? false : menu?.type==1}">
+                    <input type="radio" name="type" value="2" title="按钮" th:checked="${menu==null ? false : menu?.type==2}">
                 </div>
             </div>
         </div>
@@ -46,51 +47,53 @@
             <label class="layui-form-label">菜单名称</label>
             <div class="layui-input-block">
                 <input type="text" name="title" placeholder="请输入菜单名称" class="layui-input" lay-verify="required" value=""
-                       autocomplete="off">
+                       autocomplete="off" th:value="${menu?.title}">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">菜单地址</label>
             <div class="layui-input-block">
-                <input type="text" name="url" placeholder="请输入菜单地址" class="layui-input" value="" autocomplete="off">
+                <input type="text" name="url" placeholder="请输入菜单地址" class="layui-input" value="" autocomplete="off"
+                       th:value="${menu?.url}">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">权限标识</label>
             <div class="layui-input-block">
                 <input type="text" name="perms" id="perms" placeholder="请输入权限标识 如：user:save 若不限制权限可不输入"
-                       class="layui-input" value="" autocomplete="off">
+                       class="layui-input" value="" autocomplete="off" th:value="${menu?.perms}">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">排序</label>
             <div class="layui-input-block">
                 <input type="number" name="sort" placeholder="请输入排序编号" class="layui-input" lay-verify="required"
-                       autocomplete="off">
+                       autocomplete="off" th:value="${menu?.sort}">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">图标</label>
             <div class="layui-input-block">
                 <input type="text" name="icon" placeholder="请输入字体名称,支持layui-icon / fa" class="layui-input"
-                      lay-verify="required" autocomplete="off">
+                      lay-verify="required" autocomplete="off" th:value="${menu?.icon}">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-                <textarea name="remark" placeholder="请输入该菜单的描述信息" class="layui-textarea" autocomplete="off"></textarea>
+                <textarea name="remark" placeholder="请输入该菜单的描述信息" class="layui-textarea" autocomplete="off"
+                          th:value="${menu?.remark}"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label layui-inline">状态</label>
             <div class="layui-inline">
                 <input type="checkbox" checked="" name="status" lay-skin="switch" lay-filter="status"
-                       lay-text="开启|关闭" value="true" >
+                       lay-text="开启|关闭" value="true" th:checked="${menu==null ? true : menu?.status}">
             </div>
         </div>
         <div class="yyms-layer-btn">
-            <a class="layui-btn" lay-submit="" lay-filter="submitAdd" id="submitAdd">新增</a>
+            <a class="layui-btn" lay-submit="" lay-filter="submitAdd" id="submitAdd" th:text="${menu==null ? '新增' : '修改'}"></a>
             <button class="layui-btn layui-btn-danger" type="reset" id="resetAdd">重置</button>
         </div>
     </form>

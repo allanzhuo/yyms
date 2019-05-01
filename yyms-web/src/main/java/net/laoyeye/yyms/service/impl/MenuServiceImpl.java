@@ -46,8 +46,14 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Result updateMenu() {
+    public Result updateMenu(SysMenuDO menuDO) {
+        sysMenuRepository.save(menuDO);
+        return Result.ok("修改菜单成功！");
+    }
 
-        return null;
+    @Override
+    public SysMenuDO getMenuById(Long id) {
+        SysMenuDO menuDO = sysMenuRepository.findById(id).orElse(new SysMenuDO());
+        return menuDO;
     }
 }

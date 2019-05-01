@@ -7,10 +7,7 @@ import net.laoyeye.yyms.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,18 +28,35 @@ public class MenuController extends BaseController{
         return "admin/menu";
     }
 
-    @GetMapping("/menu/add")
-    public String add(Model model,Long pid,String title) {
-        model.addAttribute("pid",pid);
-        model.addAttribute("title",title);
-        return "admin/menu_add";
-    }
-
     @RequestMapping("/menu/list")
     @ResponseBody
     public List<SysMenuDO> listMenu() {
 
         return menuService.listMenus();
+    }
+
+    @GetMapping("/menu/add")
+    public String add(Model model,Long pid,String title) {
+        model.addAttribute("pid",pid);
+        model.addAttribute("title",title);
+        model.addAttribute("url","/admin/menu/add");
+        return "admin/menu_add";
+    }
+
+    @GetMapping("/menu/edit")
+    public String edit(Model model,Long id) {
+        SysMenuDO menuDO = menuService.getMenuById(id);
+        SysMenuDO parentMenuDO;
+        if (menuDO.getPid()==0L){
+            parentMenuDO = SysMenuDO.builder().id(0L).title("顶级菜单").build();
+        } else {
+            parentMenuDO = menuService.getMenuById(menuDO.getPid());
+        }
+        model.addAttribute("pid", parentMenuDO.getId());
+        model.addAttribute("title", parentMenuDO.getTitle());
+        model.addAttribute("menu",menuDO);
+        model.addAttribute("url","/admin/menu/edit");
+        return "admin/menu_add";
     }
 
     @PostMapping("/menu/edit/status")
@@ -58,5 +72,12 @@ public class MenuController extends BaseController{
         menuDO.setCreateUser(getUser().getUserName());
         menuDO.setUpdateUser(getUser().getUserName());
         return menuService.saveMenu(menuDO);
+    }
+
+    @PostMapping("/menu/edit")
+    @ResponseBody
+    public Result editMenu(SysMenuDO menuDO) {
+        menuDO.setUpdateUser(getUser().getUserName());
+        return menuService.updateMenu(menuDO);
     }
 }
