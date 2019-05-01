@@ -1,8 +1,7 @@
 layui.config({
     base: '/plus/lib/',
 }).use(['form','treeTable','layer'], function () {
-    var $ = layui.$,
-        form = layui.form,
+    var form = layui.form,
         treeTable = layui.treeTable,
         layer = layui.layer;
 
