@@ -80,4 +80,11 @@ public class MenuController extends BaseController{
         menuDO.setUpdateUser(getUser().getUserName());
         return menuService.updateMenu(menuDO);
     }
+
+    @PostMapping("/menu/remove")
+    @ResponseBody
+    public Result removeMenu(@RequestParam("ids[]")Long[] ids) {
+        Result result = menuService.removeMenu(ids);
+        return result;
+    }
 }

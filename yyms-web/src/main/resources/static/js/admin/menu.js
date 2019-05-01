@@ -145,25 +145,15 @@ layui.config({
                 }
             });
         },
-        removeBatch: function () {
-            var checkStatus = table.checkStatus('log-table');
-            var data = checkStatus.data;
-            if (data.length == 0) {
-                layer.msg("请选择要删除的数据");
-                return;
-            }
-            layer.confirm("确认要删除选中的【" + data.length + "】条数据吗?", function (index) {
-                var ids = new Array();
-                // 遍历所有选择的行数据，取每条数据对应的ID
-                for (var i = 0; i < data.length; i++) {
-                    ids[i] = data[i].id;
-                }
-                common.ajax(common.url.prefix + "/log/removeBatch", {ids: ids}, function (json) {
-                    if (json.code === common.status.ok) {
-                        layer.msg('删除成功！');
-                        active.reload();
+        del: function () {
+            var ids = treeTable.checked(table)
+            layer.confirm("确认要删除选中的【" + ids.length + "】条数据吗?", function (index) {
+                $.post("/admin/menu/remove", {ids: ids}, function (res) {
+                    if (res.code === 200) {
+                        layer.msg(res.msg);
+                        refresh();
                     } else {
-                        layer.msg("删除失败！" + json.message);
+                        layer.msg(res.msg);
                     }
                 });
                 layer.close(index);
@@ -171,7 +161,7 @@ layui.config({
         }
     };
 
-    $('#table-tools').find('.layui-btn').on('click', function () {
+    $('#table-tools').find('.layui-btn').off('click').on('click', function () {
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
         return false;

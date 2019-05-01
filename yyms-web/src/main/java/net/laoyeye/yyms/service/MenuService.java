@@ -13,12 +13,14 @@ import java.util.List;
 public interface MenuService {
     /**查询所有的菜单*/
     List<SysMenuDO> listMenus();
-    /**修改菜单属性*/
+    /**修改菜单状态*/
     Result updateStatusById(Boolean status,Long id);
-    /**新增菜单属性*/
+    /**新增菜单*/
     Result saveMenu(SysMenuDO menuDO);
-    /**修改菜单属性*/
+    /**修改菜单*/
     Result updateMenu(SysMenuDO menuDO);
-    /**根据id取得菜单*/
+    /**根据id查询菜单*/
     SysMenuDO getMenuById(Long id);
+    /**根据id批量删除菜单*/
+    Result removeMenu(Long[] ids);
 }

@@ -7,6 +7,7 @@ import net.laoyeye.yyms.repository.SysMenuRepository;
 import net.laoyeye.yyms.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,5 +56,11 @@ public class MenuServiceImpl implements MenuService {
     public SysMenuDO getMenuById(Long id) {
         SysMenuDO menuDO = sysMenuRepository.findById(id).orElse(new SysMenuDO());
         return menuDO;
+    }
+
+    @Override
+    public Result removeMenu(Long[] ids) {
+        int i = sysMenuRepository.deleteBatch(ids);
+        return Result.ok("删除选中的【" + i + "】条数据成功!");
     }
 }
