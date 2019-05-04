@@ -54,6 +54,41 @@ layui.use(['element', 'layer'], function () {
         layer.close(this.index);
     });
 
+    init();
+    function init(){
+        var leftMenus;
+        $.post("/admin/menu/init", function (res) {
+            if (res.code == 200) {
+                layer.alert(res.msg);
+                for(let item in res.data) {
+                    if(item.children === null){
+                        leftMenus += '<li data-name="get" class="layui-nav-item">'+
+                            '<a href="javascript:;" lay-href="//www.layui.com/admin/#get" lay-tips="'+item.title+'" lay-direction="2">'+
+                            '<i class="layui-icon layui-icon-auz"></i>'+
+                            '<cite>'+item.title+'</cite>'+
+                            '</a>'+
+                            '</li>';
+                    } else {
+                        leftMenus += '<li data-name="home" class="layui-nav-item layui-nav-itemed">'+
+                            '<a href="javascript:;" lay-tips="'+item.title+'" lay-direction="2">'+
+                            '<i class="layui-icon layui-icon-home"></i>'+
+                            '<cite>'+item.title+'</cite>'+
+                            '</a>'+
+                            '<dl class="layui-nav-child">';
+                            // for(let children in res.data.item.children){
+                            //     leftMenus += '<dd data-name="console" class="layui-this">'+
+                            //     '<a lay-href="home/console.html">'+children.title+'</a>'+
+                            //     '</dd>';
+                            // }
+                        leftMenus += '</dl></li>';
+                    }
+                };
+             var leftMenu = document.getElementById('left-menu-temp');
+                leftMenu.innerHTML = leftMenus;
+            }
+        });
+    }
+
     $.ajaxSetup({
         complete: function (XMLHttpRequest, textStatus) {
             if (textStatus == "parsererror") {
