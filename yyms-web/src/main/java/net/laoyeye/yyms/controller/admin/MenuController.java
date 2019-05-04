@@ -87,4 +87,11 @@ public class MenuController extends BaseController{
         Result result = menuService.removeMenu(ids);
         return result;
     }
+
+    @PostMapping("/menu/init")
+    @ResponseBody
+    public Result listInitMenu() {
+        Result result = menuService.listInitMenus();
+        return result;
+    }
 }

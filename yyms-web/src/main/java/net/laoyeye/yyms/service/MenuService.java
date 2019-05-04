@@ -23,4 +23,6 @@ public interface MenuService {
     SysMenuDO getMenuById(Long id);
     /**根据id批量删除菜单*/
     Result removeMenu(Long[] ids);
+    /**根据用户id查询用户菜单*/
+    Result listInitMenus();
 }

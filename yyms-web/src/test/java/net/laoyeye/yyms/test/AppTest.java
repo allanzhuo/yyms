@@ -1,10 +1,12 @@
 package net.laoyeye.yyms.test;
 
+import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.AppStart;
 import net.laoyeye.yyms.pojo.domain.SysMenuDO;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.repository.SysMenuRepository;
 import net.laoyeye.yyms.repository.SysUserRepository;
+import net.laoyeye.yyms.service.MenuService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,9 @@ public class AppTest {
     @Autowired
     private SysUserRepository userRepository;
     @Autowired
-    protected SysMenuRepository sysMenuRepository;
+    private SysMenuRepository sysMenuRepository;
+    @Autowired
+    private MenuService menuService;
 
     @Test
     public void hello() {
@@ -69,7 +73,9 @@ public class AppTest {
     @Test
     public void testUser() {
 //
-        List<SysMenuDO> all = sysMenuRepository.findAllByOrderBySortAsc();
-        System.out.println(all);
+//        List<SysMenuDO> all = sysMenuRepository.findAllByOrderBySortAsc();
+//        System.out.println(all);
+        Result result = menuService.listInitMenus();
+        System.out.println(result);
     }
 }

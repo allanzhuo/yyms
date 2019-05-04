@@ -2,10 +2,7 @@ package net.laoyeye.yyms.pojo.vo;
 
 import java.util.List;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * @author laoyeye.net
@@ -14,12 +11,16 @@ import lombok.Setter;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SysMenuVO {
     private Long id;
 
     private Long pid;
 
     private String title;
+
+    private Integer type;
 
     private String icon;
 
