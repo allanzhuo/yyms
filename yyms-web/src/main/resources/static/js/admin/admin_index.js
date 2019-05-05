@@ -60,24 +60,27 @@ layui.use(['element', 'layer'], function () {
         $.post("/admin/menu/init", function (res) {
             if (res.code == 200) {
                 layer.alert(res.msg);
-                for(let item in res.data) {
-                    if(item.children === null){
-                        leftMenus += '<li data-name="get" class="layui-nav-item">'+
-                            '<a href="javascript:;" lay-href="//www.layui.com/admin/#get" lay-tips="'+item.title+'" lay-direction="2">'+
-                            '<i class="layui-icon layui-icon-auz"></i>'+
-                            '<cite>'+item.title+'</cite>'+
+                for(let index in res.data) {
+                    if(res.data[index].children == null && res.data[index].children == 0){
+                        leftMenus += '<li class="layui-nav-item">'+
+                            '<a href="'+res.data[index].url+'" lay-tips="'+res.data[index].title+'">'+
+                            '<i class="'+res.data[index].icon+'"></i>'+
+                            '<cite>'+res.data[index].title+'</cite>'+
                             '</a>'+
                             '</li>';
                     } else {
-                        leftMenus += '<li data-name="home" class="layui-nav-item layui-nav-itemed">'+
-                            '<a href="javascript:;" lay-tips="'+item.title+'" lay-direction="2">'+
-                            '<i class="layui-icon layui-icon-home"></i>'+
-                            '<cite>'+item.title+'</cite>'+
+                        leftMenus += '<li class="layui-nav-item">'+
+                            '<a href="javascript:;" lay-tips="'+res.data[index].title+'">'+
+                            '<i class="'+res.data[index].icon+'"></i>'+
+                            '<cite>'+res.data[index].title+'</cite>'+
                             '</a>'+
                             '<dl class="layui-nav-child">';
-                            // for(let children in res.data.item.children){
-                            //     leftMenus += '<dd data-name="console" class="layui-this">'+
-                            //     '<a lay-href="home/console.html">'+children.title+'</a>'+
+                            // for(let childrenIndex in res.data[index].children){
+                            //     leftMenus += '<dd>'+
+                            //     '<a href="'+res.data[index].children[childrenIndex].url+'">'+
+                            //     '<i class="'+res.data[index].children[childrenIndex].icon+'"></i>'+
+                            //     '<cite>'+res.data[index].children[childrenIndex].title+'</cite>'+
+                            //         +'</a>'+
                             //     '</dd>';
                             // }
                         leftMenus += '</dl></li>';
