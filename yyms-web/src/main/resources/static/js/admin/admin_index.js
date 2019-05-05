@@ -54,38 +54,43 @@ layui.use(['element', 'layer'], function () {
         layer.close(this.index);
     });
 
-    init();
+    //init();
     function init(){
-        var leftMenus;
+        var leftMenus = '';
         $.post("/admin/menu/init", function (res) {
             if (res.code == 200) {
-                layer.alert(res.msg);
                 for(let index in res.data) {
-                    if(res.data[index].children == null && res.data[index].children == 0){
+                    console.log(res.data[index].children.length)
+                    console.log(res.data[index].children)
+                    if(res.data[index].children===null || res.data[index].children.length==0){
                         leftMenus += '<li class="layui-nav-item">'+
                             '<a href="'+res.data[index].url+'" lay-tips="'+res.data[index].title+'">'+
                             '<i class="'+res.data[index].icon+'"></i>'+
                             '<cite>'+res.data[index].title+'</cite>'+
                             '</a>'+
                             '</li>';
+                        console.log(res.data[index].children.length+"000")
                     } else {
                         leftMenus += '<li class="layui-nav-item">'+
                             '<a href="javascript:;" lay-tips="'+res.data[index].title+'">'+
                             '<i class="'+res.data[index].icon+'"></i>'+
                             '<cite>'+res.data[index].title+'</cite>'+
+
                             '</a>'+
                             '<dl class="layui-nav-child">';
-                            // for(let childrenIndex in res.data[index].children){
-                            //     leftMenus += '<dd>'+
-                            //     '<a href="'+res.data[index].children[childrenIndex].url+'">'+
-                            //     '<i class="'+res.data[index].children[childrenIndex].icon+'"></i>'+
-                            //     '<cite>'+res.data[index].children[childrenIndex].title+'</cite>'+
-                            //         +'</a>'+
-                            //     '</dd>';
-                            // }
+                            for(let childrenIndex in res.data[index].children){
+                                leftMenus += '<dd>'+
+                                '<a href="'+res.data[index].children[childrenIndex].url+'">'+
+                                    res.data[index].children[childrenIndex].title
+                            /*    '<i class="'+res.data[index].children[childrenIndex].icon+'"></i>'+
+                                '<cite>'+res.data[index].children[childrenIndex].title+'</cite>'+*/
+                                    +'</a>'+
+                                '</dd>';
+                            }
                         leftMenus += '</dl></li>';
                     }
                 };
+                console.log(leftMenus)
              var leftMenu = document.getElementById('left-menu-temp');
                 leftMenu.innerHTML = leftMenus;
             }
