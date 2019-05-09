@@ -8,13 +8,8 @@ layui.config({
     var	table = treeTable.render({
         elem: '#menu-table'
         , url: "/admin/menu/list"
-        //, data: [{"id":1,"pid":0,"title":null,"type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":2,"pid":0,"title":"系统管理","type":0,"icon":"fa fa-send-o"},{"id":3,"pid":0,"title":"1-3","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":4,"pid":2,"title":"1-1-1","type":0,"icon":"layui-icon layui-icon-face-smile"},{"id":5,"pid":2,"title":"网站设置","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":6,"pid":2,"title":"1-2-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":7,"pid":2,"title":"1-2-3","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":8,"pid":3,"title":"1-3-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":9,"pid":3,"title":"1-3-2","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":10,"pid":4,"title":"1-1-1-1","type":1,"icon":"layui-icon layui-icon-face-smile"},{"id":11,"pid":4,"title":"1-1-1-2","type":1,"icon":"layui-icon layui-icon-face-smile"}]
         , icon_key: 'title'
         , is_checkbox: true
-        // , checked: {
-        //         key: 'id',
-        //         data: [0,1,4,10,11,5,2,6,7,3,8,9],
-        //     },
         ,end: function(e){
                 form.render();
             }
@@ -147,6 +142,10 @@ layui.config({
         },
         del: function () {
             var ids = treeTable.checked(table)
+            if (ids.length == 0) {
+                layer.msg('请先选择要删除的数据', {time: 3000, icon:0});
+                return;
+            }
             layer.confirm("确认要删除选中的【" + ids.length + "】条数据吗?", function (index) {
                 $.post("/admin/menu/remove", {ids: ids}, function (res) {
                     if (res.code === 200) {

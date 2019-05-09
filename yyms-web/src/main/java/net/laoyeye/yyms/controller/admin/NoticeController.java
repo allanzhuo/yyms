@@ -19,4 +19,10 @@ public class NoticeController {
 
         return "admin/notice";
     }
+
+    @GetMapping("/notice/manage")
+    public String noticeManage(Model model) {
+
+        return "admin/notice_manage";
+    }
 }

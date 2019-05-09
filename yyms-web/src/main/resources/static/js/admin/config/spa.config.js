@@ -16,9 +16,9 @@ $(function () {
                 templateUrl: url_prefix + 'notice',
                 controller: js_prefix + 'notice.js'
             },
-            'blogs': {
-                templateUrl: url_prefix + 'blog/index',
-                controller: js_prefix + '/blogs.js'
+            'notice_manage': {
+                templateUrl: url_prefix + 'notice/manage',
+                controller: js_prefix + 'notice_manage.js'
             },
             'note': {
                 templateUrl: url_prefix + 'note',
