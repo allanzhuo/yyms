@@ -29,7 +29,7 @@ import static java.time.LocalDateTime.now;
 @NoArgsConstructor
 @Table(name = "sys_notice")
 @org.hibernate.annotations.Table(appliesTo = "sys_notice",comment="通知公告表")
-public class NoticeDO implements Serializable {
+public class SysNoticeDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(generator = "id")

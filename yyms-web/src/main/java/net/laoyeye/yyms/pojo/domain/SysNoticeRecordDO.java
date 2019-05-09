@@ -16,7 +16,7 @@ import java.util.Date;
 import static java.lang.Boolean.FALSE;
 
 /**
- * @description: 通知通告发送记录
+ * @description: 通知公告发送记录
  * @author: laoyeye.net
  * @date: 2019/5/9 19:37
  */
@@ -27,7 +27,7 @@ import static java.lang.Boolean.FALSE;
 @NoArgsConstructor
 @Table(name = "sys_notice_record")
 @org.hibernate.annotations.Table(appliesTo = "sys_notice_record",comment="通知公告发送记录")
-public class NoticeRecordDO implements Serializable {
+public class SysNoticeRecordDO implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(generator = "id")
