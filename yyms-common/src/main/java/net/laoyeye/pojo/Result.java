@@ -11,9 +11,9 @@ import java.util.List;
 @Getter
 @Setter
 public class Result {
-    private int code;
+    private Integer code;
     private String msg;
-    private long count;
+    private Long count;
     private List<?> data;
     
     public static Result build(Integer code, String msg, List<?> data) {
@@ -29,7 +29,7 @@ public class Result {
     }
 
     public static Result ok() {
-        return new Result(null,null);
+        return new Result(null);
     }
     public Result() {
 
@@ -45,9 +45,21 @@ public class Result {
         this.data = data;
     }
 
+    public Result(List<?> data) {
+        this.code = 200;
+        this.msg = "OK";
+        this.data = data;
+    }
+
     public Result(List<?> data,String msg) {
         this.code = 200;
         this.msg = msg;
+        this.data = data;
+    }
+
+    public Result(List<?> data,Long count) {
+        this.code = 0;
+        this.count = count;
         this.data = data;
     }
 }
