@@ -1,7 +1,13 @@
-layui.use(['form', 'table', 'layer'], function () {
+layui.use(['form', 'table', 'layer','laydate'], function () {
     var table = layui.table
         , form = layui.form
-        , layer = layui.layer;
+        , layer = layui.layer
+        , laydate = layui.laydate;
+
+    laydate.render({
+        elem: '#createTime'
+        ,range: true //或 range: '~' 来自定义分割字符
+    });
 
     var noticeTable = table.render({
         elem: '#notice-table'
@@ -63,6 +69,23 @@ layui.use(['form', 'table', 'layer'], function () {
     //     }
     // };
     //
+
+    //监听提交
+    form.on('submit(btn-search)', function(data){
+        //执行重载
+        table.reload('notice-table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            , where: {
+                startDate: data.field.createTime.substring(0,10),
+                endDate: data.field.createTime.substring(13,23),
+                noticeTitle: data.field.noticeTitle
+            }
+        });
+        return false;
+    });
+
     // $('#log-table-search').find('.layui-btn').on('click', function () {
     //     var type = $(this).data('type');
     //     active[type] ? active[type].call(this) : '';

@@ -30,7 +30,7 @@ public class BaseController{
      */
     protected static Result result(Page jpaPage) {
 
-        return new Result(jpaPage.getContent(), (long)jpaPage.getTotalElements());
+        return new Result(jpaPage.getContent(), jpaPage.getTotalElements());
     }
 
 }

@@ -45,12 +45,12 @@ public class NoticeServiceImpl implements NoticeService {
             if (StringUtils.isNotEmpty(noticeTitle)){
                 list.add(cb.like(title, "%" + noticeTitle + "%"));
             }
-            if (startDate != null) {
-                list.add(cb.greaterThanOrEqualTo(createTime, LocalDate.parse(startDate)));
+            if (startDate != null && startDate != "" && endDate != null &&endDate != "") {
+                list.add(cb.between(createTime, LocalDate.parse(startDate),LocalDate.parse(endDate)));
             }
-            if (startDate != null) {
-                list.add(cb.lessThanOrEqualTo(createTime, LocalDate.parse(endDate)));
-            }
+//            if (endDate != null && endDate != "") {
+//                list.add(cb.lessThanOrEqualTo(createTime, LocalDate.parse(endDate)));
+//            }
             Predicate[] p = new Predicate[list.size()];
             return cb.and(list.toArray(p));
         };
