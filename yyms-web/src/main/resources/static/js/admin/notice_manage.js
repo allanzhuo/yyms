@@ -6,7 +6,8 @@ layui.use(['form', 'table', 'layer','laydate'], function () {
 
     laydate.render({
         elem: '#createTime'
-        ,range: true //或 range: '~' 来自定义分割字符
+        ,type: 'datetime'
+        ,range: true
     });
 
     var noticeTable = table.render({
@@ -78,8 +79,8 @@ layui.use(['form', 'table', 'layer','laydate'], function () {
                 curr: 1 //重新从第 1 页开始
             }
             , where: {
-                startDate: data.field.createTime.substring(0,10),
-                endDate: data.field.createTime.substring(13,23),
+                startDate: data.field.createTime.substring(0,19),
+                endDate: data.field.createTime.substring(22,41),
                 noticeTitle: data.field.noticeTitle
             }
         });

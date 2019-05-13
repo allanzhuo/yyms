@@ -14,7 +14,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class NoticeServiceImpl implements NoticeService {
         Pageable pageable = PageRequest.of(baseQuery.getPage()-1, baseQuery.getLimit(), Sort.Direction.DESC, "id");  //分页信息
         Specification<SysNoticeDO> spec = (Root<SysNoticeDO> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
             Path<String> title = root.get("noticeTitle");
-            Path<LocalDate> createTime = root.get("createTime");
+            Path<LocalDateTime> createTime = root.get("createTime");
             //查询方式一：
 //            Predicate p1 = cb.like(title, "%" + noticeTitle + "%");
 //            Predicate p2 = cb.greaterThanOrEqualTo(createTime, LocalDate.parse(startDate));
@@ -45,8 +46,9 @@ public class NoticeServiceImpl implements NoticeService {
             if (StringUtils.isNotEmpty(noticeTitle)){
                 list.add(cb.like(title, "%" + noticeTitle + "%"));
             }
-            if (startDate != null && startDate != "" && endDate != null &&endDate != "") {
-                list.add(cb.between(createTime, LocalDate.parse(startDate),LocalDate.parse(endDate)));
+            if (startDate != null && startDate != "" && endDate != null && endDate != "") {
+                DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                list.add(cb.between(createTime, LocalDateTime.parse(startDate,df),LocalDateTime.parse(endDate,df)));
             }
 //            if (endDate != null && endDate != "") {
 //                list.add(cb.lessThanOrEqualTo(createTime, LocalDate.parse(endDate)));
