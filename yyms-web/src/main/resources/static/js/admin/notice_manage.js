@@ -19,7 +19,7 @@ layui.use(['form', 'table', 'layer','laydate'], function () {
             {type:'checkbox'}
             ,{type: 'numbers'}
             ,{field: 'noticeTitle', width: 150, title: '标题', align:'center'}
-            , {field: 'noticeContent', title: '内容', align:'center'}
+            , {field: 'noticeContent', width: '40%', title: '内容', align:'center'}
             , {title: '状态', width: 100,  align:'center' , toolbar: '#statusBar'}
             , {field: 'createUser', width: 150, title: '创建人',align:'center'}
             , {field: 'createTime', width: 200, title: '创建时间',align:'center'}

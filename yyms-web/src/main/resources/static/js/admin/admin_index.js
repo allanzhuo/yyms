@@ -98,12 +98,12 @@ layui.use(['element', 'layer'], function () {
 //            }
     });
 
-    /**监听侧边菜单，点击显示全部*/
+    /**监听侧边菜单，点击关闭*/
     element.on('nav(left-menu-temp)', function (elem) {
         $("#flexible").removeAttr("lay-select");
         $("body").removeClass("layadmin-side-shrink").removeClass("layadmin-side-spread-sm");
         $("#left-menu-temp").removeClass("side-shrink");
-        $("#flexible-icon").removeClass("layui-icon-spread-left").addClass("layui-icon-spread-right");
+        $("#flexible-icon").removeClass("layui-icon-spread-right").addClass("layui-icon-spread-left");
     });
 
     $(window).resize(function () {
