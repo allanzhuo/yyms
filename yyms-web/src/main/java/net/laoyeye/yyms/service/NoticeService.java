@@ -1,5 +1,6 @@
 package net.laoyeye.yyms.service;
 
+import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.pojo.domain.SysNoticeDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
 import org.springframework.data.domain.Page;
@@ -12,4 +13,6 @@ import org.springframework.data.domain.Page;
 public interface NoticeService {
     /**分页查询通知*/
     Page<SysNoticeDO> list(BaseQuery query, String startDate, String endDate, String noticeTitle);
+    /**保存通知*/
+    Result save(SysNoticeDO noticeDO);
 }

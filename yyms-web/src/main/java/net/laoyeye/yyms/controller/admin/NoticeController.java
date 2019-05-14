@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,10 +37,19 @@ public class NoticeController extends BaseController{
         return "admin/notice_manage";
     }
 
-    @RequestMapping("/notice/list")
+    @PostMapping("/notice/list")
     @ResponseBody
     public Result list(BaseQuery query,String startDate,String endDate,String noticeTitle) {
         Page<SysNoticeDO> page = noticeService.list(query, startDate, endDate, noticeTitle);
         return result(page);
+    }
+
+    @PostMapping("/notice/save")
+    @ResponseBody
+    public Result save(SysNoticeDO noticeDO) {
+        noticeDO.setCreateUser(getUser().getUserName());
+        noticeDO.setUpdateUser(getUser().getUserName());
+        Result result = noticeService.save(noticeDO);
+        return result;
     }
 }

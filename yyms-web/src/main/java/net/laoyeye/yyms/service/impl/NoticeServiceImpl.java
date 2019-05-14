@@ -1,5 +1,6 @@
 package net.laoyeye.yyms.service.impl;
 
+import net.laoyeye.pojo.Result;
 import net.laoyeye.utils.StringUtils;
 import net.laoyeye.yyms.pojo.domain.SysNoticeDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
@@ -57,6 +58,12 @@ public class NoticeServiceImpl implements NoticeService {
             return cb.and(list.toArray(p));
         };
         return sysNoticeRepository.findAll(spec, pageable);
+    }
+
+    @Override
+    public Result save(SysNoticeDO noticeDO) {
+        sysNoticeRepository.save(noticeDO);
+        return Result.ok("新增通知成功！");
     }
 
 }

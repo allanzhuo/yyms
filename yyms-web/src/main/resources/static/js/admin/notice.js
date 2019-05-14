@@ -5,12 +5,11 @@ layui.use(['form', 'layer'], function () {
 
     //监听提交
     form.on('submit(confirm-notice)', function(data){
-        $.post(data.form.action, data.field, function (res) {
+        $.post("/admin/notice/save", data.field, function (res) {
             if (res.code == 200) {
-                layer.alert(res.msg, {}, function () {
-                        var curIfr = parent.layer.getFrameIndex(window.name);
-                        window.parent.refresh();
-                        parent.layer.close(curIfr);
+                layer.alert(res.msg, {icon: 1}, function (index) {
+                    location.href = common.url.admin_index+'#notice_manage';
+                    layer.close(index);
                     }
                 )
             } else {
