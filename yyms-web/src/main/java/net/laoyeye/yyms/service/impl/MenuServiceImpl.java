@@ -69,7 +69,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Result listInitMenus() {
         //查询父菜单为0的所有菜单
-        List<SysMenuDO> list = sysMenuRepository.findMenuVoByPidOrderBySortAsc(0L);
+        List<SysMenuDO> list = sysMenuRepository.findByPidOrderBySortAsc(0L);
         List<SysMenuVO> listVO = list.stream().map(menuDO -> {
             SysMenuVO menuVO = SysMenuVO.builder()
                     .id(menuDO.getId())
@@ -83,7 +83,7 @@ public class MenuServiceImpl implements MenuService {
         }).collect(toList());
         for (SysMenuVO menuVO : listVO) {
             //查询一级菜单
-            List<SysMenuDO> listChildren = sysMenuRepository.findMenuVoByPidOrderBySortAsc(menuVO.getId());
+            List<SysMenuDO> listChildren = sysMenuRepository.findByPidOrderBySortAsc(menuVO.getId());
             List<SysMenuVO> listChildrenVO = listChildren.stream().map(menuDO -> {
                 SysMenuVO menuChildrenVO = SysMenuVO.builder()
                         .id(menuDO.getId())
