@@ -1,5 +1,6 @@
 layui.use(['form', 'table', 'layer','laydate'], function () {
-    var table = layui.table
+    var $ = layui.$
+        , table = layui.table
         , form = layui.form
         , layer = layui.layer
         , laydate = layui.laydate;
@@ -85,6 +86,16 @@ layui.use(['form', 'table', 'layer','laydate'], function () {
             }
         });
         return false;
+    });
+
+    form.on('switch(noticeStatus)', function (obj) {
+        $.post("/admin/notice/edit/status",{id:this.value, noticeStatus: obj.elem.checked},function(res){
+            if (res.code == 200) {
+                layer.msg("修改状态成功");
+            } else {
+                layer.msg("修改失败,"+res.msg);
+            }
+        });
     });
 
     // $('#log-table-search').find('.layui-btn').on('click', function () {

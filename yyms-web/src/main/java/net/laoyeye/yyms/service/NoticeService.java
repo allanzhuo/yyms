@@ -15,4 +15,6 @@ public interface NoticeService {
     Page<SysNoticeDO> list(BaseQuery query, String startDate, String endDate, String noticeTitle);
     /**保存通知*/
     Result save(SysNoticeDO noticeDO);
+    /**修改通知状态*/
+    Result updateStatusById(Boolean noticeStatus,Long id);
 }

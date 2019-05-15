@@ -1,6 +1,8 @@
 package net.laoyeye.yyms.pojo.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,6 +37,7 @@ public class SysNoticeDO implements Serializable {
 	@GeneratedValue(generator = "id")
 	@GenericGenerator(name = "id", strategy = "net.laoyeye.yyms.pojo.strategy.IdentifierGeneratorImpl")
 	@Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
+	@JsonSerialize(using=ToStringSerializer.class)
 	private Long id;
 
 	@Column(nullable = false, columnDefinition="varchar(20) COMMENT '标题'")

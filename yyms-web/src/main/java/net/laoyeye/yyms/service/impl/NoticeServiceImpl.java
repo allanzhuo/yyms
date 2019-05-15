@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @description: 通知公告
@@ -83,6 +84,18 @@ public class NoticeServiceImpl implements NoticeService {
             sysNoticeRecordRepository.save(recordDO);
         }
         return Result.ok("新增通知成功！");
+    }
+
+    @Override
+    public Result updateStatusById(Boolean noticeStatus, Long id) {
+        Optional<SysNoticeDO> noticeDO = sysNoticeRepository.findById(id);
+        if (noticeDO.isPresent()){
+            SysNoticeDO notice = noticeDO.get().toBuilder()
+                    .noticeStatus(noticeStatus)
+                    .build();
+            sysNoticeRepository.save(notice);
+        }
+        return Result.ok("修改通知状态成功！");
     }
 
 }

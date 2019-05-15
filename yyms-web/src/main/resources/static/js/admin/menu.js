@@ -87,7 +87,6 @@ layui.config({
     });
 
     form.on('switch(status)', function (obj) {
-        var status = obj.elem.checked;
         $.post("/admin/menu/edit/status",{id:this.value, status: obj.elem.checked},function(res){
             if (res.code == 200) {
                 layer.msg("修改状态成功");

@@ -52,4 +52,11 @@ public class NoticeController extends BaseController{
         Result result = noticeService.save(noticeDO);
         return result;
     }
+
+    @PostMapping("/notice/edit/status")
+    @ResponseBody
+    public Result editMenuStatus(Boolean noticeStatus, Long id) {
+
+        return noticeService.updateStatusById(noticeStatus,id);
+    }
 }
