@@ -3,8 +3,12 @@ package net.laoyeye.yyms.service.impl;
 import net.laoyeye.pojo.Result;
 import net.laoyeye.utils.StringUtils;
 import net.laoyeye.yyms.pojo.domain.SysNoticeDO;
+import net.laoyeye.yyms.pojo.domain.SysNoticeRecordDO;
+import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
+import net.laoyeye.yyms.repository.SysNoticeRecordRepository;
 import net.laoyeye.yyms.repository.SysNoticeRepository;
+import net.laoyeye.yyms.repository.SysUserRepository;
 import net.laoyeye.yyms.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,6 +33,10 @@ import java.util.List;
 public class NoticeServiceImpl implements NoticeService {
     @Autowired
     private SysNoticeRepository sysNoticeRepository;
+    @Autowired
+    private SysUserRepository sysUserRepository;
+    @Autowired
+    private SysNoticeRecordRepository sysNoticeRecordRepository;
 
     @Override
     public Page<SysNoticeDO> list(BaseQuery baseQuery, String startDate, String endDate, String noticeTitle) {
@@ -62,7 +70,18 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public Result save(SysNoticeDO noticeDO) {
-        sysNoticeRepository.save(noticeDO);
+        //保存公告
+        SysNoticeDO sysNoticeDO = sysNoticeRepository.save(noticeDO);
+        List<SysUserDO> list = sysUserRepository.findAll();
+        //保存发送记录
+        for (SysUserDO sysUserDO : list) {
+            SysNoticeRecordDO recordDO = SysNoticeRecordDO
+                    .builder()
+                    .noticeId(sysNoticeDO.getId())
+                    .userId(sysUserDO.getId())
+                    .build();
+            sysNoticeRecordRepository.save(recordDO);
+        }
         return Result.ok("新增通知成功！");
     }
 

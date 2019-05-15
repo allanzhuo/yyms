@@ -9,7 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -35,11 +35,11 @@ public class SysNoticeRecordDO implements Serializable {
     @Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
     private Long id;
 
-    @NotBlank(message = "通知ID不能为空")
+    @NotNull(message = "通知ID不能为空")
     @Column(nullable = false, columnDefinition="bigint(20) COMMENT '通知ID'")
     private Long noticeId;
 
-    @NotBlank(message = "用户ID不能为空")
+    @NotNull(message = "用户ID不能为空")
     @Column(nullable = false, columnDefinition="bigint(20) COMMENT '用户ID'")
     private Long userId;
 
