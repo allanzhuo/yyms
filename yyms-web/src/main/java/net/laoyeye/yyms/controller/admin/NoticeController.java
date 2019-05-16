@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author laoyeye.net
@@ -58,5 +55,19 @@ public class NoticeController extends BaseController{
     public Result editMenuStatus(Boolean noticeStatus, Long id) {
 
         return noticeService.updateStatusById(noticeStatus,id);
+    }
+
+    @PostMapping("/notice/remove")
+    @ResponseBody
+    public Result removeMenu(Long id) {
+
+        return noticeService.removeNotice(id);
+    }
+
+    @PostMapping("/notice/removeBatch")
+    @ResponseBody
+    public Result removeBatch(@RequestParam("ids[]") Long[] ids) {
+
+        return noticeService.removeBatch(ids);
     }
 }

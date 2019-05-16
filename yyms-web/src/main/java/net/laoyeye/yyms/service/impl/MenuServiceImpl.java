@@ -63,7 +63,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Result removeMenu(Long[] ids) {
         int i = sysMenuRepository.deleteBatch(ids);
-        return Result.ok("删除选中的【" + i + "】条数据成功!");
+        return Result.ok("删除选中的【" + i + "】条数据成功！");
     }
 
     @Override
