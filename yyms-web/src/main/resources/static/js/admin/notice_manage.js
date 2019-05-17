@@ -6,7 +6,7 @@ layui.use(['form', 'table', 'layer', 'laydate'], function () {
         , laydate = layui.laydate;
 
     laydate.render({
-        elem: '#createTime'
+        elem: '#queryDate'
         , type: 'datetime'
         , range: true
     });
