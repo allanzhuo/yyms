@@ -17,4 +17,8 @@ public interface NoticeService {
     Result save(SysNoticeDO noticeDO);
     /**修改通知状态*/
     Result updateStatusById(Boolean noticeStatus,Long id);
+    /**删除通知*/
+    Result removeNotice(Long id);
+    /**批量删除通知*/
+    Result removeBatch(Long[] ids);
 }

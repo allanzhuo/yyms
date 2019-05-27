@@ -98,4 +98,16 @@ public class NoticeServiceImpl implements NoticeService {
         return Result.ok("修改通知状态成功！");
     }
 
+    @Override
+    public Result removeNotice(Long id) {
+        sysNoticeRepository.deleteById(id);
+        return Result.ok("删除通知成功！");
+    }
+
+    @Override
+    public Result removeBatch(Long[] ids) {
+        int i = sysNoticeRepository.deleteBatch(ids);
+        return Result.ok("删除选中的【" + i + "】条数据成功！");
+    }
+
 }

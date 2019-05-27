@@ -14,7 +14,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">发布时间</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="createTime" id="createTime" placeholder="请选择发布时间段" autocomplete="off" class="layui-input">
+                            <input type="text" name="queryDate" id="queryDate" placeholder="请选择发布时间段" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -35,7 +35,7 @@
             <div class="layui-card-body">
                 <div style="padding-bottom: 10px;" id="table-tools">
                     <a class="layui-btn" href="#notice">添加</a>
-                    <a class="layui-btn layui-btn-danger" data-type="del">删除</a>
+                    <a class="layui-btn layui-btn-danger" id="remove-batch">删除</a>
                 </div>
                 <table class="layui-table" id="notice-table" lay-filter="notice-table"></table>
             </div>
@@ -46,7 +46,7 @@
 <!--操作-->
 <script type="text/html" id="noticeBar">
     <a class="layui-btn layui-btn-xs" lay-event="edit" data-url="/system/menuedit">编辑</a>
-    <a class="layui-btn layui-btn-xs layui-btn-danger" data-url="/system/menus/delete" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="statusBar">
     <input type="checkbox" name="noticeStatus" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
