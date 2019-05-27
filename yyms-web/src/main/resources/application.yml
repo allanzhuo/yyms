@@ -3,6 +3,9 @@ server:
   port: 8080
 #项目配置
 spring:
+  #环境指定
+  profiles:
+    active: pro
   #资源配置
   thymeleaf:
     cache: false
@@ -18,21 +21,16 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   mvc:
     date-format: yyyy-MM-dd HH:mm:ss
-  #数据连接配置
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://118.25.38.57:3306/yyms?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    hikari:
-      username: root
-      password: zhangzhuo321..
-  #数据访问配置
+  #jpa配置
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
   #最大上传文件大小
   servlet:
     multipart:
+      enabled: true
       max-file-size: 20MB
+      max-request-size: 20MB

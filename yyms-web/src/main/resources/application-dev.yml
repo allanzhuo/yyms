@@ -1,0 +1,22 @@
+#服务器配置
+server:
+  port: 8080
+  tomcat:
+      basedir: C:/test
+      uri-encoding: utf-8
+      max-connections: 2000
+      max-threads: 2000
+#项目配置
+spring:
+  #数据连接配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://118.25.38.57:3306/yyms?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    hikari:
+      username: root
+      password: zhangzhuo321..
+logging:
+  level:
+    root: info
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
