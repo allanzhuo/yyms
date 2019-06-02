@@ -20,9 +20,9 @@ $(function () {
                 templateUrl: url_prefix + 'notice/manage',
                 controller: js_prefix + 'notice_manage.js'
             },
-            'note': {
-                templateUrl: url_prefix + 'note',
-                controller: js_prefix + '/note.js'
+            'message_center': {
+                templateUrl: url_prefix + 'message/center',
+                controller: js_prefix + 'message_center.js'
             },
             'notes': {
                 templateUrl: url_prefix + 'note/index',
