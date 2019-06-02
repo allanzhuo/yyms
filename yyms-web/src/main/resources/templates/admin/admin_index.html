@@ -42,9 +42,8 @@
                 <li class="layui-nav-item" lay-unselect>
                     <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心">
                         <i class="layui-icon layui-icon-notice"></i>
-
                         <!-- 如果有新消息，则显示小圆点 -->
-                        <span class="layui-badge-dot"></span>
+                        <span id="notice-dot"></span>
                     </a>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
@@ -115,6 +114,8 @@
 <script th:src="${@mvcResourceUrlProvider.getForLookupPath('/js/admin/config/spa.config.js')}"></script>
 <script th:src="${@mvcResourceUrlProvider.getForLookupPath('/plus/layui/layui.js')}"></script>
 <script th:src="${@mvcResourceUrlProvider.getForLookupPath('/js/common.js')}"></script>
+<script th:src="${@mvcResourceUrlProvider.getForLookupPath('/plus/websocket/sockjs.min.js')}"></script>
+<script th:src="${@mvcResourceUrlProvider.getForLookupPath('/plus/websocket/stomp.min.js')}"></script>
 <script th:src="${@mvcResourceUrlProvider.getForLookupPath('/js/admin/admin_index.js')}"></script>
 </body>
 </html>

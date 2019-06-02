@@ -134,4 +134,27 @@ layui.use(['element', 'layer'], function () {
         }
     });
 
+    connect();
+    function connect() {
+        //建立连接对象（还未发起连接）
+        var sock = new SockJS("/webSocketServer");
+        // 获取 STOMP 子协议的客户端对象
+        var stomp = Stomp.over(sock);
+        // 向服务器发起websocket连接并发送CONNECT帧
+        stomp.connect('guest', 'guest', function(frame) {
+            stomp.subscribe('/topic/response', function (response) {
+                var returnData = JSON.parse(response.body);
+                $("#notice-dot").addClass("layui-badge-dot");
+                console.log("测试中ing:"+returnData.responseMessage);
+            });
+
+            stomp.subscribe('/app/subscribe', function (response) {
+                console.log("已成功订阅/app/subscribeTest");
+                var returnData = JSON.parse(response.body);
+                console.log("/app/subscribeTest 你接收到的消息为:" + returnData.responseMessage);
+            });
+        });
+
+    }
+
 });
