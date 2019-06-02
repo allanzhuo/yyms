@@ -34,7 +34,7 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String username = (String) token.getPrincipal();
-
+        log.info(username+"：请求登录！");
         String password = new String((char[]) token.getCredentials());
 
         SysUserRepository userRepository = SpringBeanFactory.getBean(SysUserRepository.class);
@@ -63,7 +63,7 @@ public class UserRealm extends AuthorizingRealm {
                 throw new LockedAccountException("账号已被锁定,请联系管理员");
             }
         }
-
+        log.info(username+"：登录成功！");
         //不使用shiro自带的密码验证
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.get(), password, getName());
         return info;
