@@ -12,7 +12,8 @@ import org.springframework.data.domain.Page;
  */
 public interface NoticeService {
     /**分页查询通知*/
-    Page<SysNoticeDO> list(BaseQuery query, String startDate, String endDate, String noticeTitle);
+    Page<SysNoticeDO> listByCriteria(BaseQuery query, String startDate, String endDate, String noticeTitle);
+    Page<SysNoticeDO> list(BaseQuery query);
     /**保存通知*/
     Result save(SysNoticeDO noticeDO);
     /**修改通知状态*/

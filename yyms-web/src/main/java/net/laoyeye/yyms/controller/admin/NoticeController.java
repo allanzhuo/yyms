@@ -37,7 +37,7 @@ public class NoticeController extends BaseController{
     @PostMapping("/notice/list")
     @ResponseBody
     public Result list(BaseQuery query,String startDate,String endDate,String noticeTitle) {
-        Page<SysNoticeDO> page = noticeService.list(query, startDate, endDate, noticeTitle);
+        Page<SysNoticeDO> page = noticeService.listByCriteria(query, startDate, endDate, noticeTitle);
         return result(page);
     }
 

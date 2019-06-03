@@ -40,7 +40,7 @@ public class NoticeServiceImpl implements NoticeService {
     private SysNoticeRecordRepository sysNoticeRecordRepository;
 
     @Override
-    public Page<SysNoticeDO> list(BaseQuery baseQuery, String startDate, String endDate, String noticeTitle) {
+    public Page<SysNoticeDO> listByCriteria(BaseQuery baseQuery, String startDate, String endDate, String noticeTitle) {
         Pageable pageable = PageRequest.of(baseQuery.getPage()-1, baseQuery.getLimit(), Sort.Direction.DESC, "id");  //分页信息
         Specification<SysNoticeDO> spec = (Root<SysNoticeDO> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
             Path<String> title = root.get("noticeTitle");
@@ -67,6 +67,12 @@ public class NoticeServiceImpl implements NoticeService {
             return cb.and(list.toArray(p));
         };
         return sysNoticeRepository.findAll(spec, pageable);
+    }
+
+    @Override
+    public Page<SysNoticeDO> list(BaseQuery query) {
+        Pageable pageable = PageRequest.of(query.getPage()-1, query.getLimit(), Sort.Direction.DESC, "id");
+        return sysNoticeRepository.findAll(pageable);
     }
 
     @Override
