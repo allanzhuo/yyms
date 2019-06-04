@@ -2,11 +2,9 @@ package net.laoyeye.yyms.controller.admin;
 
 import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.controller.BaseController;
-import net.laoyeye.yyms.pojo.domain.SysNoticeDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
-import net.laoyeye.yyms.service.NoticeService;
+import net.laoyeye.yyms.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/admin")
 public class MessageCenterController extends BaseController {
     @Autowired
-    private NoticeService noticeService;
+    private MessageService messageService;
 
     @GetMapping("/message/center")
     public String index(Model model) {
@@ -34,7 +32,7 @@ public class MessageCenterController extends BaseController {
     @PostMapping("/message/list")
     @ResponseBody
     public Result list(BaseQuery query) {
-        Page<SysNoticeDO> page = noticeService.list(query);
-        return result(page);
+        Result result = messageService.list(query);
+        return result;
     }
 }

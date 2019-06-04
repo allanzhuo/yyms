@@ -11,8 +11,8 @@ layui.use(['table', 'layer'], function () {
         , cols: [[
             {type: 'checkbox'}
             , {type: 'numbers'}
-            , {field: 'noticeTitle', width: 150, title: '标题', align: 'center'}
-            , {field: 'noticeContent', width: '40%', title: '时间', align: 'center'}
+            , {field: 'noticeTitle', width: '41%', title: '标题', align: 'center'}
+            , {field: 'createTime', width: '41%', title: '发布时间', align: 'center'}
             , {title: '状态', width: 100, align: 'center', toolbar: '#messageStatus'}
         ]]
         , page: true
