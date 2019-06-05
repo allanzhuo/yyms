@@ -24,9 +24,9 @@ $(function () {
                 templateUrl: url_prefix + 'message/center',
                 controller: js_prefix + 'message_center.js'
             },
-            'notes': {
-                templateUrl: url_prefix + 'note/index',
-                controller: js_prefix + '/notes.js'
+            'message_detail': {
+                templateUrl: url_prefix + 'message/detail',
+                controller: js_prefix + 'message_detail.js'
             },
             'note_edit': {
                 templateUrl: url_prefix + 'note/edit',

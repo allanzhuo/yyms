@@ -36,8 +36,11 @@
 </div>
 <script type="text/html" id="messageStatus">
     {{#  if(d.readFlg == false){ }}
-    <span class="layui-bg-red">未读</span>
+    <button class="layui-btn layui-btn-xs">未读</button>
     {{#  } else { }}
-    <span class="layui-bg-gray">已读</span>
+    <button class="layui-btn layui-btn-primary layui-btn-xs">已读</button>
     {{#  }}}
+</script>
+<script type="text/html" id="titleTpl">
+    <a lay-href="" lay-event="link" >{{d.noticeTitle}}</a>
 </script>

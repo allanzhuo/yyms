@@ -11,4 +11,6 @@ import net.laoyeye.yyms.pojo.query.BaseQuery;
 public interface MessageService {
     /**分页查询消息*/
     Result list(BaseQuery query);
+    /**查询消息详情*/
+    Result getMessageDetail(Long recordId, Long noticeId);
 }

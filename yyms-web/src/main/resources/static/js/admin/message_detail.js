@@ -3,29 +3,19 @@ layui.use(['table', 'layer'], function () {
         , table = layui.table
         , layer = layui.layer;
 
-    table.render({
-        elem: '#message-table'
-        , url: "/admin/message/list"
-        , cellMinWidth: 80
-        , method: "post"
-        , cols: [[
-            {type: 'checkbox'}
-            , {type: 'numbers'}
-            , {field: 'noticeId', width: '41%', title: '发布时间', align: 'center'}
-            , {field: 'recordId', width: '41%', title: '发布时间', align: 'center'}
 
-            , {field: 'noticeTitle', width: '41%', title: '标题', align: 'center', toolbar: '#titleTpl'}
-            , {field: 'createTime', width: '41%', title: '发布时间', align: 'center'}
-            , {title: '状态', width: 100, align: 'center', toolbar: '#messageStatus'}
-        ]]
-        , page: true
-    });
-
-    //监听工具条
-    table.on('tool(message-table)', function (obj) {
-        var data = obj.data;
-        location.hash = vipspa.stringify('message_detail',{recordId: data.recordId,noticeId: data.noticeId});
-    });
+    read();
+    function read() {
+        var obj = vipspa.parse();
+        console.log(obj);
+        $.post("/admin/message/read", {recordId: obj.param.recordId, noticeId: obj.param.noticeId}, function (res) {
+            if (res.code == 200) {
+                layer.msg("修改状态成功");
+            } else {
+                layer.msg("修改失败," + res.msg);
+            }
+        });
+    };
     //监听提交
     // form.on('submit(btn-search)', function (data) {
     //     //执行重载

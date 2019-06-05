@@ -2,9 +2,11 @@ package net.laoyeye.yyms.repository;
 
 import net.laoyeye.yyms.pojo.domain.SysNoticeRecordDO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +17,19 @@ import java.util.Map;
  */
 public interface SysNoticeRecordRepository extends JpaRepository<SysNoticeRecordDO, Long> {
 
-    @Query(value = "SELECT sn.notice_title noticeTitle,sn.create_time createTime,snr.read_flg readFlg FROM sys_notice_record snr LEFT JOIN sys_notice sn ON sn.id = snr.notice_id AND sn.notice_status = TRUE WHERE snr.user_id = '1' ORDER BY sn.create_time DESC LIMIT :pageOffset,:pageSize", nativeQuery = true)
+    @Query(value = "SELECT CONCAT(snr.id,'S') recordId,CONCAT(sn.id,'S') noticeId,sn.notice_title noticeTitle,sn.create_time createTime,snr.read_flg readFlg FROM sys_notice_record snr JOIN sys_notice sn ON sn.id = snr.notice_id AND sn.notice_status = TRUE WHERE snr.user_id = '1' ORDER BY sn.create_time DESC LIMIT :pageOffset,:pageSize", nativeQuery = true)
     List<Map<String,Object>> findMessageCenter(@Param("pageOffset") int pageOffset, @Param("pageSize")int pageSize);
 
-    @Query(value = "SELECT count(snr.id) FROM sys_notice_record snr LEFT JOIN sys_notice sn ON sn.id = snr.notice_id AND sn.notice_status = TRUE WHERE snr.user_id = '1' ORDER BY sn.create_time DESC", nativeQuery = true)
+    @Query(value = "SELECT count(snr.id) FROM sys_notice_record snr JOIN sys_notice sn ON sn.id = snr.notice_id AND sn.notice_status = TRUE WHERE snr.user_id = '1' ORDER BY sn.create_time DESC", nativeQuery = true)
     Long findMessageCenterNum();
+
+    @Modifying
+    @Transactional
+    @Query("delete from SysNoticeRecordDO where noticeId in (?1)")
+    int deleteBatch(Long[] noticeIds);
+
+    @Modifying
+    @Transactional
+    @Query("delete from SysNoticeRecordDO where noticeId = ?1")
+    int deleteByNoticeId(Long noticeId);
 }
