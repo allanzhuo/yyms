@@ -13,4 +13,8 @@ public interface MessageService {
     Result list(BaseQuery query);
     /**查询消息详情*/
     Result getMessageDetail(Long recordId, Long noticeId);
+    /**标记所有未读消息*/
+    Result updateReadAll(Long userId);
+    /**批量标记消息*/
+    Result updateReadByIds(Long[] ids);
 }

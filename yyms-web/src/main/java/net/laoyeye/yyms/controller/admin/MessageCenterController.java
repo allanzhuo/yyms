@@ -7,10 +7,7 @@ import net.laoyeye.yyms.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author laoyeye
@@ -35,4 +32,20 @@ public class MessageCenterController extends BaseController {
         Result result = messageService.list(query);
         return result;
     }
+
+    @PostMapping("/message/read")
+    @ResponseBody
+    public Result updateReadByIds(@RequestParam("ids[]") Long[] ids) {
+        Result result = messageService.updateReadByIds(ids);
+        return result;
+    }
+
+    @PostMapping("/message/readAll")
+    @ResponseBody
+    public Result updateReadAll() {
+        Result result = messageService.updateReadAll(getUserId());
+        return result;
+    }
+
+
 }

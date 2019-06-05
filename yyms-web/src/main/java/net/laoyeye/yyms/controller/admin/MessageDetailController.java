@@ -27,7 +27,7 @@ public class MessageDetailController extends BaseController {
         return "admin/message_detail";
     }
 
-    @PostMapping("/message/read")
+    @PostMapping("/message/readDetail")
     @ResponseBody
     public Result read(String recordId, String noticeId) {
         Result result = messageService.getMessageDetail(Long.parseLong(recordId.substring(0,recordId.indexOf("S"))),

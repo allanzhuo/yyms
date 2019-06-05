@@ -8,7 +8,7 @@ layui.use(['table', 'layer'], function () {
     function read() {
         var obj = vipspa.parse();
         console.log(obj);
-        $.post("/admin/message/read", {recordId: obj.param.recordId, noticeId: obj.param.noticeId}, function (res) {
+        $.post("/admin/message/readDetail", {recordId: obj.param.recordId, noticeId: obj.param.noticeId}, function (res) {
             if (res.code == 200) {
                 $("#notice-title").html(res.data[0].noticeTitle);
                 $("#create-time").html(res.data[0].createTime);

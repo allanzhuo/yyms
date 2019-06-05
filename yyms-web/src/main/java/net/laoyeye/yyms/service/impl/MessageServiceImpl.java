@@ -34,22 +34,42 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Result getMessageDetail(Long recordId,Long noticeId) {
+    public Result getMessageDetail(Long recordId, Long noticeId) {
         Optional<SysNoticeDO> noticeDO = sysNoticeRepository.findById(noticeId);
         SysNoticeDO sysNoticeDO = noticeDO.orElse(new SysNoticeDO());
         Optional<SysNoticeRecordDO> recordDO = sysNoticeRecordRepository.findById(recordId);
-        if (recordDO.isPresent() && Boolean.FALSE.equals(recordDO.get().getReadFlg())){
+        if (recordDO.isPresent() && Boolean.FALSE.equals(recordDO.get().getReadFlg())) {
             SysNoticeRecordDO sysNoticeRecordDO = recordDO.get()
                     .toBuilder()
                     .readFlg(Boolean.TRUE)
                     .readDate(new Date())
                     .build();
             SysNoticeRecordDO save = sysNoticeRecordRepository.save(sysNoticeRecordDO);
-        } else if (!recordDO.isPresent()){
-            return Result.build(ResultEnum.NOT_FOUND.getCode(),"通知不存在，请检查操作！");
-        };
+        } else if (!recordDO.isPresent()) {
+            return Result.build(ResultEnum.NOT_FOUND.getCode(), "通知不存在，请检查操作！");
+        }
+        ;
         List list = new ArrayList<>();
         list.add(sysNoticeDO);
         return new Result(list);
+    }
+
+    @Override
+    public Result updateReadAll(Long userId) {
+        List<SysNoticeRecordDO> list = sysNoticeRecordRepository.findAllByReadFlgAndUserId(Boolean.FALSE, userId);
+        for (SysNoticeRecordDO recordDO : list) {
+            SysNoticeRecordDO sysNoticeRecordDO = recordDO.toBuilder()
+                    .readFlg(Boolean.TRUE)
+                    .readDate(new Date())
+                    .build();
+            SysNoticeRecordDO save = sysNoticeRecordRepository.save(sysNoticeRecordDO);
+        }
+        return Result.ok("标记成功！");
+    }
+
+    @Override
+    public Result updateReadByIds(Long[] ids) {
+        sysNoticeRecordRepository.updateReadBatch(ids);
+        return Result.ok("标记成功！");
     }
 }
