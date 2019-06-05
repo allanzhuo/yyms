@@ -10,7 +10,9 @@ layui.use(['table', 'layer'], function () {
         console.log(obj);
         $.post("/admin/message/read", {recordId: obj.param.recordId, noticeId: obj.param.noticeId}, function (res) {
             if (res.code == 200) {
-                layer.msg("修改状态成功");
+                $("#notice-title").html(res.data[0].noticeTitle);
+                $("#create-time").html(res.data[0].createTime);
+                $("#notice-content").html(res.data[0].noticeContent);
             } else {
                 layer.msg("修改失败," + res.msg);
             }
