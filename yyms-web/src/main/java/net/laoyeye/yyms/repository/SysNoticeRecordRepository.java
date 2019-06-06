@@ -35,7 +35,12 @@ public interface SysNoticeRecordRepository extends JpaRepository<SysNoticeRecord
 
     @Modifying
     @Transactional
-    @Query("update SysNoticeRecordDO set readFlg = true,readDate = current_timestamp where noticeId in (?1)")
+    @Query("delete from SysNoticeRecordDO where id in (?1)")
+    int deleteBatchByIds(Long[] ids);
+
+    @Modifying
+    @Transactional
+    @Query("update SysNoticeRecordDO set readFlg = true,readDate = current_timestamp where id in (?1)")
     int updateReadBatch(Long[] recordIds);
 
     List<SysNoticeRecordDO> findAllByReadFlgAndUserId(Boolean readFlg,Long userId);

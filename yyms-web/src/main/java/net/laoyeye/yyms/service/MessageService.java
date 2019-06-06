@@ -16,5 +16,9 @@ public interface MessageService {
     /**标记所有未读消息*/
     Result updateReadAll(Long userId);
     /**批量标记消息*/
-    Result updateReadByIds(Long[] ids);
+    Result updateReadByIds(Long[] ids,Long userId);
+    /**批量删除消息*/
+    Result removeBatch(Long[] ids,Long userId);
+    /**查询未读消息数量*/
+    Integer countUnread(Long userId);
 }

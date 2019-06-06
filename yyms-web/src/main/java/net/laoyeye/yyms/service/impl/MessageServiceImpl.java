@@ -64,12 +64,26 @@ public class MessageServiceImpl implements MessageService {
                     .build();
             SysNoticeRecordDO save = sysNoticeRecordRepository.save(sysNoticeRecordDO);
         }
-        return Result.ok("标记成功！");
+        return Result.ok("通知：全部已读！");
     }
 
     @Override
-    public Result updateReadByIds(Long[] ids) {
+    public Result updateReadByIds(Long[] ids,Long userId) {
         sysNoticeRecordRepository.updateReadBatch(ids);
-        return Result.ok("标记成功！");
+        List<SysNoticeRecordDO> list = sysNoticeRecordRepository.findAllByReadFlgAndUserId(Boolean.FALSE, userId);
+        return Result.ok(list,"标记已读成功！");
+    }
+
+    @Override
+    public Result removeBatch(Long[] ids,Long userId) {
+        sysNoticeRecordRepository.deleteBatchByIds(ids);
+        List<SysNoticeRecordDO> list = sysNoticeRecordRepository.findAllByReadFlgAndUserId(Boolean.FALSE, userId);
+        return  Result.ok(list,"删除成功！");
+    }
+
+    @Override
+    public Integer countUnread(Long userId) {
+        List<SysNoticeRecordDO> list = sysNoticeRecordRepository.findAllByReadFlgAndUserId(Boolean.FALSE, userId);
+        return list.size();
     }
 }

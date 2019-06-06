@@ -10,7 +10,7 @@
         <div class="layui-card">
             <div class="layui-tab layui-tab-brief">
                 <ul class="layui-tab-title">
-                    <li class="layui-this">未读通知<span class="layui-badge">6</span></li>
+                    <li class="layui-this">未读通知<span class="layui-badge" th:if="${unread gt 0}" th:text="${unread}" id="unread"></span></li>
                 </ul>
                 <div class="layui-tab-content">
 

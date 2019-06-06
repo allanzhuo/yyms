@@ -22,7 +22,7 @@ public class MessageCenterController extends BaseController {
 
     @GetMapping("/message/center")
     public String index(Model model) {
-
+        model.addAttribute("unread",messageService.countUnread(getUserId()));
         return "admin/message_center";
     }
 
@@ -36,7 +36,7 @@ public class MessageCenterController extends BaseController {
     @PostMapping("/message/read")
     @ResponseBody
     public Result updateReadByIds(@RequestParam("ids[]") Long[] ids) {
-        Result result = messageService.updateReadByIds(ids);
+        Result result = messageService.updateReadByIds(ids,getUserId());
         return result;
     }
 
@@ -47,5 +47,10 @@ public class MessageCenterController extends BaseController {
         return result;
     }
 
+    @PostMapping("/message/removeBatch")
+    @ResponseBody
+    public Result removeBatch(@RequestParam("ids[]") Long[] ids) {
 
+        return messageService.removeBatch(ids,getUserId());
+    }
 }

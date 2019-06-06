@@ -38,7 +38,18 @@ layui.use(['table', 'layer'], function () {
             }
             $.post("/admin/message/read", {ids: ids}, function (res) {
                 if (res.code == 200) {
+                    if (res.data.length == 0){
+                        $("#unread").removeClass("layui-badge");
+                        $("#unread").html("");
+                    } else {
+                        $("#unread").html(res.data.length);
+                    }
                     layer.msg(res.msg, {icon:1});
+                    table.reload('message-table', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                    });
                 } else {
                     layer.msg(res.msg, {icon:2});
                 }
@@ -47,7 +58,14 @@ layui.use(['table', 'layer'], function () {
         readAll: function () {
             $.post("/admin/message/readAll", function (res) {
                 if (res.code == 200) {
+                    $("#unread").removeClass("layui-badge");
+                    $("#unread").html("");
                     layer.msg(res.msg, {icon:1});
+                    table.reload('message-table', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                    });
                 } else {
                     layer.msg(res.msg, {icon:2});
                 }
@@ -64,22 +82,21 @@ layui.use(['table', 'layer'], function () {
                 var ids = new Array();
                 // 遍历所有选择的行数据，取每条数据对应的ID
                 for (var i = 0; i < data.length; i++) {
-                    ids[i] = data[i].id;
+                    ids[i] = data[i].recordId.substr(0,data[i].recordId.indexOf("S"));
                 }
                 $.post("/admin/message/removeBatch", {ids: ids}, function (res) {
                     if (res.code == 200) {
+                        if (res.data.length == 0){
+                            $("#unread").removeClass("layui-badge");
+                            $("#unread").html("");
+                        } else {
+                            $("#unread").html(res.data.length);
+                        }
                         layer.msg(res.msg, {icon:1});
                         //执行重载
-                        var queryDate = $("#queryDate").val();
-                        var noticeTitle = $("#noticeTitle").val();
-                        table.reload('notice-table', {
+                        table.reload('message-table', {
                             page: {
                                 curr: 1 //重新从第 1 页开始
-                            }
-                            , where: {
-                                startDate: queryDate.substring(0, 19),
-                                endDate: queryDate.substring(22, 41),
-                                noticeTitle: noticeTitle
                             }
                         });
                     } else {
