@@ -39,6 +39,7 @@ layui.use(['table', 'layer'], function () {
             $.post("/admin/message/read", {ids: ids}, function (res) {
                 if (res.code == 200) {
                     if (res.data.length == 0){
+                        $("#notice-dot").removeClass("layui-badge-dot");
                         $("#unread").removeClass("layui-badge");
                         $("#unread").html("");
                     } else {
@@ -58,6 +59,7 @@ layui.use(['table', 'layer'], function () {
         readAll: function () {
             $.post("/admin/message/readAll", function (res) {
                 if (res.code == 200) {
+                    $("#notice-dot").removeClass("layui-badge-dot");
                     $("#unread").removeClass("layui-badge");
                     $("#unread").html("");
                     layer.msg(res.msg, {icon:1});
@@ -87,6 +89,7 @@ layui.use(['table', 'layer'], function () {
                 $.post("/admin/message/removeBatch", {ids: ids}, function (res) {
                     if (res.code == 200) {
                         if (res.data.length == 0){
+                            $("#notice-dot").removeClass("layui-badge-dot");
                             $("#unread").removeClass("layui-badge");
                             $("#unread").html("");
                         } else {
@@ -120,6 +123,8 @@ layui.use(['table', 'layer'], function () {
             if (res != 0){
                 $("#unread").addClass("layui-badge");
                 $("#unread").html(res);
+            } else {
+                $("#notice-dot").removeClass("layui-badge-dot");
             }
         });
     };
