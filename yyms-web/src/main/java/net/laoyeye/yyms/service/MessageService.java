@@ -10,7 +10,7 @@ import net.laoyeye.yyms.pojo.query.BaseQuery;
  */
 public interface MessageService {
     /**分页查询消息*/
-    Result list(BaseQuery query);
+    Result list(BaseQuery query,Long userId);
     /**查询消息详情*/
     Result getMessageDetail(Long recordId, Long noticeId);
     /**标记所有未读消息*/

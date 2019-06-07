@@ -26,10 +26,10 @@ public class MessageServiceImpl implements MessageService {
     private SysNoticeRepository sysNoticeRepository;
 
     @Override
-    public Result list(BaseQuery query) {
-        List<Map<String, Object>> list = sysNoticeRecordRepository.findMessageCenter((query.getPage() - 1) * query.getLimit(), query.getLimit());
+    public Result list(BaseQuery query,Long userId) {
+        List<Map<String, Object>> list = sysNoticeRecordRepository.findMessageCenter(userId,(query.getPage() - 1) * query.getLimit(), query.getLimit());
         Result result = new Result(list,
-                sysNoticeRecordRepository.findMessageCenterNum());
+                sysNoticeRecordRepository.findMessageCenterNum(userId));
         return result;
     }
 

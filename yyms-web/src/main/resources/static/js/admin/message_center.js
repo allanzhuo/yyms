@@ -114,4 +114,14 @@ layui.use(['table', 'layer'], function () {
         active[type] ? active[type].call(this) : '';
     });
 
+    init();
+    function init() {
+        $.post("/admin/message/center/unread", function (res) {
+            if (res != 0){
+                $("#unread").addClass("layui-badge");
+                $("#unread").html(res);
+            }
+        });
+    };
+
 });

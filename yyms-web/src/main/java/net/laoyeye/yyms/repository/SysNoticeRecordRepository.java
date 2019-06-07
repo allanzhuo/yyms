@@ -17,11 +17,11 @@ import java.util.Map;
  */
 public interface SysNoticeRecordRepository extends JpaRepository<SysNoticeRecordDO, Long> {
 
-    @Query(value = "SELECT CONCAT(snr.id,'S') recordId,CONCAT(sn.id,'S') noticeId,sn.notice_title noticeTitle,sn.create_time createTime,snr.read_flg readFlg FROM sys_notice_record snr JOIN sys_notice sn ON sn.id = snr.notice_id AND sn.notice_status = TRUE WHERE snr.user_id = '1' ORDER BY sn.create_time DESC LIMIT :pageOffset,:pageSize", nativeQuery = true)
-    List<Map<String,Object>> findMessageCenter(@Param("pageOffset") int pageOffset, @Param("pageSize")int pageSize);
+    @Query(value = "SELECT CONCAT(snr.id,'S') recordId,CONCAT(sn.id,'S') noticeId,sn.notice_title noticeTitle,sn.create_time createTime,snr.read_flg readFlg FROM sys_notice_record snr JOIN sys_notice sn ON sn.id = snr.notice_id AND sn.notice_status = TRUE WHERE snr.user_id = :userId ORDER BY sn.create_time DESC LIMIT :pageOffset,:pageSize", nativeQuery = true)
+    List<Map<String,Object>> findMessageCenter(@Param("userId") Long userId, @Param("pageOffset") int pageOffset, @Param("pageSize")int pageSize);
 
-    @Query(value = "SELECT count(snr.id) FROM sys_notice_record snr JOIN sys_notice sn ON sn.id = snr.notice_id AND sn.notice_status = TRUE WHERE snr.user_id = '1' ORDER BY sn.create_time DESC", nativeQuery = true)
-    Long findMessageCenterNum();
+    @Query(value = "SELECT count(snr.id) FROM sys_notice_record snr JOIN sys_notice sn ON sn.id = snr.notice_id AND sn.notice_status = TRUE WHERE snr.user_id = :userId ORDER BY sn.create_time DESC", nativeQuery = true)
+    Long findMessageCenterNum(@Param("userId") Long userId);
 
     @Modifying
     @Transactional
@@ -43,5 +43,13 @@ public interface SysNoticeRecordRepository extends JpaRepository<SysNoticeRecord
     @Query("update SysNoticeRecordDO set readFlg = true,readDate = current_timestamp where id in (?1)")
     int updateReadBatch(Long[] recordIds);
 
+    @Query(value = "SELECT " +
+            "snr.id, snr.notice_id, snr.user_id, snr.read_flg, snr.read_date " +
+            "FROM " +
+            "sys_notice_record snr " +
+            "JOIN sys_notice sn ON sn.id = snr.notice_id AND sn.notice_status = TRUE " +
+            "WHERE " +
+            "snr.read_flg = ?1 AND snr.user_id = ?2 " +
+            "ORDER BY sn.create_time DESC ", nativeQuery = true)
     List<SysNoticeRecordDO> findAllByReadFlgAndUserId(Boolean readFlg,Long userId);
 }

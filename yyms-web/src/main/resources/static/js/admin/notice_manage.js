@@ -50,9 +50,9 @@ layui.use(['form', 'table', 'layer', 'laydate'], function () {
     form.on('switch(noticeStatus)', function (obj) {
         $.post("/admin/notice/edit/status", {id: this.value, noticeStatus: obj.elem.checked}, function (res) {
             if (res.code == 200) {
-                layer.msg("修改状态成功");
+                layer.msg("修改状态成功", {icon:1});
             } else {
-                layer.msg("修改失败," + res.msg);
+                layer.msg("修改失败," + res.msg, {icon:2});
             }
         });
     });
@@ -64,10 +64,21 @@ layui.use(['form', 'table', 'layer', 'laydate'], function () {
             layer.confirm('确认删除吗？', function (index) {
                 $.post("/admin/notice/remove", {id: data.id}, function (res) {
                     if (res.code == 200) {
-                        obj.del();
-                        layer.msg('删除成功！')
+                        layer.msg(res.msg, {icon:1});
+                        var queryDate = $("#queryDate").val();
+                        var noticeTitle = $("#noticeTitle").val();
+                        table.reload('notice-table', {
+                            page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+                            , where: {
+                                startDate: queryDate.substring(0, 19),
+                                endDate: queryDate.substring(22, 41),
+                                noticeTitle: noticeTitle
+                            }
+                        });
                     } else {
-                        layer.msg(res.msg);
+                        layer.msg(res.msg, {icon:2});
                     }
                 });
                 layer.close(index);

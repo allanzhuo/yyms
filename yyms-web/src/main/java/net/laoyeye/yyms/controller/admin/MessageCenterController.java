@@ -26,10 +26,16 @@ public class MessageCenterController extends BaseController {
         return "admin/message_center";
     }
 
+    @RequestMapping("/message/center/unread")
+    @ResponseBody
+    public int unread() {
+        return messageService.countUnread(getUserId());
+    }
+
     @PostMapping("/message/list")
     @ResponseBody
     public Result list(BaseQuery query) {
-        Result result = messageService.list(query);
+        Result result = messageService.list(query,getUserId());
         return result;
     }
 
