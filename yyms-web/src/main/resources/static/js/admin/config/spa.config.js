@@ -28,13 +28,13 @@ $(function () {
                 templateUrl: url_prefix + 'message/detail',
                 controller: js_prefix + 'message_detail.js'
             },
-            'note_edit': {
-                templateUrl: url_prefix + 'note/edit',
-                controller: js_prefix + '/note_edit.js'
+            'account': {
+                templateUrl: url_prefix + 'account',
+                controller: js_prefix + 'account.js'
             },
-            'cate': {
-                templateUrl: url_prefix + 'cate',
-                controller: js_prefix + '/cate.js'
+            'password': {
+                templateUrl: url_prefix + 'password',
+                controller: js_prefix + 'password.js'
             },
             'file': {
                 templateUrl: url_prefix + 'file',

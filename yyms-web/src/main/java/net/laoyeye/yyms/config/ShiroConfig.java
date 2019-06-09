@@ -20,9 +20,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
+import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Shiro配置文件
@@ -54,6 +56,16 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+
+//        LinkedHashMap<String, Filter> filtsMap=new LinkedHashMap<String, Filter>();
+//        filtsMap.put("authc",new ShiroFormAuthenticationFilter());
+//        shiroFilterFactoryBean.setFilters(filtsMap);
+        Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
+//        filters.put("authd", myShiroAuthcFilter());
+        // 注意这里不要用Bean的方式，否则会报错
+        filters.put("user", new MyShiroAuthcFilter());
+        shiroFilterFactoryBean.setFilters(filters);
+
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
@@ -65,6 +77,8 @@ public class ShiroConfig {
         //因为这里开启了rememberMe，所以要用user,authc是必须认证（执行实际的登陆操作）
        /* filterChainDefinitionMap.put("/**", "authc");*/
         filterChainDefinitionMap.put("/**", "user");
+
+
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

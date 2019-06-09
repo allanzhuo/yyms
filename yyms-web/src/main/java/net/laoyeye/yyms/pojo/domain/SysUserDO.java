@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -24,6 +25,7 @@ import static java.time.LocalDateTime.now;
 @Data
 @Builder(toBuilder=true)
 @Entity
+@DynamicUpdate
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "sys_user",

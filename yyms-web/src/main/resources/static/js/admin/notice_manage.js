@@ -1,5 +1,5 @@
 layui.use(['form', 'table', 'layer', 'laydate'], function () {
-    var $ = jQuery = layui.$
+    var $ = layui.$
         , table = layui.table
         , form = layui.form
         , layer = layui.layer

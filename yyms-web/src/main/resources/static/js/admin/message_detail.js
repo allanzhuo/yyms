@@ -12,7 +12,7 @@ layui.use(['table', 'layer'], function () {
                 $("#create-time").html(res.data[0].createTime);
                 $("#notice-content").html(res.data[0].noticeContent);
             } else {
-                layer.msg("修改失败," + res.msg);
+                layer.msg(res.msg, {icon:2});
             }
         });
     };
