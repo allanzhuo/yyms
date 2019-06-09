@@ -105,6 +105,12 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
+    public Result updateNotice(SysNoticeDO noticeDO) {
+        sysNoticeRepository.save(noticeDO);
+        return Result.ok("修改通知信息成功！");
+    }
+
+    @Override
     public Result removeNotice(Long id) {
         sysNoticeRepository.deleteById(id);
         sysNoticeRecordRepository.deleteByNoticeId(id);

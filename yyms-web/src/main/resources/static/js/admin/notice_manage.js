@@ -1,5 +1,5 @@
 layui.use(['form', 'table', 'layer', 'laydate'], function () {
-    var $ = layui.$
+    var $ = jQuery = layui.$
         , table = layui.table
         , form = layui.form
         , layer = layui.layer
@@ -10,7 +10,6 @@ layui.use(['form', 'table', 'layer', 'laydate'], function () {
         , type: 'datetime'
         , range: true
     });
-
     table.render({
         elem: '#notice-table'
         , url: "/admin/notice/list"
@@ -82,6 +81,44 @@ layui.use(['form', 'table', 'layer', 'laydate'], function () {
                     }
                 });
                 layer.close(index);
+            });
+        } else {
+            layer.open({
+                type: 1,
+                title: '编辑通知',
+                shadeClose: true,
+                btnAlign: 'c',
+                area: ['700px', '480px'], //宽高
+                content: $("#notice-edit-tpl").html()
+                ,success:function(layero, index) {
+                    layero.find("#notice-title").val(data.noticeTitle);
+                    layero.find("#notice-content").val(data.noticeContent);
+                }
+                ,btn: ['修改', '取消']
+                ,yes: function(index, layero){
+                    var noticeTitle = layero.find("#notice-title").val();
+                    var noticeContent = layero.find("#notice-content").val();
+                    $.post('/admin/notice/edit',{id: data.id,"noticeTitle": noticeTitle,"noticeContent": noticeContent,"noticeStatus": data.noticeStatus},function(res){
+                        if (res.code == 200) {
+                            layer.msg(res.msg, {icon:1});
+                            layer.close(index);
+                            var queryDate = $("#queryDate").val();
+                            var noticeTitle = $("#noticeTitle").val();
+                            table.reload('notice-table', {
+                                page: {
+                                    curr: 1 //重新从第 1 页开始
+                                }
+                                , where: {
+                                    startDate: queryDate.substring(0, 19),
+                                    endDate: queryDate.substring(22, 41),
+                                    noticeTitle: noticeTitle
+                                }
+                            });
+                        } else {
+                            layer.msg(res.msg, {icon:2});
+                        }
+                    });
+                }
             });
         }
     });

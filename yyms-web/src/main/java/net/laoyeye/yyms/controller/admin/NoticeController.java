@@ -52,9 +52,16 @@ public class NoticeController extends BaseController{
 
     @PostMapping("/notice/edit/status")
     @ResponseBody
-    public Result editMenuStatus(Boolean noticeStatus, Long id) {
+    public Result editNoticeStatus(Boolean noticeStatus, Long id) {
 
         return noticeService.updateStatusById(noticeStatus,id);
+    }
+
+    @PostMapping("/notice/edit")
+    @ResponseBody
+    public Result editNotice(SysNoticeDO noticeDO) {
+        noticeDO.setUpdateUser(getUser().getUserName());
+        return noticeService.updateNotice(noticeDO);
     }
 
     @PostMapping("/notice/remove")
