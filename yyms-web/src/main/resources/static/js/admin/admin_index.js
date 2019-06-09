@@ -130,6 +130,8 @@ layui.use(['element', 'layer'], function () {
                 });
             } else if (textStatus == "error") {
                 layer.alert('请求超时！请稍后再试！')
+            } else if (XMLHttpRequest.getResponseHeader('REQUIRE_AUTH') === 'true') {
+                top.location.href = '/login';
             }
         }
     });
