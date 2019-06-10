@@ -3,7 +3,9 @@ package net.laoyeye.yyms.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import net.laoyeye.enums.ResultEnum;
+import net.laoyeye.pojo.Constant;
 import net.laoyeye.pojo.Result;
+import net.laoyeye.utils.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Slf4j
 @Controller
-public class LoginController {
+public class LoginController extends BaseController{
 
     @GetMapping("/login")
     public String login() {
@@ -45,9 +47,12 @@ public class LoginController {
         return Result.ok();
     }
 
-/*    @GetMapping("/logout")
-    public String logoutUser() {
+    @GetMapping("/logout")
+    public String logout(String from) {
         logout();
-        return "redirect:/login";
-    }*/
+        if (StringUtils.isEmpty(from)) {
+            return "redirect:/";
+        }
+        return "redirect:" + Constant.LOGIN_URL;
+    }
 }
