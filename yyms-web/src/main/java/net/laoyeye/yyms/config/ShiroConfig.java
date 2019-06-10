@@ -60,11 +60,11 @@ public class ShiroConfig {
 //        LinkedHashMap<String, Filter> filtsMap=new LinkedHashMap<String, Filter>();
 //        filtsMap.put("authc",new ShiroFormAuthenticationFilter());
 //        shiroFilterFactoryBean.setFilters(filtsMap);
-        Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
-//        filters.put("authd", myShiroAuthcFilter());
+    //    Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
+        LinkedHashMap<String, Filter> filtsMap = new LinkedHashMap<String, Filter>();
         // 注意这里不要用Bean的方式，否则会报错
-        filters.put("user", new MyShiroAuthcFilter());
-        shiroFilterFactoryBean.setFilters(filters);
+        filtsMap.put("user", new MyShiroAuthcFilter());
+        shiroFilterFactoryBean.setFilters(filtsMap);
 
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/css/**", "anon");
