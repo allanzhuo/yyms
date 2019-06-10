@@ -24,7 +24,6 @@ import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * Shiro配置文件
@@ -57,13 +56,9 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 
-//        LinkedHashMap<String, Filter> filtsMap=new LinkedHashMap<String, Filter>();
-//        filtsMap.put("authc",new ShiroFormAuthenticationFilter());
-//        shiroFilterFactoryBean.setFilters(filtsMap);
-    //    Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
         LinkedHashMap<String, Filter> filtsMap = new LinkedHashMap<String, Filter>();
         // 注意这里不要用Bean的方式，否则会报错
-        filtsMap.put("user", new MyShiroAuthcFilter());
+        filtsMap.put("user", new ShiroFormAuthenticationFilter());
         shiroFilterFactoryBean.setFilters(filtsMap);
 
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
