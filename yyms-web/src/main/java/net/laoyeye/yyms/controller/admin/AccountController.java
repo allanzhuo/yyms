@@ -1,5 +1,6 @@
 package net.laoyeye.yyms.controller.admin;
 
+import net.laoyeye.yyms.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/admin")
-public class AccountController {
+public class AccountController extends BaseController{
 
     @GetMapping("/account")
     public String index(Model model) {
-
+        model.addAttribute("user", getUser());
         return "admin/account";
     }
 }
