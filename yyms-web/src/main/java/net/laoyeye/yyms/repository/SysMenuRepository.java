@@ -23,7 +23,7 @@ public interface SysMenuRepository extends JpaRepository<SysMenuDO, Long> {
     @Query("delete from SysMenuDO where id in (?1)")
     int deleteBatch(Long[] ids);
     /**根据父菜单ID查询菜单*/
-    @Query(value = "select * from sys_menu where pid = :pid and status = true order by sort", nativeQuery = true)
+    @Query(value = "select * from sys_menu where pid = :pid and status = true AND type in (0,1) order by sort", nativeQuery = true)
     List<SysMenuDO> findByPidOrderBySortAsc(@Param("pid") Long pid);
 
 }
