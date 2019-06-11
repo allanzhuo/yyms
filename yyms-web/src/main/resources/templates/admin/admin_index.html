@@ -63,11 +63,12 @@
                 </li>
                 <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:;">
-                        <cite>贤心</cite>
+                        <img th:src="${avatar}" class="layui-nav-img">
+                        <cite th:text="${nickName}"></cite>
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a href="#account">基本资料</a></dd>
-                        <dd><a href="#password">修改密码</a></dd>
+                        <dd style="text-align: center;"><a href="#account">基本资料</a></dd>
+                        <dd style="text-align: center;"><a href="#password">修改密码</a></dd>
                         <hr>
                         <dd style="text-align: center;"><a href="/logout?from=admin">退出</a></dd>
                     </dl>

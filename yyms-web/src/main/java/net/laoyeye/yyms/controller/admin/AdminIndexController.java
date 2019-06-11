@@ -32,7 +32,7 @@ public class AdminIndexController extends BaseController {
     public String index(Model model) {
         SysUserDO user = getUser();
         model.addAttribute("avatar", user.getAvatar());
-        model.addAttribute("nickname", user.getNickName());
+        model.addAttribute("nickName", user.getNickName());
         return "admin/admin_index";
     }
 
