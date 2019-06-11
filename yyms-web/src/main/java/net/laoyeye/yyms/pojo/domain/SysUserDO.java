@@ -55,6 +55,9 @@ public class SysUserDO implements Serializable {
     @Column(columnDefinition="varchar(100) COMMENT '邮箱'")
     private String email;
 
+    @Column(columnDefinition="varchar(255) COMMENT '个人简介'")
+    private String profile;
+
     @Column(columnDefinition = "varchar(32) COMMENT 'qqOpenId'")
     private String qqOpenId;
 

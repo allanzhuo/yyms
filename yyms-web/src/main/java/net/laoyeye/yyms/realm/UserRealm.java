@@ -64,8 +64,9 @@ public class UserRealm extends AuthorizingRealm {
             }
         }
         log.info(username+"：登录成功！");
+        SysUserDO userDO = user.get().toBuilder().password(null).build();
         //不使用shiro自带的密码验证
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.get(), password, getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userDO, password, getName());
         return info;
     }
 
