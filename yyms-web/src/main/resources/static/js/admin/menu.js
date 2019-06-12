@@ -89,9 +89,9 @@ layui.config({
     form.on('switch(status)', function (obj) {
         $.post("/admin/menu/edit/status",{id:this.value, status: obj.elem.checked},function(res){
             if (res.code == 200) {
-                layer.msg("修改状态成功");
+                layer.msg(res.msg, {icon:1});
             } else {
-                layer.msg("修改失败,"+res.msg);
+                layer.msg(res.msg, {icon:2});
             }
         });
     });
@@ -148,10 +148,10 @@ layui.config({
             layer.confirm("确认要删除选中的【" + ids.length + "】条数据吗?", function (index) {
                 $.post("/admin/menu/remove", {ids: ids}, function (res) {
                     if (res.code === 200) {
-                        layer.msg(res.msg);
+                        layer.msg(res.msg, {icon:1});
                         refresh();
                     } else {
-                        layer.msg(res.msg);
+                        layer.msg(res.msg, {icon:2});
                     }
                 });
                 layer.close(index);

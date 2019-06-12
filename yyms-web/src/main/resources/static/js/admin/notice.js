@@ -17,12 +17,12 @@ layui.use(['form', 'layer'], function () {
                 });
 
                 layer.alert(res.msg, {icon: 1}, function (index) {
-                    location.href = common.url.admin_index+'#notice_manage';
+                    location.href = '/admin#notice_manage';
                     layer.close(index);
                     }
                 )
             } else {
-                layer.msg(res.msg);
+                layer.msg(res.msg, {icon:2});
             }
         });
         return false;

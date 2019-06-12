@@ -29,7 +29,7 @@ layui.use('form', function () {
                 if (res.code === 200) {
                     layer.msg("登录成功！");
                     setTimeout(function () {
-                        location.href = common.url.admin_index;
+                        location.href = '/admin';
                     }, 1000);
                 } else {
                     layer.msg(res.msg);

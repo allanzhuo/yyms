@@ -15,7 +15,7 @@ layui.use(['form', 'laydate'], function () {
                     }
                 )
             } else {
-                layer.msg(res.msg);
+                layer.msg(res.msg, {icon:2});
             }
         });
     });

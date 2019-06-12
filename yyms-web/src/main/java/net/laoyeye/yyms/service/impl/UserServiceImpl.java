@@ -39,4 +39,19 @@ public class UserServiceImpl implements UserService {
         }
         return Result.build(500, "密码验证不一致，请检查！");
     }
+
+    @Override
+    public Result updateAccount(SysUserDO userDO) {
+        Optional<SysUserDO> sysUserDO = sysUserRepository.findById(userDO.getId());
+        SysUserDO user = sysUserDO.get();
+        SysUserDO newUser = user.toBuilder()
+                .userName(userDO.getUserName())
+                .nickName(userDO.getNickName())
+                .avatar(userDO.getAvatar())
+                .email(userDO.getEmail())
+                .profile(userDO.getProfile())
+                .build();
+        sysUserRepository.save(newUser);
+        return Result.ok("设置资料成功！");
+    }
 }

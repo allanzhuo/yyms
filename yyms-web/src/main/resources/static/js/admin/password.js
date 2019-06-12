@@ -21,7 +21,7 @@ layui.use('form', function () {
         $.post("/admin/password/edit", data.field, function (res) {
             if (res.code == 200) {
                 layer.alert(res.msg, {icon: 1}, function (index) {
-                        location.href = common.url.login;
+                        location.href = '/login';
                         layer.close(index);
                     }
                 )
