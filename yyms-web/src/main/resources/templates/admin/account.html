@@ -13,10 +13,11 @@
                     <div class="layui-card-header">设置我的资料</div>
                     <div class="layui-card-body" pad15="">
                         <form class="layui-form" lay-filter="">
+                            <input type="text" name="id" th:value="${user.id}" class="layui-input layui-hide" disabled="disabled">
                             <div class="layui-form-item">
                                 <label class="layui-form-label">用户名</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="userName" th:value="${user.userName}" readonly="" class="layui-input" disabled="disabled">
+                                    <input type="text" name="userName" th:value="${user.userName}" class="layui-input" disabled="disabled">
                                 </div>
                                 <div class="layui-form-mid layui-word-aux">修改结果需重新登录生效</div>
                             </div>
@@ -49,7 +50,7 @@
                             </div>
                             <div class="layui-form-item">
                                 <div class="layui-input-block">
-                                    <button class="layui-btn" lay-submit="" lay-filter="setmyinfo">确认修改</button>
+                                    <button class="layui-btn" lay-submit="" lay-filter="set-account">确认修改</button>
                                     <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
                                 </div>
                             </div>
