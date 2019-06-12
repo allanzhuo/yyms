@@ -6,6 +6,9 @@ import net.laoyeye.utils.StringUtils;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.repository.SysUserRepository;
 import net.laoyeye.yyms.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -52,6 +55,13 @@ public class UserServiceImpl implements UserService {
                 .profile(userDO.getProfile())
                 .build();
         sysUserRepository.save(newUser);
+        PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
+        //修改属性
+        String realmName = principalCollection.getRealmNames().iterator().next();
+        newUser.setPassword(null);
+        PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(newUser, realmName);
+        //重新加载Principal
+        SecurityUtils.getSubject().runAs(newPrincipalCollection);
         return Result.ok("设置资料成功！");
     }
 }
