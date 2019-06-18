@@ -36,9 +36,9 @@ $(function () {
                 templateUrl: url_prefix + 'password',
                 controller: js_prefix + 'password.js'
             },
-            'file': {
-                templateUrl: url_prefix + 'file',
-                controller: js_prefix + '/file.js'
+            'options': {
+                templateUrl: url_prefix + 'options',
+                controller: js_prefix + 'options.js'
             },
             'tag': {
                 templateUrl: url_prefix + 'tag',
