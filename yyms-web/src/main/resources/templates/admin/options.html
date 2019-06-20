@@ -12,7 +12,7 @@
                 <ul class="layui-tab-title ">
                     <li class="layui-this" id="systemLi">站点设置</li>
                     <li>邮件配置</li>
-                    <li>附件设置</li>
+                    <li>存储设置</li>
                     <li>核心设置</li>
                     <li>水印设置</li>
                 </ul>
@@ -29,42 +29,42 @@
                                     <td>网站名称</td>
                                     <!-- 输入框 -->
                                     <td>
-                                        <input type="text" name="xxx[xxx_webname]" class="layui-input" value="yyms经典的开源内容管理系统_yyms全功能新媒体内容管理系统微信公众平台开发_基于yyms敏捷开发框架" autocomplete="off">
+                                        <input type="text" name="website_name" class="layui-input" value="小卖铺的老爷爷" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>网站前台默认风格</td>
+                                    <td>网站域名</td>
                                     <!-- 输入框 -->
                                     <td>
-                                        <input type="text" name="xxx[xxx_df_style]" class="layui-input" value="yyms" autocomplete="off">
+                                        <input type="text" name="website_domain_name" class="layui-input" value="https://www.laoyeye.net" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>网站备案号</td>
+                                    <td>网站标题</td>
                                     <!-- 输入框 -->
                                     <td>
-                                        <input type="text" name="xxx[xxx_beian]" class="layui-input" value="鄂ICP备18000110号-1" autocomplete="off">
+                                        <input type="text" name="website_title" class="layui-input" value="未来面前，你我还都是孩子" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>网站默认关键词</td>
+                                    <td>META关键词</td>
                                     <!-- 输入框 -->
                                     <td>
-                                        <input type="text" name="xxx[xxx_keywords]" class="layui-input" value="layui后台,yyms,yyms,yyms,后台模板,layui后台模板,微信公众平台开发,yyms,tp5cms,内容管理系统,thinkphp后台系统,企业网站定制开发," autocomplete="off">
+                                        <input type="text" name="meta_keywords" class="layui-input" value="开源,后台管理,内容管理,微信小程序" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>站点描述</td>
+                                    <td>META描述</td>
                                     <!-- 文本域 -->
                                     <td>
-                                        <textarea placeholder="请输入内容" name="xxx[xxx_description]" class="layui-textarea" autocomplete="off">yyms旗下一款专注于前后端敏捷开发的全端框架系统，yyms.x匠心打造，跨平台多终端设备完美适配的全端极速开发框架，可快速应用于企业一站式开发解决方案，yyms、手机端企业网站、小程序、微信公众号多场景下系统解决方案，提供丰富的javascript组件库 方便程序开发人员快速完成web前后端开发】</textarea>
+                                        <textarea placeholder="请输入内容" name="meta_description" class="layui-textarea" autocomplete="off">yyms旗下一款专注于前后端敏捷开发的全端框架系统，yyms.x匠心打造，跨平台多终端设备完美适配的全端极速开发框架，可快速应用于企业一站式开发解决方案，yyms、手机端企业网站、小程序、微信公众号多场景下系统解决方案，提供丰富的javascript组件库 方便程序开发人员快速完成web前后端开发】</textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>网站版权信息</td>
+                                    <td>版权信息</td>
                                     <!-- 文本域 -->
                                     <td>
-                                        <textarea placeholder="请输入内容" name="xxx[xxx_powerby]" class="layui-textarea" autocomplete="off"> laoyeye.net版权所有. QQ 313492783</textarea>
+                                        <textarea placeholder="请输入内容" name="copyright" class="layui-textarea" autocomplete="off"> laoyeye.net版权所有</textarea>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -84,24 +84,6 @@
                                 </colgroup>
                                 <tbody>
                                 <tr>
-                                    <td>邮件发送方式</td>
-                                    <!-- 下拉 -->
-                                    <td>
-                                        <select name="xxx[xxx_mail_type]" id="xxx_mail_type">
-                                            <option value="smtp">smtp</option>
-                                            <option value="mail">mail</option>
-                                        </select>
-                                        <div class="layui-unselect layui-form-select">
-                                            <div class="layui-select-title">
-                                                <input type="text" placeholder="请选择" value="smtp" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div>
-                                            <dl class="layui-anim layui-anim-upbit">
-                                                <dd lay-value="smtp" class="layui-this">smtp</dd>
-                                                <dd lay-value="mail" class="">mail</dd>
-                                            </dl>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td>SMTP服务器</td>
                                     <!-- 输入框 -->
                                     <td>
@@ -109,7 +91,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>SMTP服务器端口</td>
+                                    <td>SMTP端口号</td>
                                     <!-- 输入框 -->
                                     <td>
                                         <input type="text" name="xxx[xxx_smtp_port]" class="layui-input" value="465" autocomplete="off">
@@ -133,21 +115,7 @@
                                     <td>邮件激活模板</td>
                                     <!-- HTML文本 -->
                                     <td>
-                                        <script id="mail_tpl_active" name="name[mail_tpl_active]" type="text/plain">
-                                                <p>Hi，{username}:</p>
-                                                <p>&nbsp; &nbsp; &nbsp;欢迎加入{title}！请点击下方链接认证您的邮箱，完成账号激活（本次验证链接30分钟内有效）。</p>
-                                                <p>{url}
-                                                    <br/>
-                                                </p>
-                                                <p>这是系统消息无须回复，{title}真诚欢迎您的加入！</p>
-                                            </script>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>测试邮箱账号</td>
-                                    <!-- 输入框 -->
-                                    <td>
-                                        <input type="text" name="xxx[mail_test]" class="layui-input" value="test@qq.com" autocomplete="off">
+                                        <textarea placeholder="请输入内容" name="meta_description" class="layui-textarea" autocomplete="off">yyms旗下一款专注于前后端敏捷开发的全端框架系统，yyms.x匠心打造，跨平台多终端设备完美适配的全端极速开发框架，可快速应用于企业一站式开发解决方案，yyms、手机端企业网站、小程序、微信公众号多场景下系统解决方案，提供丰富的javascript组件库 方便程序开发人员快速完成web前后端开发】</textarea>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -167,61 +135,49 @@
                                 </colgroup>
                                 <tbody>
                                 <tr>
-                                    <td>是否开启缩略图上传</td>
+                                    <td>存储设置</td>
                                     <!-- 单选框 -->
                                     <td>
                                         <input type="radio" name="is_thumb" title="是" value="是" checked="checked">
                                         <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i>
-                                            <div>是</div>
+                                            <div>腾讯云</div>
                                         </div>
                                         <input type="radio" name="is_thumb" title="否" value="否">
                                         <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>否</div>
+                                            <div>七牛云</div>
+                                        </div>
+                                        <input type="radio" name="is_thumb" title="否" value="否">
+                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
+                                            <div>又拍云</div>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>缩略图宽度</td>
+                                    <td>SecretId</td>
                                     <!-- 输入框 -->
                                     <td>
-                                        <input type="text" name="name[thumb_width]" class="layui-input" value="300" autocomplete="off">
+                                        <input type="text" name="xxx[xxx_smtp_host]" class="layui-input" value="smtp.qq.com" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>缩略图高度</td>
+                                    <td>SecretKey</td>
                                     <!-- 输入框 -->
                                     <td>
-                                        <input type="text" name="name[thumb_height]" class="layui-input" value="300" autocomplete="off">
+                                        <input type="text" name="xxx[xxx_smtp_port]" class="layui-input" value="465" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>缩略图裁剪方式</td>
-                                    <!-- 单选框 -->
+                                    <td>Bucket</td>
+                                    <!-- 输入框 -->
                                     <td>
-                                        <input type="radio" name="thumb_way" title="等比例缩放" value="等比例缩放">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>等比例缩放</div>
-                                        </div>
-                                        <input type="radio" name="thumb_way" title="缩放后填充" value="缩放后填充">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>缩放后填充</div>
-                                        </div>
-                                        <input type="radio" name="thumb_way" title="居中裁剪" value="居中裁剪" checked="checked">
-                                        <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i>
-                                            <div>居中裁剪</div>
-                                        </div>
-                                        <input type="radio" name="thumb_way" title="左上角裁剪" value="左上角裁剪">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>左上角裁剪</div>
-                                        </div>
-                                        <input type="radio" name="thumb_way" title="右下角裁剪" value="右下角裁剪">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>右下角裁剪</div>
-                                        </div>
-                                        <input type="radio" name="thumb_way" title="固定尺寸缩放" value="固定尺寸缩放">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>固定尺寸缩放</div>
-                                        </div>
+                                        <input type="text" name="xxx[xxx_smtp_user]" class="layui-input" value="yyms@laoyeye.net" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Region</td>
+                                    <!-- 输入框 -->
+                                    <td>
+                                        <input type="text" name="xxx[xxx_smtp_pass]" class="layui-input" value="xxxxx" autocomplete="off">
                                     </td>
                                 </tr>
                                 </tbody>
@@ -241,16 +197,30 @@
                                 </colgroup>
                                 <tbody>
                                 <tr>
-                                    <td>是否开启会员</td>
+                                    <td>全站评论</td>
                                     <!-- 单选框 -->
                                     <td>
                                         <input type="radio" name="is_user_reg" title="是" value="是" checked="checked">
                                         <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i>
-                                            <div>是</div>
+                                            <div>开启</div>
                                         </div>
                                         <input type="radio" name="is_user_reg" title="否" value="否">
                                         <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>否</div>
+                                            <div>关闭</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>网站留言</td>
+                                    <!-- 单选框 -->
+                                    <td>
+                                        <input type="radio" name="is_user_reg" title="是" value="是" checked="checked">
+                                        <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i>
+                                            <div>开启</div>
+                                        </div>
+                                        <input type="radio" name="is_user_reg" title="否" value="否">
+                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
+                                            <div>关闭</div>
                                         </div>
                                     </td>
                                 </tr>
