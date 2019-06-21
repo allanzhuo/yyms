@@ -26,42 +26,36 @@
                                 <tbody>
                                 <tr>
                                     <td>网站名称</td>
-                                    <!-- 输入框 -->
                                     <td>
                                         <input type="text" name="website_name" class="layui-input" value="小卖铺的老爷爷" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>网站域名</td>
-                                    <!-- 输入框 -->
                                     <td>
                                         <input type="text" name="website_domain_name" class="layui-input" value="https://www.laoyeye.net" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>网站标题</td>
-                                    <!-- 输入框 -->
-                                    <td>
+                                      <td>
                                         <input type="text" name="website_title" class="layui-input" value="未来面前，你我还都是孩子" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>META关键词</td>
-                                    <!-- 输入框 -->
                                     <td>
                                         <input type="text" name="meta_keywords" class="layui-input" value="开源,后台管理,内容管理,微信小程序" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>META描述</td>
-                                    <!-- 文本域 -->
                                     <td>
                                         <textarea placeholder="请输入内容" name="meta_description" class="layui-textarea" autocomplete="off">yyms旗下一款专注于前后端敏捷开发的全端框架系统，yyms.x匠心打造，跨平台多终端设备完美适配的全端极速开发框架，可快速应用于企业一站式开发解决方案，yyms、手机端企业网站、小程序、微信公众号多场景下系统解决方案，提供丰富的javascript组件库 方便程序开发人员快速完成web前后端开发】</textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>版权信息</td>
-                                    <!-- 文本域 -->
                                     <td>
                                         <textarea placeholder="请输入内容" name="copyright" class="layui-textarea" autocomplete="off"> laoyeye.net版权所有</textarea>
                                     </td>
@@ -69,7 +63,7 @@
                                 </tbody>
                             </table>
                             <div class="yyms-layer-btn">
-                                <a class="layui-btn layui-btn" lay-submit="" lay-filter="conf_1" id="conf_1">确定</a>
+                                <a class="layui-btn layui-btn" lay-submit="" lay-filter="website-set">保存</a>
                                 <a class="layui-btn layui-btn layui-btn-danger" type="reset">重置</a>
                             </div>
                         </form>
@@ -120,7 +114,7 @@
                                 </tbody>
                             </table>
                             <div class="yyms-layer-btn">
-                                <a class="layui-btn layui-btn" lay-submit="" lay-filter="conf_2" id="conf_2">确定</a>
+                                <a class="layui-btn layui-btn" lay-submit="" lay-filter="conf_2" id="conf_2">保存</a>
                                 <a class="layui-btn layui-btn layui-btn-danger" type="reset">重置</a>
                             </div>
                         </form>
@@ -137,18 +131,10 @@
                                     <td>存储设置</td>
                                     <!-- 单选框 -->
                                     <td>
-                                        <input type="radio" name="is_thumb" title="是" value="是" checked="checked">
-                                        <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i>
-                                            <div>腾讯云</div>
-                                        </div>
-                                        <input type="radio" name="is_thumb" title="否" value="否">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>七牛云</div>
-                                        </div>
-                                        <input type="radio" name="is_thumb" title="否" value="否">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>又拍云</div>
-                                        </div>
+                                        <input type="radio" name="is_thumb" title="腾讯云" value="tencent" checked="checked">
+                                        <!--后期开发-->
+                                        <input type="radio" name="is_thumb" title="七牛云" value="qiniu" disabled>
+                                        <input type="radio" name="is_thumb" title="又拍云" value="upyun" disabled>
                                     </td>
                                 </tr>
                                 <tr>
@@ -182,7 +168,7 @@
                                 </tbody>
                             </table>
                             <div class="yyms-layer-btn">
-                                <a class="layui-btn layui-btn" lay-submit="" lay-filter="conf_3" id="conf_3">确定</a>
+                                <a class="layui-btn layui-btn" lay-submit="" lay-filter="conf_3" id="conf_3">保存</a>
                                 <a class="layui-btn layui-btn layui-btn-danger" type="reset">重置</a>
                             </div>
                         </form>
@@ -226,7 +212,7 @@
                                 </tbody>
                             </table>
                             <div class="yyms-layer-btn">
-                                <a class="layui-btn layui-btn" lay-submit="" lay-filter="conf_7" id="conf_7">确定</a>
+                                <a class="layui-btn layui-btn" lay-submit="" lay-filter="conf_7" id="conf_7">保存</a>
                                 <a class="layui-btn layui-btn layui-btn-danger" type="reset">重置</a>
                             </div>
                         </form>
