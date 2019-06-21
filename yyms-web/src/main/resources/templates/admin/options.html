@@ -13,8 +13,7 @@
                     <li class="layui-this" id="systemLi">站点设置</li>
                     <li>邮件配置</li>
                     <li>存储设置</li>
-                    <li>核心设置</li>
-                    <li>水印设置</li>
+                    <li>全局设置</li>
                 </ul>
                 <div class="layui-tab-content">
                     <div class='layui-tab-item layui-show'>
@@ -184,7 +183,7 @@
                             </table>
                             <div class="yyms-layer-btn">
                                 <a class="layui-btn layui-btn" lay-submit="" lay-filter="conf_3" id="conf_3">确定</a>
-                                <a class="layui-btn layui-btn layui-btn-danger" id="resetAdd">重置</a>
+                                <a class="layui-btn layui-btn layui-btn-danger" type="reset">重置</a>
                             </div>
                         </form>
                     </div>
@@ -228,161 +227,7 @@
                             </table>
                             <div class="yyms-layer-btn">
                                 <a class="layui-btn layui-btn" lay-submit="" lay-filter="conf_7" id="conf_7">确定</a>
-                                <a class="layui-btn layui-btn layui-btn-danger" id="resetAdd">重置</a>
-                            </div>
-                        </form>
-                    </div>
-                    <div class='layui-tab-item'>
-                        <form action="" class="layui-form">
-                            <table class="layui-table" lay-skin="nob">
-                                <colgroup>
-                                    <col width="15%">
-                                    <col width="85%">
-                                </colgroup>
-                                <tbody>
-                                <tr>
-                                    <td>是否开启水印功能</td>
-                                    <!-- 单选框 -->
-                                    <td>
-                                        <input type="radio" name="is_markup" title="开启" value="开启" checked="checked">
-                                        <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i>
-                                            <div>开启</div>
-                                        </div>
-                                        <input type="radio" name="is_markup" title="关闭" value="关闭">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>关闭</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>水印文件类型</td>
-                                    <!-- 单选框 -->
-                                    <td>
-                                        <input type="radio" name="mark_type" title="gif" value="gif">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>gif</div>
-                                        </div>
-                                        <input type="radio" name="mark_type" title="png" value="png">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>png</div>
-                                        </div>
-                                        <input type="radio" name="mark_type" title="文字" value="文字" checked="checked">
-                                        <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i>
-                                            <div>文字</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>水印图片文字</td>
-                                    <!-- 输入框 -->
-                                    <td>
-                                        <input type="text" name="name[water_text]" class="layui-input" value="laoyeye.net" autocomplete="off">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>水印图片文件</td>
-                                    <!-- 附件类型 -->
-                                    <td>
-                                        <div class="layui-inline">
-                                            <input type="text" name="water_img" value="../../../images/water.jpg" id="litpicPath" class="layui-input">
-                                            <img src="../../../images/water.jpg">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>水印文字颜色</td>
-                                    <!-- 输入框 -->
-                                    <td>
-                                        <input type="text" name="name[water_text_color]" class="layui-input" value="#FF5722" autocomplete="off">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>水印文字大小</td>
-                                    <!-- 输入框 -->
-                                    <td>
-                                        <input type="text" name="name[water_font_size]" class="layui-input" value="16" autocomplete="off">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>水印透明度</td>
-                                    <!-- 输入框 -->
-                                    <td>
-                                        <input type="text" name="name[water_tmd]" class="layui-input" value="60" autocomplete="off">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>水印位置</td>
-                                    <!-- 单选框 -->
-                                    <td>
-                                        <input type="radio" name="water_pos" title="左上角" value="左上角">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>左上角</div>
-                                        </div>
-                                        <input type="radio" name="water_pos" title="上居中" value="上居中">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>上居中</div>
-                                        </div>
-                                        <input type="radio" name="water_pos" title="右上角" value="右上角">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>右上角</div>
-                                        </div>
-                                        <input type="radio" name="water_pos" title="左居中" value="左居中">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>左居中</div>
-                                        </div>
-                                        <input type="radio" name="water_pos" title="居中" value="居中">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>居中</div>
-                                        </div>
-                                        <input type="radio" name="water_pos" title="右居中" value="右居中">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>右居中</div>
-                                        </div>
-                                        <input type="radio" name="water_pos" title="左下角" value="左下角">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>左下角</div>
-                                        </div>
-                                        <input type="radio" name="water_pos" title="下居中" value="下居中">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>下居中</div>
-                                        </div>
-                                        <input type="radio" name="water_pos" title="右下角" value="右下角" checked="checked">
-                                        <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i>
-                                            <div>右下角</div>
-                                        </div>
-                                        <input type="radio" name="water_pos" title="随机位置" value="随机位置">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>随机位置</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>水印字体</td>
-                                    <!-- 单选框 -->
-                                    <td>
-                                        <input type="radio" name="font_path" title="yyms.ttf" value="yyms.ttf" checked="checked">
-                                        <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i>
-                                            <div>yyms.ttf</div>
-                                        </div>
-                                        <input type="radio" name="font_path" title="yyms.ttf" value="yyms.ttf">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>yyms.ttf</div>
-                                        </div>
-                                        <input type="radio" name="font_path" title="yyms.ttf" value="yyms.ttf">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>yyms.ttf</div>
-                                        </div>
-                                        <input type="radio" name="font_path" title="行书.ttf" value="行书.ttf">
-                                        <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
-                                            <div>行书.ttf</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="yyms-layer-btn">
-                                <a class="layui-btn layui-btn" lay-submit="" lay-filter="conf_8" id="conf_8">确定</a>
-                                <a class="layui-btn layui-btn layui-btn-danger" id="resetAdd">重置</a>
+                                <a class="layui-btn layui-btn layui-btn-danger" type="reset">重置</a>
                             </div>
                         </form>
                     </div>
