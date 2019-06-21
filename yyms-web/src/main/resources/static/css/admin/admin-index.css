@@ -29,3 +29,7 @@
     right: 0px;
     padding-top: 15px;
 }
+
+.yyms-table tbody tr:hover,.layui-table-hover{
+    background-color: transparent!important;
+}
