@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -23,7 +24,12 @@ public class OptionsController extends BaseController{
 
     @GetMapping("/options")
     public String index(Model model) {
-        //model.addAttribute("user", getUser());
+//        List<SettingDO> settings = settingService.listAll();
+//        Map<String, Object> attributeMap = new HashMap<String, Object>();
+//        for (SettingDO setting : settings) {
+//            attributeMap.put(setting.getCode(), setting.getValue());
+//        }
+//        model.addAllAttributes(attributeMap);
         return "admin/options";
     }
 
