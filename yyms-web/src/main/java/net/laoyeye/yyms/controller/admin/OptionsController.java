@@ -2,6 +2,7 @@ package net.laoyeye.yyms.controller.admin;
 
 import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.controller.BaseController;
+import net.laoyeye.yyms.pojo.domain.SysOptionsDO;
 import net.laoyeye.yyms.service.OptionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,12 +26,12 @@ public class OptionsController extends BaseController{
 
     @GetMapping("/options")
     public String index(Model model) {
-//        List<SettingDO> settings = settingService.listAll();
-//        Map<String, Object> attributeMap = new HashMap<String, Object>();
-//        for (SettingDO setting : settings) {
-//            attributeMap.put(setting.getCode(), setting.getValue());
-//        }
-//        model.addAllAttributes(attributeMap);
+        List<SysOptionsDO> list = optionsService.listAll();
+        Map<String, Object> attributeMap = new HashMap<String, Object>();
+        for (SysOptionsDO optionsDO : list) {
+            attributeMap.put(optionsDO.getOptionCode(), optionsDO.getOptionValue());
+        }
+        model.addAllAttributes(attributeMap);
         return "admin/options";
     }
 

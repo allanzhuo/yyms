@@ -1,7 +1,9 @@
 package net.laoyeye.yyms.service;
 
 import net.laoyeye.pojo.Result;
+import net.laoyeye.yyms.pojo.domain.SysOptionsDO;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,4 +14,7 @@ import java.util.Map;
 public interface OptionsService {
     /**保存配置*/
     Result save(Map<String,String> map);
+
+    /**查询所有配置*/
+    List<SysOptionsDO> listAll();
 }

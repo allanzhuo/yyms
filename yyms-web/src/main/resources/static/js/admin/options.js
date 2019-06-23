@@ -1,6 +1,7 @@
 layui.use('form', function () {
     var $ = layui.$,
         form = layui.form;
+    form.render();
 
     //监听提交
     form.on('submit(website-set)', function (data) {

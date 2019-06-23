@@ -27,37 +27,37 @@
                                 <tr>
                                     <td>网站名称</td>
                                     <td>
-                                        <input type="text" name="website_name" class="layui-input" value="小卖铺的老爷爷" autocomplete="off">
+                                        <input type="text" name="website_name" class="layui-input" th:value="${website_name}" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>网站域名</td>
                                     <td>
-                                        <input type="text" name="website_domain" class="layui-input" value="https://www.laoyeye.net" autocomplete="off">
+                                        <input type="text" name="website_domain" class="layui-input" th:value="${website_domain}" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>网站标题</td>
                                       <td>
-                                        <input type="text" name="website_title" class="layui-input" value="未来面前，你我还都是孩子" autocomplete="off">
+                                        <input type="text" name="website_title" class="layui-input" th:value="${website_title}" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>META关键词</td>
                                     <td>
-                                        <input type="text" name="meta_keywords" class="layui-input" value="开源,后台管理,内容管理,微信小程序" autocomplete="off">
+                                        <input type="text" name="meta_keywords" class="layui-input" th:value="${meta_keywords}" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>META描述</td>
                                     <td>
-                                        <textarea placeholder="请输入内容" name="meta_description" class="layui-textarea" autocomplete="off">yyms旗下一款专注于前后端敏捷开发的全端框架系统，yyms.x匠心打造，跨平台多终端设备完美适配的全端极速开发框架，可快速应用于企业一站式开发解决方案，yyms、手机端企业网站、小程序、微信公众号多场景下系统解决方案，提供丰富的javascript组件库 方便程序开发人员快速完成web前后端开发】</textarea>
+                                        <textarea placeholder="请输入内容" name="meta_description" class="layui-textarea" th:utext="${meta_description}" autocomplete="off"></textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>版权信息</td>
                                     <td>
-                                        <textarea placeholder="请输入内容" name="copyright" class="layui-textarea" autocomplete="off"> laoyeye.net版权所有</textarea>
+                                        <textarea placeholder="请输入内容" name="copyright" class="layui-textarea" th:utext="${copyright}" autocomplete="off"></textarea>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -79,31 +79,31 @@
                                 <tr>
                                     <td>SMTP服务器</td>
                                     <td>
-                                        <input type="text" name="smtp_host" class="layui-input" value="smtp.qq.com" autocomplete="off">
+                                        <input type="text" name="smtp_host" class="layui-input" th:value="${smtp_host}" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>SMTP端口号</td>
                                     <td>
-                                        <input type="text" name="smtp_port" class="layui-input" value="465" autocomplete="off">
+                                        <input type="text" name="smtp_port" class="layui-input" th:value="${smtp_port}" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>SMTP用户名</td>
                                     <td>
-                                        <input type="text" name="smtp_user" class="layui-input" value="yyms@laoyeye.net" autocomplete="off">
+                                        <input type="text" name="smtp_user" class="layui-input" th:value="${smtp_user}" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>SMTP授权码</td>
                                     <td>
-                                        <input type="text" name="smtp_pass" class="layui-input" value="xxxxx" autocomplete="off">
+                                        <input type="text" name="smtp_pass" class="layui-input" th:value="${smtp_pass}" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr style="">
                                     <td>邮件激活模板</td>
                                     <td>
-                                        <textarea placeholder="请输入内容" name="smtp_tpl" class="layui-textarea" autocomplete="off">yyms旗下一款专注于前后端敏捷开发的全端框架系统，yyms.x匠心打造，跨平台多终端设备完美适配的全端极速开发框架，可快速应用于企业一站式开发解决方案，yyms、手机端企业网站、小程序、微信公众号多场景下系统解决方案，提供丰富的javascript组件库 方便程序开发人员快速完成web前后端开发】</textarea>
+                                        <textarea placeholder="请输入内容" name="smtp_tpl" class="layui-textarea" th:utext="${smtp_tpl}" autocomplete="off"></textarea>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -125,7 +125,7 @@
                                 <tr>
                                     <td>存储类型</td>
                                     <td>
-                                        <input type="radio" name="storage_type" title="腾讯云" value="tencent" checked="checked">
+                                        <input type="radio" name="storage_type" title="腾讯云" value="tencent" checked="true">
                                         <!--后期开发-->
                                         <input type="radio" name="storage_type" title="七牛云" value="qiniu" disabled>
                                         <input type="radio" name="storage_type" title="又拍云" value="upyun" disabled>
@@ -134,25 +134,25 @@
                                 <tr>
                                     <td>SecretId</td>
                                     <td>
-                                        <input type="text" name="secret_id" class="layui-input" value="smtp.qq.com" autocomplete="off">
+                                        <input type="text" name="secret_id" class="layui-input" th:value="${secret_id}" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>SecretKey</td>
                                     <td>
-                                        <input type="text" name="secret_key" class="layui-input" value="465" autocomplete="off">
+                                        <input type="text" name="secret_key" class="layui-input" th:value="${secret_key}" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Bucket</td>
                                     <td>
-                                        <input type="text" name="bucket" class="layui-input" value="yyms@laoyeye.net" autocomplete="off">
+                                        <input type="text" name="bucket" class="layui-input" th:value="${bucket}" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Region</td>
                                     <td>
-                                        <input type="text" name="region" class="layui-input" value="xxxxx" autocomplete="off">
+                                        <input type="text" name="region" class="layui-input" th:value="${region}" autocomplete="off">
                                     </td>
                                 </tr>
                                 </tbody>
@@ -174,15 +174,15 @@
                                 <tr>
                                     <td>全站评论</td>
                                     <td>
-                                        <input type="radio" name="all_comment" title="开启" value="1" checked="checked">
-                                        <input type="radio" name="all_comment" title="关闭" value="0">
+                                        <input type="radio" name="all_comment" title="开启" value="1" th:checked="${all_comment eq '1'}">
+                                        <input type="radio" name="all_comment" title="关闭" value="0" th:checked="${all_comment eq '0'}">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>网站留言</td>
                                     <td>
-                                        <input type="radio" name="message_board" title="开启" value="1" checked="checked">
-                                        <input type="radio" name="message_board" title="关闭" value="0">
+                                        <input type="radio" name="message_board" title="开启" value="1" th:checked="${message_board eq '1'}">
+                                        <input type="radio" name="message_board" title="关闭" value="0" th:checked="${message_board eq '0'}">
                                     </td>
                                 </tr>
                                 </tbody>
