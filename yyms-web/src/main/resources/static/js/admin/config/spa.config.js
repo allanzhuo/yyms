@@ -40,9 +40,9 @@ $(function () {
                 templateUrl: url_prefix + 'options',
                 controller: js_prefix + 'options.js'
             },
-            'tag': {
-                templateUrl: url_prefix + 'tag',
-                controller: js_prefix + '/tag.js'
+            'role': {
+                templateUrl: url_prefix + 'role',
+                controller: js_prefix + 'role.js'
             },
             'about': {
                 templateUrl: url_prefix + 'about',
