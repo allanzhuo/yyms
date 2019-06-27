@@ -150,7 +150,11 @@
             var url = routers[0];
             var routerItem = vipspa.routerMap[url];
             if(typeof routerItem==='undefined'){
-                console.error('路由匹配失败，请检查。',hashPathAndParams)
+                console.error('路由匹配失败，请检查。',hashPathAndParams);
+                var defaultsRoute = vipspa.routerMap.defaults;
+                routerItem = vipspa.routerMap[defaultsRoute];
+                loaderHtml(vipspa.mainView, routerItem);
+                location.hash = defaultsRoute;
                 return false;
             }
 

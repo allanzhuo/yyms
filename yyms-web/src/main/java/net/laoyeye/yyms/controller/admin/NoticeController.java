@@ -28,10 +28,10 @@ public class NoticeController extends BaseController{
         return "admin/notice";
     }
 
-    @GetMapping("/notice/manage")
+    @GetMapping("/notice/add")
     public String noticeManage(Model model) {
 
-        return "admin/notice_manage";
+        return "admin/notice_add";
     }
 
     @PostMapping("/notice/list")

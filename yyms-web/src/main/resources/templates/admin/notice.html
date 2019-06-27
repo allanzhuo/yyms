@@ -4,40 +4,68 @@
         <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
             <a href="/admin">主页</a><span lay-separator="">/</span>
             <a><cite>系统管理</cite></a><span lay-separator="">/</span>
-            <a href="#notice_manage"><cite>通知管理</cite></a><span lay-separator="">/</span>
-            <a><cite>通知设置</cite></a>
+            <a><cite>通知管理</cite></a>
         </div>
     </div>
     <div class="layui-fluid">
-        <div class="layui-row layui-col-space15">
-            <div class="layui-col-md12">
-                <div class="layui-card">
-                    <div class="layui-card-header">通知设置</div>
-                    <div class="layui-card-body" pad15="">
-
-                        <div class="layui-form" wid100="" lay-filter="">
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">通知标题</label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="noticeTitle" value="layuiAdmin" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">通知内容</label>
-                                <div class="layui-input-block">
-                                    <textarea name="noticeContent" class="layui-textarea">layuiAdmin 通用后台管理模板系统</textarea>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <div class="layui-input-block">
-                                    <button class="layui-btn" lay-submit="" lay-filter="confirm-notice">确认发布</button>
-                                </div>
-                            </div>
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="app-content-list">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">发布时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="queryDate" id="queryDate" placeholder="请选择发布时间段" autocomplete="off" class="layui-input">
                         </div>
-
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">通知标题</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="noticeTitle" id="noticeTitle" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn layuiadmin-btn-list" lay-submit=""
+                                lay-filter="btn-search">
+                            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                        </button>
                     </div>
                 </div>
+            </div>
+
+            <div class="layui-card-body">
+                <div style="padding-bottom: 10px;" id="table-tools">
+                    <a class="layui-btn" href="#notice_add">添加</a>
+                    <a class="layui-btn layui-btn-danger" id="remove-batch">删除</a>
+                </div>
+                <table class="layui-table" id="notice-table" lay-filter="notice-table"></table>
             </div>
         </div>
     </div>
 </div>
+<div id="notice-edit-tpl" style="display: none;">
+    <div style="height:100%;overflow-y:scroll;">
+        <form class="layui-form layui-form-pane yyms-menu-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">通知标题</label>
+                <div class="layui-input-block">
+                    <input type="text" name="noticeTitle" id="notice-title" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">通知内容</label>
+                <div class="layui-input-block">
+                    <textarea name="noticeContent" id="notice-content" class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--操作-->
+<script type="text/html" id="noticeBar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit" >编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="statusBar">
+    <input type="checkbox" name="noticeStatus" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
+           lay-filter="noticeStatus" {{ d.noticeStatus== true ? 'checked' : '' }}>
+</script>
