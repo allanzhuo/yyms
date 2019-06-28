@@ -11,7 +11,7 @@ layui.use(['form', 'table', 'layer', 'laydate'], function () {
         , range: true
     });
     table.render({
-        elem: '#notice-table'
+        elem: '#role-table'
         , url: "/admin/role/list"
         , cellMinWidth: 80
         , method: "post"
