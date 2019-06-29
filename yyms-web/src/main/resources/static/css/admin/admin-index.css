@@ -33,3 +33,51 @@
 .yyms-table tbody tr:hover,.layui-table-hover{
     background-color: transparent!important;
 }
+
+/** 自定义弹窗风格 */
+.layui-layer.layui-layer-yyms .layui-layer-title {
+    background-color: #24262F;    /* 标题背景颜色 */
+    color: #ffffff;    /* 标题文字颜色 */
+}
+
+.layui-layer.layui-layer-yyms .layui-layer-setwin {
+    top: 17px;
+}
+
+.layui-layer.layui-layer-yyms .layui-layer-setwin a {
+    font-family: layui-icon !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #ffffff;       /* 关闭按钮、最大化按钮颜色 */
+}
+
+/* 关闭按钮 */
+.layui-layer.layui-layer-yyms .layui-layer-setwin .layui-layer-close1 {
+    background: none;  /* 去掉背景图片，使用layui图标 */
+}
+
+.layui-layer.layui-layer-yyms .layui-layer-setwin .layui-layer-close1:before {
+    content: "\1006";
+}
+
+/* 最小化按钮 */
+.layui-layer.layui-layer-yyms .layui-layer-setwin .layui-layer-min cite {
+    background-color: #dddddd;     /* 最小化按钮颜色 */
+}
+
+/* 最大化按钮 */
+.layui-layer.layui-layer-yyms .layui-layer-setwin .layui-layer-max {
+    background: none;
+    font-size: 14px;
+    padding-top: 1px;
+}
+
+.layui-layer.layui-layer-yyms .layui-layer-setwin .layui-layer-max:before {
+    content: "\e622";
+}
+
+.layui-layer.layui-layer-yyms .layui-layer-setwin .layui-layer-maxmin:before {
+    content: "\e758";
+}

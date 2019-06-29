@@ -4,6 +4,10 @@ layui.use(['element', 'layer'], function () {
         layer = layui.layer;
     element.render();
 
+    layer.config({
+        skin: 'layui-layer-yyms' //一旦设定，所有弹层风格都采用此主题。
+    });
+
     init();
     function init() {
         var windowWidth = window.innerWidth;
