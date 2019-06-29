@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/admin")
-public class RoleController extends BaseController{
+public class RoleController extends BaseController {
     @Autowired
     private RoleService roleService;
 
@@ -30,7 +30,7 @@ public class RoleController extends BaseController{
         return "admin/role";
     }
 
-//    @GetMapping("/notice/add")
+    //    @GetMapping("/notice/add")
 //    public String noticeManage(Model model) {
 //
 //        return "admin/notice_add";
@@ -42,6 +42,13 @@ public class RoleController extends BaseController{
         Page<SysRoleDO> page = roleService.listByRoleName(query, roleName);
         return result(page);
     }
+
+    @PostMapping("/role/edit/status")
+    @ResponseBody
+    public Result editNoticeStatus(Boolean roleStatus, Long id) {
+
+        return roleService.updateStatusById(roleStatus, id);
+    }
 //
 //    @PostMapping("/notice/save")
 //    @ResponseBody
@@ -52,12 +59,7 @@ public class RoleController extends BaseController{
 //        return result;
 //    }
 //
-//    @PostMapping("/notice/edit/status")
-//    @ResponseBody
-//    public Result editNoticeStatus(Boolean noticeStatus, Long id) {
-//
-//        return noticeService.updateStatusById(noticeStatus,id);
-//    }
+
 //
 //    @PostMapping("/notice/edit")
 //    @ResponseBody

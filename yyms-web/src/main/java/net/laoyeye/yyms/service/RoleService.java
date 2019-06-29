@@ -14,4 +14,6 @@ import org.springframework.data.domain.Page;
 public interface RoleService {
     /**分页查询角色*/
     Page<SysRoleDO> listByRoleName(BaseQuery query, String roleName);
+    /**修改通知状态*/
+    Result updateStatusById(Boolean roleStatus,Long id);
 }

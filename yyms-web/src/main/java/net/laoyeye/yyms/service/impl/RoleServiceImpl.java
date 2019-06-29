@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author laoyeye
@@ -45,5 +46,17 @@ public class RoleServiceImpl implements RoleService {
             return cb.and(list.toArray(p));
         };
         return sysRoleRepository.findAll(spec, pageable);
+    }
+
+    @Override
+    public Result updateStatusById(Boolean roleStatus, Long id) {
+        Optional<SysRoleDO> roleDO = sysRoleRepository.findById(id);
+        if (roleDO.isPresent()){
+            SysRoleDO role = roleDO.get().toBuilder()
+                    .roleStatus(roleStatus)
+                    .build();
+            sysRoleRepository.save(role);
+        }
+        return Result.ok("修改角色状态成功！");
     }
 }
