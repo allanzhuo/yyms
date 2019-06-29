@@ -12,15 +12,9 @@
             <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="app-content-list">
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">发布时间</label>
+                        <label class="layui-form-label">角色名称</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="queryDate" id="queryDate" placeholder="请选择发布时间段" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">通知标题</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="noticeTitle" id="noticeTitle" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            <input type="text" name="roleName" placeholder="请输入角色名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -34,8 +28,8 @@
 
             <div class="layui-card-body">
                 <div style="padding-bottom: 10px;" id="table-tools">
-                    <a class="layui-btn" href="#notice_add">添加</a>
-                    <a class="layui-btn layui-btn-danger" id="remove-batch">删除</a>
+                    <a class="layui-btn" data-type="add">添加</a>
+                    <a class="layui-btn layui-btn-danger" data-type="del">删除</a>
                 </div>
                 <table class="layui-table" id="role-table" lay-filter="role-table"></table>
             </div>
@@ -43,25 +37,65 @@
     </div>
 </div>
 <div id="notice-edit-tpl" style="display: none;">
-    <div style="height:100%;overflow-y:scroll;">
-        <form class="layui-form layui-form-pane yyms-menu-form">
+    <div id="LAY-popup-user-add" class="layui-layer-content" style="height: 390px;">
+        <div class="layui-form" lay-filter="layuiadmin-form-role" style="padding: 20px 30px 0 0;">
             <div class="layui-form-item">
-                <label class="layui-form-label">通知标题</label>
+                <label class="layui-form-label">角色</label>
                 <div class="layui-input-block">
-                    <input type="text" name="noticeTitle" id="notice-title" class="layui-input" lay-verify="required">
+                    <script type="text/html" template="">
+                        <select name="rolename">
+                            <option value="0" {{ d.params.rolename === '管理员' ? 'selected' : '' }}>管理员</option>
+                            <option value="1" {{ d.params.rolename === '超级管理员' ? 'selected' : '' }}>超级管理员</option>
+                            <option value="2" {{ d.params.rolename === '纠错员' ? 'selected' : '' }}>纠错员</option>
+                            <option value="3" {{ d.params.rolename === '采购员' ? 'selected' : '' }}>采购员</option>
+                            <option value="4" {{ d.params.rolename === '推销员' ? 'selected' : '' }}>推销员</option>
+                            <option value="5" {{ d.params.rolename === '运营人员' ? 'selected' : '' }}>运营人员</option>
+                            <option value="6" {{ d.params.rolename === '文章撰写员' ? 'selected' : '' }}>文章撰写员</option>
+                        </select>
+                    </script> <select name="rolename"> <option value="0">管理员</option> <option value="1">超级管理员</option> <option value="2">纠错员</option> <option value="3">采购员</option> <option value="4">推销员</option> <option value="5">运营人员</option> <option value="6">文章撰写员</option> </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择" value="管理员" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="0" class="layui-this">管理员</dd><dd lay-value="1" class="">超级管理员</dd><dd lay-value="2" class="">纠错员</dd><dd lay-value="3" class="">采购员</dd><dd lay-value="4" class="">推销员</dd><dd lay-value="5" class="">运营人员</dd><dd lay-value="6" class="">文章撰写员</dd></dl></div>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">通知内容</label>
+                <label class="layui-form-label">权限范围</label>
                 <div class="layui-input-block">
-                    <textarea name="noticeContent" id="notice-content" class="layui-textarea"></textarea>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="内容系统"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>内容系统</span><i class="layui-icon layui-icon-ok"></i></div>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="社区系统"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>社区系统</span><i class="layui-icon layui-icon-ok"></i></div>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="用户"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>用户</span><i class="layui-icon layui-icon-ok"></i></div>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="角色"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>角色</span><i class="layui-icon layui-icon-ok"></i></div>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="评论审核"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>评论审核</span><i class="layui-icon layui-icon-ok"></i></div>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="发货"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>发货</span><i class="layui-icon layui-icon-ok"></i></div>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="采购"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>采购</span><i class="layui-icon layui-icon-ok"></i></div>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="系统设置"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>系统设置</span><i class="layui-icon layui-icon-ok"></i></div>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="发邮件"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>发邮件</span><i class="layui-icon layui-icon-ok"></i></div>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="发短信"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>发短信</span><i class="layui-icon layui-icon-ok"></i></div>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="审核"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>审核</span><i class="layui-icon layui-icon-ok"></i></div>
+                    <input type="checkbox" name="limits[]" lay-skin="primary" title="删库跑路"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>删库跑路</span><i class="layui-icon layui-icon-ok"></i></div>
                 </div>
             </div>
-        </form>
-    </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">具体描述</label>
+                <div class="layui-input-block">
+                    <script type="text/html" template="">
+                        <textarea type="text" name="descr" lay-verify="required" autocomplete="off" class="layui-textarea">{{ d.params.descr || '' }}</textarea>
+                    </script> <textarea type="text" name="descr" lay-verify="required" autocomplete="off" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-inline">
+                    <input type="button" lay-submit="" lay-filter="LAY-user-role-submit" value="确认" class="layui-btn">
+                </div>
+            </div>
+        </div><script>
+        layui.use([ 'form'], function(){
+            var $ = layui.$
+                ,form = layui.form;
+
+        });
+    </script></div><span class="layui-layer-setwin"></span><span class="layui-layer-resize"></span><i class="layui-icon" close="">ဆ</i>
 </div>
 <!--操作-->
-<script type="text/html" id="noticeBar">
+<script type="text/html" id="roleBar">
     <a class="layui-btn layui-btn-xs" lay-event="edit" >编辑</a>
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 </script>
