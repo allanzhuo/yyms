@@ -1,4 +1,4 @@
-layui.use(['form', 'table', 'layer', 'laydate'], function () {
+layui.use(['form', 'table', 'layer', 'tree'], function () {
     var $ = layui.$
         , table = layui.table
         , form = layui.form
@@ -50,23 +50,20 @@ layui.use(['form', 'table', 'layer', 'laydate'], function () {
     });
 
     //监听工具条
-    table.on('tool(notice-table)', function (obj) {
+    table.on('tool(role-table)', function (obj) {
         var data = obj.data;
         if (obj.event === 'del') {
             layer.confirm('确认删除吗？', function (index) {
-                $.post("/admin/notice/remove", {id: data.id}, function (res) {
+                $.post("/admin/role/remove", {id: data.id}, function (res) {
                     if (res.code == 200) {
                         layer.msg(res.msg, {icon:1});
-                        var queryDate = $("#queryDate").val();
-                        var noticeTitle = $("#noticeTitle").val();
-                        table.reload('notice-table', {
+                        var roleName = $("#roleName").val();
+                        table.reload('role-table', {
                             page: {
                                 curr: 1 //重新从第 1 页开始
                             }
                             , where: {
-                                startDate: queryDate.substring(0, 19),
-                                endDate: queryDate.substring(22, 41),
-                                noticeTitle: noticeTitle
+                                roleName: roleName
                             }
                         });
                     } else {
@@ -120,27 +117,42 @@ layui.use(['form', 'table', 'layer', 'laydate'], function () {
         add: function () {
             layer.open({
                 type: 1,
-                title: '添加菜单',
+                title: '添加角色',
                 shadeClose: true,
                 maxmin: true, //开启最大化最小化按钮
                 area: ['500px', '480px'], //宽高
-                content: $("#notice-edit-tpl").html()
+                content: $("#role-edit-tpl").html()
                 ,success:function(layero, index) {
-                    form.render('select');
+                 form.render();
                 }
             });
         },
         del: function () {
-            var ids = treeTable.checked(table)
-            if (ids.length == 0) {
+            var checkStatus = table.checkStatus('role-table');
+            var data = checkStatus.data;
+            if (data.length == 0) {
                 layer.msg('请先选择要删除的数据', {time: 3000, icon:0});
                 return;
             }
-            layer.confirm("确认要删除选中的【" + ids.length + "】条数据吗?", function (index) {
-                $.post("/admin/menu/remove", {ids: ids}, function (res) {
+            layer.confirm("确认要删除选中的【" + data.length + "】条数据吗?", function (index) {
+                var ids = new Array();
+                // 遍历所有选择的行数据，取每条数据对应的ID
+                for (var i = 0; i < data.length; i++) {
+                    ids[i] = data[i].id;
+                }
+                $.post("/admin/role/removeBatch", {ids: ids}, function (res) {
                     if (res.code === 200) {
                         layer.msg(res.msg, {icon:1});
-                        refresh();
+                        //执行重载
+                        var roleName = $("#roleName").val();
+                        table.reload('role-table', {
+                            page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+                            , where: {
+                                roleName: roleName
+                            }
+                        });
                     } else {
                         layer.msg(res.msg, {icon:2});
                     }

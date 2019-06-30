@@ -16,8 +16,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,5 +56,17 @@ public class RoleServiceImpl implements RoleService {
             sysRoleRepository.save(role);
         }
         return Result.ok("修改角色状态成功！");
+    }
+
+    @Override
+    public Result removeBatch(Long[] ids) {
+        int i = sysRoleRepository.deleteBatch(ids);
+        return Result.ok("删除选中的【" + i + "】条数据成功！");
+    }
+
+    @Override
+    public Result removeRole(Long id) {
+        sysRoleRepository.deleteById(id);
+        return Result.ok("删除角色成功！");
     }
 }

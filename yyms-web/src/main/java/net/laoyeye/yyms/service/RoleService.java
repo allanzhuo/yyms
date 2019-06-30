@@ -14,6 +14,10 @@ import org.springframework.data.domain.Page;
 public interface RoleService {
     /**分页查询角色*/
     Page<SysRoleDO> listByRoleName(BaseQuery query, String roleName);
-    /**修改通知状态*/
+    /**修改角色状态*/
     Result updateStatusById(Boolean roleStatus,Long id);
+    /**批量删除角色*/
+    Result removeBatch(Long[] ids);
+    /**删除角色*/
+    Result removeRole(Long id);
 }

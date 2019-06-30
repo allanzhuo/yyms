@@ -49,6 +49,20 @@ public class RoleController extends BaseController {
 
         return roleService.updateStatusById(roleStatus, id);
     }
+
+    @PostMapping("/role/remove")
+    @ResponseBody
+    public Result removeMenu(Long id) {
+
+        return roleService.removeRole(id);
+    }
+
+    @PostMapping("/role/removeBatch")
+    @ResponseBody
+    public Result removeBatch(@RequestParam("ids[]") Long[] ids) {
+
+        return roleService.removeBatch(ids);
+    }
 //
 //    @PostMapping("/notice/save")
 //    @ResponseBody
