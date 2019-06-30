@@ -16,6 +16,8 @@ layui.use(['form', 'laydate'], function () {
                 )
             } else {
                 layer.msg(res.msg, {icon:2});
+                $("#submit").removeClass("layui-btn-disabled");
+                $("#submit").removeAttr('disabled');
             }
         });
     });

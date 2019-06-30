@@ -4,7 +4,9 @@ import net.laoyeye.pojo.Result;
 import net.laoyeye.utils.StringUtils;
 import net.laoyeye.yyms.pojo.domain.SysNoticeDO;
 import net.laoyeye.yyms.pojo.domain.SysRoleDO;
+import net.laoyeye.yyms.pojo.domain.SysRoleMenuDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
+import net.laoyeye.yyms.repository.SysRoleMenuRepository;
 import net.laoyeye.yyms.repository.SysRoleRepository;
 import net.laoyeye.yyms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ import java.util.Optional;
 public class RoleServiceImpl implements RoleService {
     @Autowired
     private SysRoleRepository sysRoleRepository;
+    @Autowired
+    private SysRoleMenuRepository sysRoleMenuRepository;
 
     @Override
     public Page<SysRoleDO> listByRoleName(BaseQuery pageQuery, String roleName) {
@@ -68,5 +72,24 @@ public class RoleServiceImpl implements RoleService {
     public Result removeRole(Long id) {
         sysRoleRepository.deleteById(id);
         return Result.ok("删除角色成功！");
+    }
+
+    @Override
+    public SysRoleDO getRole(Long id) {
+
+        return sysRoleRepository.findById(id).get();
+    }
+
+    @Override
+    public Result saveOrUpdateRole(SysRoleDO roleDO, Long[] menuIds) {
+        SysRoleDO role = sysRoleRepository.save(roleDO);
+        sysRoleMenuRepository.deleteByRoleCode(role.getRoleCode());
+        for (Long menuId : menuIds) {
+            SysRoleMenuDO roleMenuDO = new SysRoleMenuDO();
+            roleMenuDO.setMenuId(menuId);
+            roleMenuDO.setRoleCode(role.getRoleCode());
+            sysRoleMenuRepository.save(roleMenuDO);
+        }
+        return Result.ok("编辑角色成功！");
     }
 }

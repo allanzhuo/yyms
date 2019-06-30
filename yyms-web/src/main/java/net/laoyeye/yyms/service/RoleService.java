@@ -20,4 +20,8 @@ public interface RoleService {
     Result removeBatch(Long[] ids);
     /**删除角色*/
     Result removeRole(Long id);
+    /**保存角色*/
+    Result saveOrUpdateRole(SysRoleDO roleDO,Long[] menuIds);
+    /**查询角色*/
+    SysRoleDO getRole(Long id);
 }

@@ -28,4 +28,8 @@ public class SysMenuVO {
     
     private List<SysMenuVO> children;
 
+    private Boolean spread = true;
+
+    private Boolean checked;
+
 }

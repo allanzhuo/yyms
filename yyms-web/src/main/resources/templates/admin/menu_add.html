@@ -82,7 +82,7 @@
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
                 <textarea name="remark" placeholder="请输入该菜单的描述信息" class="layui-textarea" autocomplete="off"
-                          th:value="${menu?.remark}"></textarea>
+                          th:utext="${menu?.remark}"></textarea>
             </div>
         </div>
         <div class="layui-form-item">

@@ -2,6 +2,7 @@ package net.laoyeye.yyms.controller.admin;
 
 import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.controller.BaseController;
+import net.laoyeye.yyms.pojo.domain.SysMenuDO;
 import net.laoyeye.yyms.pojo.domain.SysNoticeDO;
 import net.laoyeye.yyms.pojo.domain.SysRoleDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
@@ -30,12 +31,35 @@ public class RoleController extends BaseController {
         return "admin/role";
     }
 
-    //    @GetMapping("/notice/add")
-//    public String noticeManage(Model model) {
-//
-//        return "admin/notice_add";
-//    }
-//
+    @GetMapping("/role/add")
+    public String roleAdd(Model model) {
+        model.addAttribute("url","/admin/role/add");
+        return "admin/role_add";
+    }
+
+    @GetMapping("/role/edit")
+    public String roleEdit(Model model,Long id) {
+        model.addAttribute("url","/admin/role/edit");
+        model.addAttribute("role", roleService.getRole(id));
+        return "admin/role_add";
+    }
+
+    @PostMapping("/role/add")
+    @ResponseBody
+    public Result addRole(SysRoleDO roleDO,@RequestParam("menuIds[]") Long[] menuIds) {
+        roleDO.setCreateUser(getUser().getUserName());
+        roleDO.setUpdateUser(getUser().getUserName());
+        return roleService.saveOrUpdateRole(roleDO,menuIds);
+    }
+
+    @PostMapping("/role/edit")
+    @ResponseBody
+    public Result editRole(SysRoleDO roleDO,@RequestParam("menuIds[]") Long[] menuIds) {
+        roleDO.setUpdateUser(getUser().getUserName());
+        return roleService.saveOrUpdateRole(roleDO,menuIds);
+    }
+
+
     @PostMapping("/role/list")
     @ResponseBody
     public Result list(BaseQuery query, String roleName) {

@@ -74,40 +74,14 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
             });
         } else {
             layer.open({
-                type: 1,
-                title: '编辑通知',
+                type: 2,
+                title: '编辑角色',
                 shadeClose: true,
-                btnAlign: 'c',
-                area: ['700px', '480px'], //宽高
-                content: $("#notice-edit-tpl").html()
+                maxmin: true, //开启最大化最小化按钮
+                area: ['500px', '480px'], //宽高
+                content: "/admin/role/edit?id="+data.id
                 ,success:function(layero, index) {
-                    layero.find("#notice-title").val(data.noticeTitle);
-                    layero.find("#notice-content").val(data.noticeContent);
-                }
-                ,btn: ['修改', '取消']
-                ,yes: function(index, layero){
-                    var noticeTitle = layero.find("#notice-title").val();
-                    var noticeContent = layero.find("#notice-content").val();
-                    $.post('/admin/notice/edit',{id: data.id,"noticeTitle": noticeTitle,"noticeContent": noticeContent,"noticeStatus": data.noticeStatus},function(res){
-                        if (res.code == 200) {
-                            layer.msg(res.msg, {icon:1});
-                            layer.close(index);
-                            var queryDate = $("#queryDate").val();
-                            var noticeTitle = $("#noticeTitle").val();
-                            table.reload('notice-table', {
-                                page: {
-                                    curr: 1 //重新从第 1 页开始
-                                }
-                                , where: {
-                                    startDate: queryDate.substring(0, 19),
-                                    endDate: queryDate.substring(22, 41),
-                                    noticeTitle: noticeTitle
-                                }
-                            });
-                        } else {
-                            layer.msg(res.msg, {icon:2});
-                        }
-                    });
+                    form.render();
                 }
             });
         }
@@ -116,12 +90,12 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
     var active = {
         add: function () {
             layer.open({
-                type: 1,
+                type: 2,
                 title: '添加角色',
                 shadeClose: true,
                 maxmin: true, //开启最大化最小化按钮
                 area: ['500px', '480px'], //宽高
-                content: $("#role-edit-tpl").html()
+                content: "/admin/role/add"
                 ,success:function(layero, index) {
                  form.render();
                 }
