@@ -1,16 +1,11 @@
 package net.laoyeye.yyms.repository;
 
-import net.laoyeye.yyms.pojo.domain.SysNoticeDO;
 import net.laoyeye.yyms.pojo.domain.SysRoleDO;
-import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * @description: 用户类数据访问
