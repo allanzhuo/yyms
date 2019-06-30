@@ -27,9 +27,9 @@ public class SysMenuVO {
     private String url;
     
     private List<SysMenuVO> children;
-
-    private Boolean spread = true;
-
-    private Boolean checked;
+    @Builder.Default
+    private Boolean spread = false;
+    @Builder.Default
+    private Boolean checked = false;
 
 }

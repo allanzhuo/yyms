@@ -2,11 +2,8 @@ package net.laoyeye.yyms.controller.admin;
 
 import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.controller.BaseController;
-import net.laoyeye.yyms.pojo.domain.SysMenuDO;
-import net.laoyeye.yyms.pojo.domain.SysNoticeDO;
 import net.laoyeye.yyms.pojo.domain.SysRoleDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
-import net.laoyeye.yyms.service.NoticeService;
 import net.laoyeye.yyms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -87,36 +84,4 @@ public class RoleController extends BaseController {
 
         return roleService.removeBatch(ids);
     }
-//
-//    @PostMapping("/notice/save")
-//    @ResponseBody
-//    public Result save(SysNoticeDO noticeDO) {
-//        noticeDO.setCreateUser(getUser().getUserName());
-//        noticeDO.setUpdateUser(getUser().getUserName());
-//        Result result = noticeService.save(noticeDO);
-//        return result;
-//    }
-//
-
-//
-//    @PostMapping("/notice/edit")
-//    @ResponseBody
-//    public Result editNotice(SysNoticeDO noticeDO) {
-//        noticeDO.setUpdateUser(getUser().getUserName());
-//        return noticeService.updateNotice(noticeDO);
-//    }
-//
-//    @PostMapping("/notice/remove")
-//    @ResponseBody
-//    public Result removeMenu(Long id) {
-//
-//        return noticeService.removeNotice(id);
-//    }
-//
-//    @PostMapping("/notice/removeBatch")
-//    @ResponseBody
-//    public Result removeBatch(@RequestParam("ids[]") Long[] ids) {
-//
-//        return noticeService.removeBatch(ids);
-//    }
 }

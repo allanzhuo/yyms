@@ -2,6 +2,7 @@ package net.laoyeye.yyms.service;
 
 import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.pojo.domain.SysMenuDO;
+import net.laoyeye.yyms.pojo.vo.SysMenuVO;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public interface MenuService {
     SysMenuDO getMenuById(Long id);
     /**根据id批量删除菜单*/
     Result removeMenu(Long[] ids);
-    /**根据用户id查询用户菜单*/
+    /**根据用户角色查询用户菜单*/
     Result listInitMenus();
+    /**查询授权菜单*/
+    Result listGrantMenus(String roleCode);
 }

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @description: 用户类数据访问
@@ -20,4 +21,7 @@ public interface SysRoleMenuRepository extends JpaRepository<SysRoleMenuDO, Long
     @Transactional
     @Query("delete from SysRoleMenuDO where roleCode = ?1")
     int deleteByRoleCode(String roleCode);
+    /**根据角色编码查询菜单ID*/
+    @Query("select menuId from SysRoleMenuDO where roleCode = ?1")
+    List<String> findMenuIdByRoleCode(String roleCode);
 }

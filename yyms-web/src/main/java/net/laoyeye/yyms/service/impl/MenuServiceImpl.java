@@ -5,10 +5,12 @@ import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.pojo.domain.SysMenuDO;
 import net.laoyeye.yyms.pojo.vo.SysMenuVO;
 import net.laoyeye.yyms.repository.SysMenuRepository;
+import net.laoyeye.yyms.repository.SysRoleMenuRepository;
 import net.laoyeye.yyms.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,8 @@ import static java.util.stream.Collectors.toList;
 public class MenuServiceImpl implements MenuService {
     @Autowired
     private SysMenuRepository sysMenuRepository;
+    @Autowired
+    private SysRoleMenuRepository sysRoleMenuRepository;
 
     @Override
     public List<SysMenuDO> listMenus() {
@@ -99,5 +103,46 @@ public class MenuServiceImpl implements MenuService {
         }
 
         return Result.ok(listVO,"初始化菜单成功！");
+    }
+
+    @Override
+    public Result listGrantMenus(String roleCode) {
+        //查询所有已拥有权限的菜单ID
+        List<String> menuIds = sysRoleMenuRepository.findMenuIdByRoleCode(roleCode);
+        List<SysMenuDO> list = sysMenuRepository.findByPidOrderBySortAsc(0L);
+        List<SysMenuVO> listVO = new ArrayList<>();
+        for (SysMenuDO menuDO : list) {
+            SysMenuVO menuVO = SysMenuVO.builder()
+                    .id(menuDO.getId())
+                    .pid(menuDO.getPid())
+                    .title(menuDO.getTitle())
+                    .type(menuDO.getType())
+                    .icon(menuDO.getIcon())
+                    .url(menuDO.getUrl())
+                    .build();
+            if (menuIds != null && menuIds.contains(menuVO.getId())) {
+                menuVO.setChecked(Boolean.TRUE);
+            }
+            listVO.add(menuVO);
+        }
+        for (SysMenuVO menuVO : listVO) {
+            List<SysMenuDO> listChildren = sysMenuRepository.findByPidOrderBySortAsc(menuVO.getId());
+            List<SysMenuVO> listChildrenVO = listChildren.stream().map(menuDO -> {
+                SysMenuVO menuChildrenVO = SysMenuVO.builder()
+                        .id(menuDO.getId())
+                        .pid(menuDO.getPid())
+                        .title(menuDO.getTitle())
+                        .type(menuDO.getType())
+                        .icon(menuDO.getIcon())
+                        .url(menuDO.getUrl())
+                        .build();
+                if (menuIds != null && menuIds.contains(menuChildrenVO.getId())){
+                    menuChildrenVO.setChecked(Boolean.TRUE);
+                }
+                return menuChildrenVO;
+            }).collect(toList());
+            menuVO.setChildren(listChildrenVO);
+        }
+        return Result.ok(listVO,"授权菜单初始化成功！");
     }
 }

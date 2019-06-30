@@ -94,4 +94,11 @@ public class MenuController extends BaseController{
         Result result = menuService.listInitMenus();
         return result;
     }
+
+    @PostMapping("/menu/grant")
+    @ResponseBody
+    public Result listGrantMenus(String roleCode) {
+        Result result = menuService.listGrantMenus(roleCode);
+        return result;
+    }
 }
