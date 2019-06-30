@@ -24,6 +24,8 @@ layui.use(['form', 'tree'], function () {
         var checkData = tree.getChecked('role-tree');
         if (checkData.length == 0) {
             layer.msg('请选择权限范围', {time: 3000, icon:0});
+            $("#role-add").removeClass("layui-btn-disabled");
+            $("#role-add").removeAttr('disabled');
             return;
         }
         var menuIds = new Array();
@@ -54,8 +56,8 @@ layui.use(['form', 'tree'], function () {
                 )
             } else {
                 layer.msg(res.msg, {icon:2});
-                $("#submit").removeClass("layui-btn-disabled");
-                $("#submit").removeAttr('disabled');
+                $("#role-add").removeClass("layui-btn-disabled");
+                $("#role-add").removeAttr('disabled');
             }
         });
     });
