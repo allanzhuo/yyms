@@ -1,6 +1,5 @@
-layui.use(['table', 'layer'], function () {
+layui.use('layer', function () {
     var $ = layui.$
-        , table = layui.table
         , layer = layui.layer;
 
     init();
