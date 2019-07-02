@@ -39,4 +39,11 @@ layui.use('form', function () {
         return false;
     });
 
+    check();
+    function check(){
+        if (window.parent.window != window) {
+            window.top.location = "/login";
+        }
+    }
+
 });
