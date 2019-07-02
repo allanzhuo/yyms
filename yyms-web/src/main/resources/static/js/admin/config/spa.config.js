@@ -44,9 +44,9 @@ $(function () {
                 templateUrl: url_prefix + 'role',
                 controller: js_prefix + 'role.js'
             },
-            'about': {
-                templateUrl: url_prefix + 'about',
-                controller: js_prefix + '/about.js'
+            'user': {
+                templateUrl: url_prefix + 'user',
+                controller: js_prefix + 'user.js'
             },
             'keyword': {
                 templateUrl: url_prefix + 'keyword',

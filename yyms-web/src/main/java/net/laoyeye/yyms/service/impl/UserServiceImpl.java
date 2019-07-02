@@ -4,12 +4,14 @@ import net.laoyeye.enums.ResultEnum;
 import net.laoyeye.pojo.Result;
 import net.laoyeye.utils.StringUtils;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
+import net.laoyeye.yyms.pojo.query.BaseQuery;
 import net.laoyeye.yyms.repository.SysUserRepository;
 import net.laoyeye.yyms.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -63,5 +65,10 @@ public class UserServiceImpl implements UserService {
         //重新加载Principal
         SecurityUtils.getSubject().runAs(newPrincipalCollection);
         return Result.ok("设置资料成功！");
+    }
+
+    @Override
+    public Page<SysUserDO> listByNickName(BaseQuery query, String nickName) {
+        return null;
     }
 }

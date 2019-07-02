@@ -4,7 +4,7 @@
         <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
             <a href="/admin">主页</a><span lay-separator="">/</span>
             <a><cite>系统管理</cite></a><span lay-separator="">/</span>
-            <a><cite>角色管理</cite></a>
+            <a><cite>用户管理</cite></a>
         </div>
     </div>
     <div class="layui-fluid">
@@ -12,9 +12,9 @@
             <div class="layui-form layui-card-header layuiadmin-card-header-auto">
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">角色名称</label>
+                        <label class="layui-form-label">用户昵称</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="roleName" id="roleName" placeholder="请输入角色名称" autocomplete="off"
+                            <input type="text" name="roleName" id="roleName" placeholder="请输入用户昵称" autocomplete="off"
                                    class="layui-input">
                         </div>
                     </div>
@@ -31,17 +31,17 @@
                     <a class="layui-btn" data-type="add">添加</a>
                     <a class="layui-btn layui-btn-danger" data-type="del">删除</a>
                 </div>
-                <table class="layui-table" id="role-table" lay-filter="role-table"></table>
+                <table class="layui-table" id="user-table" lay-filter="user-table"></table>
             </div>
         </div>
     </div>
 </div>
 <!--操作-->
-<script type="text/html" id="roleBar">
+<script type="text/html" id="userBar">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="statusBar">
-    <input type="checkbox" name="roleStatus" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
-           lay-filter="roleStatus" {{ d.roleStatus== true ? 'checked' : '' }}>
+    <input type="checkbox" name="status" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用"
+           lay-filter="status" {{ d.status == true ? 'checked' : '' }}>
 </script>
