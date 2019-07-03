@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @description: 用户类数据访问
@@ -18,4 +19,6 @@ public interface SysRoleRepository extends JpaRepository<SysRoleDO, Long>,JpaSpe
     @Transactional
     @Query("delete from SysRoleDO where id in (?1)")
     int deleteBatch(Long[] ids);
+    /**根据状态查询所有角色*/
+    List<SysRoleDO> findAllByRoleStatus(Boolean roleStatus);
 }

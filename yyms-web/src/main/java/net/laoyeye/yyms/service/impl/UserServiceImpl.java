@@ -3,6 +3,7 @@ package net.laoyeye.yyms.service.impl;
 import net.laoyeye.enums.ResultEnum;
 import net.laoyeye.pojo.Result;
 import net.laoyeye.utils.StringUtils;
+import net.laoyeye.yyms.pojo.domain.SysRoleDO;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
 import net.laoyeye.yyms.repository.SysUserRepository;
@@ -12,9 +13,16 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -68,7 +76,42 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<SysUserDO> listByNickName(BaseQuery query, String nickName) {
-        return null;
+    public Page<SysUserDO> listByNickName(BaseQuery pageQuery, String nickName) {
+        Pageable pageable = PageRequest.of(pageQuery.getPage()-1, pageQuery.getLimit(), Sort.Direction.DESC, "id");  //分页信息
+        Specification<SysUserDO> spec = (Root<SysUserDO> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
+            Path<String> name = root.get("nickName");
+            //方式二
+            List<Predicate> list = new ArrayList<Predicate>();
+            if (StringUtils.isNotEmpty(nickName)){
+                list.add(cb.like(name, "%" + nickName + "%"));
+            }
+            Predicate[] p = new Predicate[list.size()];
+            return cb.and(list.toArray(p));
+        };
+        return sysUserRepository.findAll(spec, pageable);
+    }
+
+    @Override
+    public Result updateStatusById(Boolean status, Long id) {
+        Optional<SysUserDO> userDO = sysUserRepository.findById(id);
+        if (userDO.isPresent()){
+            SysUserDO role = userDO.get().toBuilder()
+                    .status(status)
+                    .build();
+            sysUserRepository.save(role);
+        }
+        return Result.ok("修改用户状态成功！");
+    }
+
+    @Override
+    public Result remove(Long id) {
+        sysUserRepository.deleteById(id);
+        return Result.ok("删除用户成功！");
+    }
+
+    @Override
+    public Result removeBatch(Long[] ids) {
+        int i = sysUserRepository.deleteBatch(ids);
+        return Result.ok("删除选中的【" + i + "】条数据成功！");
     }
 }

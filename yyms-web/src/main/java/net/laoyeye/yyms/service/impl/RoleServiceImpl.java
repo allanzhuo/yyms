@@ -81,6 +81,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public List<SysRoleDO> listRoleByRoleStatus(Boolean roleStatus) {
+        return sysRoleRepository.findAllByRoleStatus(roleStatus);
+    }
+
+    @Override
     public Result saveOrUpdateRole(SysRoleDO roleDO, Long[] menuIds) {
         SysRoleDO role = sysRoleRepository.save(roleDO);
         sysRoleMenuRepository.deleteByRoleCode(role.getRoleCode());

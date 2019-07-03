@@ -14,12 +14,12 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">用户昵称</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="roleName" id="roleName" placeholder="请输入用户昵称" autocomplete="off"
+                            <input type="text" name="nickName" id="nickName" placeholder="请输入用户昵称" autocomplete="off"
                                    class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <button class="layui-btn" lay-filter="btn-search">
+                        <button class="layui-btn" lay-submit="" lay-filter="btn-search">
                             <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
                         </button>
                     </div>
@@ -35,6 +35,62 @@
             </div>
         </div>
     </div>
+</div>
+<div id="user-edit-tpl" style="display: none;">
+    <div class="layui-layer-content" style="height: 390px;">
+        <form class="layui-form" style="padding: 20px 30px 0 0;">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="userName" placeholder="请输入用户名" class="layui-input" lay-verify="required"
+                           autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户昵称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="nickName" placeholder="请输入用户昵称" class="layui-input" lay-verify="required"
+                           autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input type="text" name="email" placeholder="请输入邮箱" class="layui-input" lay-verify="required"
+                           autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色名称</label>
+                <div class="layui-input-block">
+                    <select name="roleCode" lay-verify="required" lay-search>
+                        <option value="">请选择</option>
+                        <option th:each="role:${roleList}" th:value="${role.roleCode}"
+                                th:text="${role.roleName}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-inline">
+                    <input type="button" lay-submit="" value="确认" lay-filter="user-add" class="layui-btn">
+                    <button class="layui-btn layui-btn-danger" type="reset" id="resetAdd">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        layui.use(['form', 'table'], function () {
+            var $ = layui.$
+                , form = layui.form
+                , table = layui.table;
+
+
+
+
+
+        });
+    </script>
 </div>
 <!--操作-->
 <script type="text/html" id="userBar">

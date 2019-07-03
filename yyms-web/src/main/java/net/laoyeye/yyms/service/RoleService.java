@@ -6,6 +6,8 @@ import net.laoyeye.yyms.pojo.domain.SysRoleDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 /**
  * @author laoyeye
  * @Description: 角色管理
@@ -24,4 +26,6 @@ public interface RoleService {
     Result saveOrUpdateRole(SysRoleDO roleDO,Long[] menuIds);
     /**查询角色*/
     SysRoleDO getRole(Long id);
+    /**根据*/
+    List<SysRoleDO> listRoleByRoleStatus(Boolean roleStatus);
 }
