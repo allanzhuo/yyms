@@ -2,6 +2,7 @@ package net.laoyeye.yyms.controller.admin;
 
 import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.controller.BaseController;
+import net.laoyeye.yyms.pojo.domain.SysRoleDO;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
 import net.laoyeye.yyms.service.RoleService;
@@ -26,8 +27,8 @@ public class UserController extends BaseController {
     private RoleService roleService;
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("roleList",roleService.listRoleByRoleStatus(Boolean.TRUE));
+    public String index() {
+
         return "admin/user";
     }
 
@@ -59,40 +60,34 @@ public class UserController extends BaseController {
         return userService.removeBatch(ids);
     }
 
-//    @GetMapping("/role/add")
-//    public String roleAdd(Model model) {
-//        model.addAttribute("url","/admin/role/add");
-//        return "admin/role_add";
-//    }
-//
-//    @GetMapping("/role/edit")
-//    public String roleEdit(Model model,Long id) {
-//        model.addAttribute("url","/admin/role/edit");
-//        model.addAttribute("role", roleService.getRole(id));
-//        return "admin/role_add";
-//    }
-//
-//    @PostMapping("/role/add")
-//    @ResponseBody
-//    public Result addRole(SysRoleDO roleDO,@RequestParam("menuIds[]") Long[] menuIds) {
-//        roleDO.setCreateUser(getUser().getUserName());
-//        roleDO.setUpdateUser(getUser().getUserName());
-//        return roleService.saveOrUpdateRole(roleDO,menuIds);
-//    }
-//
-//    @PostMapping("/role/edit")
-//    @ResponseBody
-//    public Result editRole(SysRoleDO roleDO,@RequestParam("menuIds[]") Long[] menuIds) {
-//        roleDO.setUpdateUser(getUser().getUserName());
-//        return roleService.saveOrUpdateRole(roleDO,menuIds);
-//    }
-//
-//
+    @GetMapping("/add")
+    public String roleAdd(Model model) {
+        model.addAttribute("url","/admin/user/add");
+        model.addAttribute("roleList",roleService.listRoleByRoleStatus(Boolean.TRUE));
+        return "admin/user_add";
+    }
 
-//
+    @GetMapping("/edit")
+    public String roleEdit(Model model,Long id) {
+        model.addAttribute("url","/admin/user/edit");
+        model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("roleList",roleService.listRoleByRoleStatus(Boolean.TRUE));
+        return "admin/user_add";
+    }
 
-//
+    @PostMapping("/add")
+    @ResponseBody
+    public Result addUser(SysUserDO userDO) {
+        userDO.setCreateUser(getUser().getUserName());
+        userDO.setUpdateUser(getUser().getUserName());
+        return userService.saveOrUpdateRole(userDO);
+    }
 
-//
+    @PostMapping("/edit")
+    @ResponseBody
+    public Result editUser(SysUserDO userDO) {
+        userDO.setUpdateUser(getUser().getUserName());
+        return userService.saveOrUpdateRole(userDO);
+    }
 
 }

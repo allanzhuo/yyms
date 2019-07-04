@@ -17,10 +17,14 @@ public interface UserService {
     Result updateAccount(SysUserDO userDO);
     /**分页查询用户*/
     Page<SysUserDO> listByNickName(BaseQuery pageQuery, String nickName);
+    /**根据id查询用户*/
+    SysUserDO getUserById(Long id);
     /**修改用户状态*/
     Result updateStatusById(Boolean status,Long id);
     /**删除用户*/
     Result remove(Long id);
     /**批量删除用户*/
     Result removeBatch(Long[] ids);
+    /**新增或删除用户*/
+    Result saveOrUpdateRole(SysUserDO userDO);
 }

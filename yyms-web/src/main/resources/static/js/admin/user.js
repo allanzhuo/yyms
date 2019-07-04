@@ -76,11 +76,10 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
         } else {
             layer.open({
                 type: 2,
-                title: '编辑角色',
+                title: '编辑用户',
                 shadeClose: true,
-                maxmin: true, //开启最大化最小化按钮
                 area: ['500px', '480px'], //宽高
-                content: "/admin/role/edit?id="+data.id
+                content: "/admin/user/edit?id="+data.id
                 ,success:function(layero, index) {
                     form.render();
                 }
@@ -91,11 +90,11 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
     var active = {
         add: function () {
             layer.open({
-                type: 5,
+                type: 2,
                 title: '添加用户',
                 shadeClose: true,
                 area: ['500px', '480px'], //宽高
-                content: $("#user-edit-tpl").html()
+                content: "/admin/user/add"
                 ,success:function(layero, index) {
                  form.render();
                 }

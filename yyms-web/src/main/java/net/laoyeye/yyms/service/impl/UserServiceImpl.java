@@ -4,6 +4,7 @@ import net.laoyeye.enums.ResultEnum;
 import net.laoyeye.pojo.Result;
 import net.laoyeye.utils.StringUtils;
 import net.laoyeye.yyms.pojo.domain.SysRoleDO;
+import net.laoyeye.yyms.pojo.domain.SysRoleMenuDO;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
 import net.laoyeye.yyms.repository.SysUserRepository;
@@ -92,6 +93,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public SysUserDO getUserById(Long id) {
+        Optional<SysUserDO> sysUserDO = sysUserRepository.findById(id);
+        SysUserDO userDO = sysUserDO.orElse(new SysUserDO());
+        return userDO;
+    }
+
+    @Override
     public Result updateStatusById(Boolean status, Long id) {
         Optional<SysUserDO> userDO = sysUserRepository.findById(id);
         if (userDO.isPresent()){
@@ -113,5 +121,28 @@ public class UserServiceImpl implements UserService {
     public Result removeBatch(Long[] ids) {
         int i = sysUserRepository.deleteBatch(ids);
         return Result.ok("删除选中的【" + i + "】条数据成功！");
+    }
+
+    @Override
+    public Result saveOrUpdateRole(SysUserDO userDO) {
+        SysUserDO user = null;
+        if (userDO.getId() != null){
+            Optional<SysUserDO> sysUserDO = sysUserRepository.findById(userDO.getId());
+            user = sysUserDO.get()
+                    .toBuilder()
+                    .nickName(userDO.getNickName())
+                    .email(userDO.getEmail())
+                    .roleCode(userDO.getRoleCode())
+                    .build();
+        } else {
+            String password = userDO.getUserName()+"123456";
+            String pass = DigestUtils.md5DigestAsHex(DigestUtils.md5DigestAsHex(password.getBytes()).getBytes());
+            user = userDO.toBuilder()
+                    .password(pass)
+                    .avatar("https://images.laoyeye.net/head.png")
+                    .build();
+        }
+        sysUserRepository.save(user);
+        return Result.ok("编辑用户成功！");
     }
 }
