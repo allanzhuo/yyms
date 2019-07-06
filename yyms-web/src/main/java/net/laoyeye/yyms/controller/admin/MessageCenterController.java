@@ -15,45 +15,45 @@ import org.springframework.web.bind.annotation.*;
  * @date 2019/6/2 22:03
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/message")
 public class MessageCenterController extends BaseController {
     @Autowired
     private MessageService messageService;
 
-    @GetMapping("/message/center")
+    @GetMapping("/center")
     public String index(Model model) {
         model.addAttribute("unread",messageService.countUnread(getUserId()));
         return "admin/message_center";
     }
 
-    @RequestMapping("/message/center/unread")
+    @RequestMapping("/center/unread")
     @ResponseBody
     public int unread() {
         return messageService.countUnread(getUserId());
     }
 
-    @PostMapping("/message/list")
+    @PostMapping("/list")
     @ResponseBody
     public Result list(BaseQuery query) {
         Result result = messageService.list(query,getUserId());
         return result;
     }
 
-    @PostMapping("/message/read")
+    @PostMapping("/read")
     @ResponseBody
     public Result updateReadByIds(@RequestParam("ids[]") Long[] ids) {
         Result result = messageService.updateReadByIds(ids,getUserId());
         return result;
     }
 
-    @PostMapping("/message/readAll")
+    @PostMapping("/readAll")
     @ResponseBody
     public Result updateReadAll() {
         Result result = messageService.updateReadAll(getUserId());
         return result;
     }
 
-    @PostMapping("/message/removeBatch")
+    @PostMapping("/removeBatch")
     @ResponseBody
     public Result removeBatch(@RequestParam("ids[]") Long[] ids) {
 

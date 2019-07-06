@@ -18,18 +18,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2019/6/10 23:12
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/account")
 public class AccountController extends BaseController{
     @Autowired
     private UserService userService;
 
-    @GetMapping("/account")
+    @GetMapping
     public String index(Model model) {
         model.addAttribute("user", getUser());
         return "admin/account";
     }
 
-    @PostMapping("/account/edit")
+    @PostMapping("/edit")
     @ResponseBody
     public Result edit(SysUserDO userDO) {
         userDO.setUpdateUser(getUser().getUserName());

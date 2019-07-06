@@ -19,12 +19,12 @@ import java.util.Map;
  * @date 2019/6/10 23:12
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/options")
 public class OptionsController extends BaseController{
     @Autowired
     private OptionsService optionsService;
 
-    @GetMapping("/options")
+    @GetMapping
     public String index(Model model) {
         List<SysOptionsDO> list = optionsService.listAll();
         Map<String, Object> attributeMap = new HashMap<String, Object>();
@@ -35,7 +35,7 @@ public class OptionsController extends BaseController{
         return "admin/options";
     }
 
-    @PostMapping("/options/save")
+    @PostMapping("/save")
     @ResponseBody
     public Result save(@RequestParam Map<String,String> map) {
         Result result = optionsService.save(map);

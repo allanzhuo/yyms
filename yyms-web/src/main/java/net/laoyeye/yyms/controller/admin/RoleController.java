@@ -17,31 +17,31 @@ import org.springframework.web.bind.annotation.*;
  * @date 2019/6/27 21:55
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/role")
 public class RoleController extends BaseController {
     @Autowired
     private RoleService roleService;
 
-    @GetMapping("/role")
+    @GetMapping
     public String index(Model model) {
 
         return "admin/role";
     }
 
-    @GetMapping("/role/add")
+    @GetMapping("/add")
     public String roleAdd(Model model) {
         model.addAttribute("url","/admin/role/add");
         return "admin/role_add";
     }
 
-    @GetMapping("/role/edit")
+    @GetMapping("/edit")
     public String roleEdit(Model model,Long id) {
         model.addAttribute("url","/admin/role/edit");
         model.addAttribute("role", roleService.getRole(id));
         return "admin/role_add";
     }
 
-    @PostMapping("/role/add")
+    @PostMapping("/add")
     @ResponseBody
     public Result addRole(SysRoleDO roleDO,@RequestParam("menuIds[]") Long[] menuIds) {
         roleDO.setCreateUser(getUser().getUserName());
@@ -49,7 +49,7 @@ public class RoleController extends BaseController {
         return roleService.saveOrUpdateRole(roleDO,menuIds);
     }
 
-    @PostMapping("/role/edit")
+    @PostMapping("/edit")
     @ResponseBody
     public Result editRole(SysRoleDO roleDO,@RequestParam("menuIds[]") Long[] menuIds) {
         roleDO.setUpdateUser(getUser().getUserName());
@@ -57,28 +57,28 @@ public class RoleController extends BaseController {
     }
 
 
-    @PostMapping("/role/list")
+    @PostMapping("/list")
     @ResponseBody
     public Result list(BaseQuery query, String roleName) {
         Page<SysRoleDO> page = roleService.listByRoleName(query, roleName);
         return result(page);
     }
 
-    @PostMapping("/role/edit/status")
+    @PostMapping("/edit/status")
     @ResponseBody
     public Result editNoticeStatus(Boolean roleStatus, Long id) {
 
         return roleService.updateStatusById(roleStatus, id);
     }
 
-    @PostMapping("/role/remove")
+    @PostMapping("/remove")
     @ResponseBody
     public Result removeMenu(Long id) {
 
         return roleService.removeRole(id);
     }
 
-    @PostMapping("/role/removeBatch")
+    @PostMapping("/removeBatch")
     @ResponseBody
     public Result removeBatch(@RequestParam("ids[]") Long[] ids) {
 

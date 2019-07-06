@@ -21,18 +21,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2019/6/9 18:50
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/password")
 public class PasswordController extends BaseController{
     @Autowired
     private UserService userService;
 
-    @GetMapping("/password")
+    @GetMapping
     public String index(Model model) {
 
         return "admin/password";
     }
 
-    @PostMapping("/password/edit")
+    @PostMapping("/edit")
     @ResponseBody
     public Result edit(String oldPassword,String password,String repassword) {
         Result result = userService.updatePassword(oldPassword, password, repassword, getUserId());

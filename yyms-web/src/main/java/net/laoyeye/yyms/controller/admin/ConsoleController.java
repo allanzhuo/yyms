@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2019/4/21 18:37
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/console")
 public class ConsoleController {
-    @GetMapping("/console")
+    @GetMapping
     public String index(Model model) {
 
         return "admin/console";

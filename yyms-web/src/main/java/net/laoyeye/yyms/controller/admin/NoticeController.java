@@ -17,31 +17,31 @@ import org.springframework.web.bind.annotation.*;
  * @date 2019/5/7 21:46
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/notice")
 public class NoticeController extends BaseController{
     @Autowired
     private NoticeService noticeService;
 
-    @GetMapping("/notice")
+    @GetMapping
     public String index(Model model) {
 
         return "admin/notice";
     }
 
-    @GetMapping("/notice/add")
-    public String noticeManage(Model model) {
+    @GetMapping("/add")
+    public String noticeAdd(Model model) {
 
         return "admin/notice_add";
     }
 
-    @PostMapping("/notice/list")
+    @PostMapping("/list")
     @ResponseBody
     public Result list(BaseQuery query,String startDate,String endDate,String noticeTitle) {
         Page<SysNoticeDO> page = noticeService.listByCriteria(query, startDate, endDate, noticeTitle);
         return result(page);
     }
 
-    @PostMapping("/notice/save")
+    @PostMapping("/save")
     @ResponseBody
     public Result save(SysNoticeDO noticeDO) {
         noticeDO.setCreateUser(getUser().getUserName());
@@ -50,28 +50,28 @@ public class NoticeController extends BaseController{
         return result;
     }
 
-    @PostMapping("/notice/edit/status")
+    @PostMapping("/edit/status")
     @ResponseBody
     public Result editNoticeStatus(Boolean noticeStatus, Long id) {
 
         return noticeService.updateStatusById(noticeStatus,id);
     }
 
-    @PostMapping("/notice/edit")
+    @PostMapping("/edit")
     @ResponseBody
     public Result editNotice(SysNoticeDO noticeDO) {
         noticeDO.setUpdateUser(getUser().getUserName());
         return noticeService.updateNotice(noticeDO);
     }
 
-    @PostMapping("/notice/remove")
+    @PostMapping("/remove")
     @ResponseBody
     public Result removeMenu(Long id) {
 
         return noticeService.removeNotice(id);
     }
 
-    @PostMapping("/notice/removeBatch")
+    @PostMapping("/removeBatch")
     @ResponseBody
     public Result removeBatch(@RequestParam("ids[]") Long[] ids) {
 

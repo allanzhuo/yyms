@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2019/6/2 22:03
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/message")
 public class MessageDetailController extends BaseController {
     @Autowired
     private MessageService messageService;
 
-    @GetMapping("/message/detail")
+    @GetMapping("/detail")
     public String index(Model model) {
         return "admin/message_detail";
     }
 
-    @PostMapping("/message/readDetail")
+    @PostMapping("/readDetail")
     @ResponseBody
     public Result read(String recordId, String noticeId) {
         Result result = messageService.getMessageDetail(Long.parseLong(recordId.substring(0,recordId.indexOf("S"))),

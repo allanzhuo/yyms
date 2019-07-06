@@ -17,25 +17,25 @@ import java.util.List;
  * @date: 2019/4/24 19:59
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/menu")
 public class MenuController extends BaseController{
     @Autowired
     private MenuService menuService;
 
-    @GetMapping("/menu")
+    @GetMapping
     public String index(Model model) {
 
         return "admin/menu";
     }
 
-    @RequestMapping("/menu/list")
+    @RequestMapping("/list")
     @ResponseBody
     public List<SysMenuDO> listMenu() {
 
         return menuService.listMenus();
     }
 
-    @GetMapping("/menu/add")
+    @GetMapping("/add")
     public String add(Model model,Long pid,String title) {
         model.addAttribute("pid",pid);
         model.addAttribute("title",title);
@@ -43,7 +43,7 @@ public class MenuController extends BaseController{
         return "admin/menu_add";
     }
 
-    @GetMapping("/menu/edit")
+    @GetMapping("/edit")
     public String edit(Model model,Long id) {
         SysMenuDO menuDO = menuService.getMenuById(id);
         SysMenuDO parentMenuDO;
@@ -59,14 +59,14 @@ public class MenuController extends BaseController{
         return "admin/menu_add";
     }
 
-    @PostMapping("/menu/edit/status")
+    @PostMapping("/edit/status")
     @ResponseBody
     public Result editMenuStatus(Boolean status, Long id) {
 
         return menuService.updateStatusById(status,id);
     }
 
-    @PostMapping("/menu/add")
+    @PostMapping("/add")
     @ResponseBody
     public Result addMenu(SysMenuDO menuDO) {
         menuDO.setCreateUser(getUser().getUserName());
@@ -74,28 +74,28 @@ public class MenuController extends BaseController{
         return menuService.saveMenu(menuDO);
     }
 
-    @PostMapping("/menu/edit")
+    @PostMapping("/edit")
     @ResponseBody
     public Result editMenu(SysMenuDO menuDO) {
         menuDO.setUpdateUser(getUser().getUserName());
         return menuService.updateMenu(menuDO);
     }
 
-    @PostMapping("/menu/remove")
+    @PostMapping("/remove")
     @ResponseBody
     public Result removeMenu(@RequestParam("ids[]")Long[] ids) {
         Result result = menuService.removeMenu(ids);
         return result;
     }
 
-    @PostMapping("/menu/init")
+    @PostMapping("/init")
     @ResponseBody
     public Result listInitMenu() {
         Result result = menuService.listInitMenus();
         return result;
     }
 
-    @PostMapping("/menu/grant")
+    @PostMapping("/grant")
     @ResponseBody
     public Result listGrantMenus(String roleCode) {
         Result result = menuService.listGrantMenus(roleCode);
