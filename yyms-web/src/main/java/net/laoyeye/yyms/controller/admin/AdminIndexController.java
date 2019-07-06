@@ -27,7 +27,7 @@ public class AdminIndexController extends BaseController {
 //    @Autowired
 //    private NoteService noteService;
 
-//    @RequiresPermissions("blog:manage:index")
+    @RequiresPermissions("blog:admin:index")
     @GetMapping("/admin")
     public String index(Model model) {
         SysUserDO user = getUser();

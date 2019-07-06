@@ -7,12 +7,11 @@ import net.laoyeye.yyms.pojo.vo.SysMenuVO;
 import net.laoyeye.yyms.repository.SysMenuRepository;
 import net.laoyeye.yyms.repository.SysRoleMenuRepository;
 import net.laoyeye.yyms.service.MenuService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -71,9 +70,9 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Result listInitMenus() {
+    public Result listInitMenus(String roleCode) {
         //查询父菜单为0的所有菜单
-        List<SysMenuDO> list = sysMenuRepository.findByPidOrderBySortAsc(0L);
+        List<SysMenuDO> list = sysMenuRepository.findByPidOrderBySortAsc(0L,roleCode);
         List<SysMenuVO> listVO = list.stream().map(menuDO -> {
             SysMenuVO menuVO = SysMenuVO.builder()
                     .id(menuDO.getId())
@@ -87,7 +86,7 @@ public class MenuServiceImpl implements MenuService {
         }).collect(toList());
         for (SysMenuVO menuVO : listVO) {
             //查询一级菜单
-            List<SysMenuDO> listChildren = sysMenuRepository.findByPidOrderBySortAsc(menuVO.getId());
+            List<SysMenuDO> listChildren = sysMenuRepository.findByPidOrderBySortAsc(menuVO.getId(),roleCode);
             List<SysMenuVO> listChildrenVO = listChildren.stream().map(menuDO -> {
                 SysMenuVO menuChildrenVO = SysMenuVO.builder()
                         .id(menuDO.getId())
@@ -144,5 +143,17 @@ public class MenuServiceImpl implements MenuService {
             menuVO.setChildren(listChildrenVO);
         }
         return Result.ok(listVO,"授权菜单初始化成功！");
+    }
+
+    @Override
+    public Set<String> listPerms(Long userId) {
+        List<String> perms = sysMenuRepository.listUserPerms(userId);
+        Set<String> permsSet = new HashSet<>();
+        for (String perm : perms) {
+            if (StringUtils.isNotBlank(perm)) {
+                permsSet.addAll(Arrays.asList(perm.trim().split(",")));
+            }
+        }
+        return permsSet;
     }
 }

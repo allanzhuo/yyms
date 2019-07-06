@@ -3,6 +3,7 @@ package net.laoyeye.yyms.realm;
 import lombok.extern.slf4j.Slf4j;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.repository.SysUserRepository;
+import net.laoyeye.yyms.service.MenuService;
 import net.laoyeye.yyms.utils.SpringBeanFactory;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -13,6 +14,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.util.DigestUtils;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * shiro自定义Realm
@@ -24,10 +26,10 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
         Long userId = ((SysUserDO)SecurityUtils.getSubject().getPrincipal()).getId();
-       // MenuService menuService = SpringBeanFactory.getBean(MenuService.class);
-        //Set<String> perms = menuService.listPerms(userId);
+        MenuService menuService = SpringBeanFactory.getBean(MenuService.class);
+        Set<String> perms = menuService.listPerms(userId);
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        // info.setStringPermissions(perms);
+        info.setStringPermissions(perms);
         return info;
     }
 

@@ -75,7 +75,7 @@ public class AppTest {
 //
 //        List<SysMenuDO> all = sysMenuRepository.findAllByOrderBySortAsc();
 //        System.out.println(all);
-        Result result = menuService.listInitMenus();
-        System.out.println(result);
+//        Result result = menuService.listInitMenus();
+//        System.out.println(result);
     }
 }

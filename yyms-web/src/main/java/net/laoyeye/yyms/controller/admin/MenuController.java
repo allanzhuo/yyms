@@ -91,7 +91,8 @@ public class MenuController extends BaseController{
     @PostMapping("/init")
     @ResponseBody
     public Result listInitMenu() {
-        Result result = menuService.listInitMenus();
+        String roleCode = getUser().getSysRoleDO().getRoleCode();
+        Result result = menuService.listInitMenus(roleCode);
         return result;
     }
 

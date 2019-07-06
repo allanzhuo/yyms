@@ -5,6 +5,7 @@ import net.laoyeye.yyms.pojo.domain.SysMenuDO;
 import net.laoyeye.yyms.pojo.vo.SysMenuVO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author laoyeye.net
@@ -25,7 +26,9 @@ public interface MenuService {
     /**根据id批量删除菜单*/
     Result removeMenu(Long[] ids);
     /**根据用户角色查询用户菜单*/
-    Result listInitMenus();
+    Result listInitMenus(String roleCode);
     /**查询授权菜单*/
     Result listGrantMenus(String roleCode);
+    /**查询用户权限*/
+    Set<String> listPerms(Long userId);
 }
