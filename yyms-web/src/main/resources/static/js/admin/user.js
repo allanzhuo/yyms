@@ -3,7 +3,7 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
         , table = layui.table
         , form = layui.form
         , layer = layui.layer;
-    
+
     table.render({
         elem: '#user-table'
         , url: "/admin/user/list"
@@ -15,7 +15,16 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
             , {field: 'userName', width: 150, title: '用户名', align: 'center'}
             , {field: 'nickName', width: 150, title: '昵称', align: 'center'}
             , {field: 'email', width: 150, title: '邮箱', align: 'center'}
-            , {field: 'roleName', width: 150, title: '角色', align: 'center'}
+            , {
+                field: 'roleName', title: '角色', width: 150, align: 'center'
+                , templet: function (d) {
+                    if (d.sysRoleDO == null) {
+                        return '<span>' + '' + '</span>'
+                    } else {
+                        return '<span>' + d.sysRoleDO.roleName + '</span>'
+                    }
+                }
+            }
             , {title: '状态', width: 100, align: 'center', toolbar: '#statusBar'}
             , {field: 'createUser', width: 150, title: '创建人', align: 'center'}
             , {field: 'createTime', width: 200, title: '创建时间', align: 'center'}
@@ -43,9 +52,9 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
     form.on('switch(status)', function (obj) {
         $.post("/admin/user/edit/status", {id: this.value, status: obj.elem.checked}, function (res) {
             if (res.code == 200) {
-                layer.msg(res.msg, {icon:1});
+                layer.msg(res.msg, {icon: 1});
             } else {
-                layer.msg("修改失败," + res.msg, {icon:2});
+                layer.msg("修改失败," + res.msg, {icon: 2});
             }
         });
     });
@@ -57,7 +66,7 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
             layer.confirm('确认删除吗？', function (index) {
                 $.post("/admin/user/remove", {id: data.id}, function (res) {
                     if (res.code == 200) {
-                        layer.msg(res.msg, {icon:1});
+                        layer.msg(res.msg, {icon: 1});
                         var nickName = $("#nickName").val();
                         table.reload('user-table', {
                             page: {
@@ -68,7 +77,7 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
                             }
                         });
                     } else {
-                        layer.msg(res.msg, {icon:2});
+                        layer.msg(res.msg, {icon: 2});
                     }
                 });
                 layer.close(index);
@@ -79,8 +88,8 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
                 title: '编辑用户',
                 shadeClose: true,
                 area: ['500px', '480px'], //宽高
-                content: "/admin/user/edit?id="+data.id
-                ,success:function(layero, index) {
+                content: "/admin/user/edit?id=" + data.id
+                , success: function (layero, index) {
                     form.render();
                 }
             });
@@ -95,8 +104,8 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
                 shadeClose: true,
                 area: ['500px', '480px'], //宽高
                 content: "/admin/user/add"
-                ,success:function(layero, index) {
-                 form.render();
+                , success: function (layero, index) {
+                    form.render();
                 }
             });
         },
@@ -104,7 +113,7 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
             var checkStatus = table.checkStatus('user-table');
             var data = checkStatus.data;
             if (data.length == 0) {
-                layer.msg('请先选择要删除的数据', {time: 3000, icon:0});
+                layer.msg('请先选择要删除的数据', {time: 3000, icon: 0});
                 return;
             }
             layer.confirm("确认要删除选中的【" + data.length + "】条数据吗?", function (index) {
@@ -115,7 +124,7 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
                 }
                 $.post("/admin/user/removeBatch", {ids: ids}, function (res) {
                     if (res.code === 200) {
-                        layer.msg(res.msg, {icon:1});
+                        layer.msg(res.msg, {icon: 1});
                         //执行重载
                         var nickName = $("#nickName").val();
                         table.reload('user-table', {
@@ -127,7 +136,7 @@ layui.use(['form', 'table', 'layer', 'tree'], function () {
                             }
                         });
                     } else {
-                        layer.msg(res.msg, {icon:2});
+                        layer.msg(res.msg, {icon: 2});
                     }
                 });
                 layer.close(index);

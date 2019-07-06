@@ -61,8 +61,9 @@ public class SysUserDO implements Serializable {
     @Column(columnDefinition="varchar(255) COMMENT '个人简介'")
     private String profile;
 
-    @Column(columnDefinition="varchar(50) COMMENT '角色编码'")
-    private String roleCode;
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "role_code", referencedColumnName = "roleCode",columnDefinition="varchar(50) COMMENT '角色编码'")
+    private SysRoleDO sysRoleDO;
 
     @Column(columnDefinition = "varchar(32) COMMENT 'qqOpenId'")
     private String qqOpenId;

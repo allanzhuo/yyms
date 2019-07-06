@@ -21,4 +21,6 @@ public interface SysRoleRepository extends JpaRepository<SysRoleDO, Long>,JpaSpe
     int deleteBatch(Long[] ids);
     /**根据状态查询所有角色*/
     List<SysRoleDO> findAllByRoleStatus(Boolean roleStatus);
+    /**根据角色Code角色查询*/
+    SysRoleDO findByRoleCode(String roleCode);
 }

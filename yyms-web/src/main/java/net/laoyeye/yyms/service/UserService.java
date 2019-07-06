@@ -26,5 +26,5 @@ public interface UserService {
     /**批量删除用户*/
     Result removeBatch(Long[] ids);
     /**新增或删除用户*/
-    Result saveOrUpdateRole(SysUserDO userDO);
+    Result saveOrUpdateRole(SysUserDO userDO, String roleCode);
 }

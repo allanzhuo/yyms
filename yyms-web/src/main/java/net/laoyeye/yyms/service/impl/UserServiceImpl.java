@@ -4,9 +4,9 @@ import net.laoyeye.enums.ResultEnum;
 import net.laoyeye.pojo.Result;
 import net.laoyeye.utils.StringUtils;
 import net.laoyeye.yyms.pojo.domain.SysRoleDO;
-import net.laoyeye.yyms.pojo.domain.SysRoleMenuDO;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
+import net.laoyeye.yyms.repository.SysRoleRepository;
 import net.laoyeye.yyms.repository.SysUserRepository;
 import net.laoyeye.yyms.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -35,6 +35,8 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private SysUserRepository sysUserRepository;
+    @Autowired
+    private SysRoleRepository sysRoleRepository;
 
     @Override
     public Result updatePassword(String oldPassword,String password,String repassword,Long userId) {
@@ -124,7 +126,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result saveOrUpdateRole(SysUserDO userDO) {
+    public Result saveOrUpdateRole(SysUserDO userDO,String roleCode) {
         SysUserDO user = null;
         if (userDO.getId() != null){
             Optional<SysUserDO> sysUserDO = sysUserRepository.findById(userDO.getId());
@@ -132,8 +134,9 @@ public class UserServiceImpl implements UserService {
                     .toBuilder()
                     .nickName(userDO.getNickName())
                     .email(userDO.getEmail())
-                    .roleCode(userDO.getRoleCode())
                     .build();
+            SysRoleDO sysRoleDO = sysRoleRepository.findByRoleCode(roleCode);
+            user.setSysRoleDO(sysRoleDO);
         } else {
             String password = userDO.getUserName()+"123456";
             String pass = DigestUtils.md5DigestAsHex(DigestUtils.md5DigestAsHex(password.getBytes()).getBytes());
@@ -141,6 +144,8 @@ public class UserServiceImpl implements UserService {
                     .password(pass)
                     .avatar("https://images.laoyeye.net/head.png")
                     .build();
+            SysRoleDO sysRoleDO = sysRoleRepository.findByRoleCode(roleCode);
+            user.setSysRoleDO(sysRoleDO);
         }
         sysUserRepository.save(user);
         return Result.ok("编辑用户成功！");

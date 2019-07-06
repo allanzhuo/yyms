@@ -50,7 +50,7 @@
                 <select name="roleCode" lay-verify="required" lay-search>
                     <option value="">请选择</option>
                     <option th:each="role:${roleList}" th:value="${role.roleCode}"
-                            th:text="${role.roleName}" th:selected="${role.roleCode==user?.roleCode}"></option>
+                            th:text="${role.roleName}" th:selected="${role.roleCode==user?.sysRoleDO?.roleCode}"></option>
                 </select>
             </div>
         </div>

@@ -2,7 +2,6 @@ package net.laoyeye.yyms.controller.admin;
 
 import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.controller.BaseController;
-import net.laoyeye.yyms.pojo.domain.SysRoleDO;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
 import net.laoyeye.yyms.service.RoleService;
@@ -77,17 +76,17 @@ public class UserController extends BaseController {
 
     @PostMapping("/add")
     @ResponseBody
-    public Result addUser(SysUserDO userDO) {
+    public Result addUser(SysUserDO userDO,String roleCode) {
         userDO.setCreateUser(getUser().getUserName());
         userDO.setUpdateUser(getUser().getUserName());
-        return userService.saveOrUpdateRole(userDO);
+        return userService.saveOrUpdateRole(userDO,roleCode);
     }
 
     @PostMapping("/edit")
     @ResponseBody
-    public Result editUser(SysUserDO userDO) {
+    public Result editUser(SysUserDO userDO,String roleCode) {
         userDO.setUpdateUser(getUser().getUserName());
-        return userService.saveOrUpdateRole(userDO);
+        return userService.saveOrUpdateRole(userDO,roleCode);
     }
 
 }
