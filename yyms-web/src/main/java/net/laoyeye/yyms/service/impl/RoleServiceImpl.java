@@ -2,7 +2,6 @@ package net.laoyeye.yyms.service.impl;
 
 import net.laoyeye.pojo.Result;
 import net.laoyeye.utils.StringUtils;
-import net.laoyeye.yyms.pojo.domain.SysNoticeDO;
 import net.laoyeye.yyms.pojo.domain.SysRoleDO;
 import net.laoyeye.yyms.pojo.domain.SysRoleMenuDO;
 import net.laoyeye.yyms.pojo.query.BaseQuery;
@@ -64,14 +63,22 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Result removeBatch(Long[] ids) {
-        int i = sysRoleRepository.deleteBatch(ids);
-        return Result.ok("删除选中的【" + i + "】条数据成功！");
+        try {
+            int i = sysRoleRepository.deleteBatch(ids);
+            return Result.ok("删除选中的【" + i + "】条数据成功！");
+        } catch (Exception e){
+            return Result.ok("删除失败，请检查角色是否在使用！");
+        }
     }
 
     @Override
     public Result removeRole(Long id) {
-        sysRoleRepository.deleteById(id);
-        return Result.ok("删除角色成功！");
+        try {
+            sysRoleRepository.deleteById(id);
+            return Result.ok("删除角色成功！");
+        } catch (Exception e){
+            return Result.ok("删除失败，请检查角色是否在使用！");
+        }
     }
 
     @Override
