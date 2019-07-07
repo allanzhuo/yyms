@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/admin/message")
-public class MessageCenterController extends BaseController {
+public class MessageController extends BaseController {
     @Autowired
     private MessageService messageService;
 
@@ -58,5 +58,18 @@ public class MessageCenterController extends BaseController {
     public Result removeBatch(@RequestParam("ids[]") Long[] ids) {
 
         return messageService.removeBatch(ids,getUserId());
+    }
+
+    @GetMapping("/detail")
+    public String detailIndex() {
+        return "admin/message_detail";
+    }
+
+    @PostMapping("/readDetail")
+    @ResponseBody
+    public Result read(String recordId, String noticeId) {
+        Result result = messageService.getMessageDetail(Long.parseLong(recordId.substring(0,recordId.indexOf("S"))),
+                Long.parseLong(noticeId.substring(0,noticeId.indexOf("S"))));
+        return result;
     }
 }
