@@ -4,6 +4,7 @@ import net.laoyeye.pojo.Result;
 import net.laoyeye.yyms.controller.BaseController;
 import net.laoyeye.yyms.pojo.domain.SysMenuDO;
 import net.laoyeye.yyms.service.MenuService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
