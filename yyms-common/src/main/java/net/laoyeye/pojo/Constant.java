@@ -10,5 +10,9 @@ public class Constant {
      * 前后台登录地址
      */
     public static String LOGIN_URL = "/login";
+    /**
+     * 默认头像地址
+     */
+    public static String DEFAULT_HEAD = "https://images.laoyeye.net/head.png";
     
 }

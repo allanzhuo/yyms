@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static net.laoyeye.pojo.Constant.DEFAULT_HEAD;
+
 /**
  * @author laoyeye
  * @Description: 用户信息service
@@ -142,7 +144,7 @@ public class UserServiceImpl implements UserService {
             String pass = DigestUtils.md5DigestAsHex(DigestUtils.md5DigestAsHex(password.getBytes()).getBytes());
             user = userDO.toBuilder()
                     .password(pass)
-                    .avatar("https://images.laoyeye.net/head.png")
+                    .avatar(DEFAULT_HEAD)
                     .build();
             SysRoleDO sysRoleDO = sysRoleRepository.findByRoleCode(roleCode);
             user.setSysRoleDO(sysRoleDO);
