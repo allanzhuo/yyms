@@ -1,0 +1,41 @@
+<!-- 页面标签 -->
+<div class="layadmin-tabsbody-item layui-show">
+    <div class="layui-card layadmin-header yyms-header">
+        <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+            <a href="/admin">主页</a><span lay-separator="">/</span>
+            <a><cite>系统管理</cite></a><span lay-separator="">/</span>
+            <a><cite>日志管理</cite></a>
+        </div>
+    </div>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">昵称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="nickName" id="nick-name" placeholder="昵称" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">操作</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="nickName" id="operation" placeholder="操作" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn" lay-submit="" lay-filter="btn-search">
+                            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-card-body">
+                <table class="layui-table" id="log-table" lay-filter="log-table"></table>
+            </div>
+        </div>
+    </div>
+</div>
