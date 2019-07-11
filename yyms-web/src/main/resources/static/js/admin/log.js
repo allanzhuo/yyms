@@ -14,15 +14,13 @@ layui.use(['form', 'table'], function () {
         , cols: [[
             {type:'checkbox'}
             ,{type: 'numbers'}
-            ,{field: 'userId', width: '15%', title: '用户ID', align:'center'}
-            , {field: 'username', width: '10%', title: '用户名', align:'center'}
-            , {field: 'operation', width: '10%', title: '操作', align:'center'}
-            , {field: 'time', width: '8%', title: '用时', align:'center'}
-            , {field: 'method', width: '37%', title: '方法', align:'center'}
-            , {field: 'params', width: '15%', title: '参数', align:'center'}
+            , {field: 'userName', width: '10%', title: '用户名', align:'center'}
+            , {field: 'operation', width: '10%', title: '用户操作', align:'center'}
+            , {field: 'responseTime', width: '8%', title: '响应时间', align:'center'}
+            , {field: 'requestMethod', width: '37%', title: '请求方法', align:'center'}
+            , {field: 'params', width: '15%', title: '请求参数', align:'center'}
             , {field: 'ip', width: '15%', title: 'IP地址', align:'center'}
-            , {field: 'createTime', width: '17%', title: '创建时间', align:'center'}
-            , {title: '操作', width: 100, align: 'center', toolbar: '#logBar'}
+            , {field: 'createTime', width: '17%', title: '操作时间', align:'center'}
         ]]
         , page: true
     });
@@ -35,7 +33,7 @@ layui.use(['form', 'table'], function () {
                 curr: 1 //重新从第 1 页开始
             }
             , where: {
-                nickName: data.field.nickName,
+                userName: data.field.userName,
                 operation: data.field.operation
             }
         });
