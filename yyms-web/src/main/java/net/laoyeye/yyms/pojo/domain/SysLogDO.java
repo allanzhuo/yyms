@@ -33,8 +33,8 @@ public class SysLogDO implements Serializable {
     @Column(updatable = false, nullable = false, columnDefinition="bigint COMMENT '主键'")
     private Long id;
 
-    @Column(columnDefinition="bigint(20) COMMENT '用户ID'")
-    private String userId;
+    @Column(columnDefinition="varchar(20) COMMENT '用户名'")
+    private String userName;
 
     @Column(columnDefinition="varchar(255) COMMENT '用户操作'")
     private String operation;
