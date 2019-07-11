@@ -1,6 +1,7 @@
 package net.laoyeye.yyms.controller.admin;
 
 import net.laoyeye.pojo.Result;
+import net.laoyeye.yyms.annotation.Log;
 import net.laoyeye.yyms.controller.BaseController;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
 import net.laoyeye.yyms.service.UserService;
@@ -29,6 +30,7 @@ public class AccountController extends BaseController{
         return "admin/account";
     }
 
+    @Log("基本资料设置")
     @PostMapping("/edit")
     @ResponseBody
     public Result edit(SysUserDO userDO) {

@@ -42,7 +42,7 @@ public class SysLogDO implements Serializable {
     @Column(columnDefinition="int(11) COMMENT '响应时间'")
     private int responseTime;
 
-    @Column(columnDefinition="varchar(50) COMMENT '请求方法'")
+    @Column(columnDefinition="varchar(255) COMMENT '请求方法'")
     private String requestMethod;
 
     @Column(columnDefinition="varchar(5000) COMMENT '请求参数'")

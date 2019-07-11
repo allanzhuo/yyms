@@ -12,4 +12,6 @@ import org.springframework.data.domain.Page;
 public interface LogService {
     /**分页查询角色*/
     Page<SysLogDO> list(BaseQuery query, String userName,String operation);
+    /**保存日志*/
+    void save(SysLogDO sysLogDO);
 }

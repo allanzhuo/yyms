@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * @description: 日志管理
  * @author: zhangzhuo
- * @date: 2019/7/11 16:42
+ * @date: 2019/7/11 23:42
  */
 @Slf4j
 @Service
@@ -46,5 +47,11 @@ public class LogServiceImpl implements LogService {
             return cb.and(list.toArray(p));
         };
         return sysLogRepository.findAll(spec, pageable);
+    }
+
+    @Async
+    @Override
+    public void save(SysLogDO sysLogDO) {
+        sysLogRepository.save(sysLogDO);
     }
 }
