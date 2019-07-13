@@ -52,9 +52,9 @@ $(function () {
                 templateUrl: url_prefix + 'log',
                 controller: js_prefix + 'log.js'
             },
-            'users': {
-                templateUrl: url_prefix + 'user',
-                controller: js_prefix + '/user.js'
+            'online': {
+                templateUrl: url_prefix + 'online',
+                controller: js_prefix + 'online.js'
             },
             'settings': {
                 templateUrl: url_prefix + 'settings',
@@ -87,10 +87,6 @@ $(function () {
             'log': {
                 templateUrl: url_prefix + 'log',
                 controller: js_prefix + '/log.js'
-            },
-            'online': {
-                templateUrl: url_prefix + 'online',
-                controller: js_prefix + '/online.js'
             },
             'defaults': 'console' //默认路由
         },
