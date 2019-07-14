@@ -1,0 +1,38 @@
+<!-- 页面标签 -->
+<div class="layadmin-tabsbody-item layui-show">
+    <div class="layui-card layadmin-header yyms-header">
+        <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+            <a href="/admin">主页</a><span lay-separator="">/</span>
+            <a><cite>系统管理</cite></a><span lay-separator="">/</span>
+            <a><cite>在线用户</cite></a>
+        </div>
+    </div>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">用户名</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="userName" id="user-name" placeholder="用户名" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn" lay-submit="" lay-filter="btn-search">
+                            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-card-body">
+                <table class="layui-table" id="online-table" lay-filter="online-table"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="onlineBar">
+    <a class="layui-btn layui-bg-red layui-btn-sm" lay-event="force"><i class="layui-icon">&#xe640;</i>强制退出</a>
+</script>
