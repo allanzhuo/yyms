@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 
 /**
  * @description: 日志管理
- * @author: zhangzhuo
+ * @author: laoyeye.net
  * @date: 2019/7/11 19:41
  */
 public interface LogService {
