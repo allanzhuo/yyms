@@ -11,10 +11,10 @@ spring:
   #数据连接配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://118.25.38.57:3306/yyms?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://xxxxxxx/xxxxxx?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     hikari:
-      username: root
-      password: zhangzhuo321..
+      username: xxxx
+      password: xxxxx
 logging:
   level:
     root: info
