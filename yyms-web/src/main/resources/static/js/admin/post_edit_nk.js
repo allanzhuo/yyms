@@ -14,20 +14,19 @@ layui.use(['element', 'form', 'layer', 'upload'], function () {
         data.field.cover = $("#coverImg").find("img").attr("src");
         $.ajax({
             type: "post"
-            , url: common.url.prefix + "/blog/add"
+            , url: "/admin/post/save"
             , dataType: "json"
             , data: data.field
-            , success: function (json) {
-                common.okMsgHandle(json, msg);
-                if (json.code === common.status.ok) {
-                    location.hash = vipspa.stringifyParam("blogs", {});
+            , success: function (res) {
+                if (res.code === 200) {
+                    // location.hash = vipspa.stringifyParam("blogs", {});
                 }
             }
         });
     };
     //监听提交
     form.on('submit(postSubmit)', function (data) {
-        post(data, false, "发布博文成功！");
+        post(data, false, "发布随笔成功！");
         return false;
     });
 
