@@ -56,9 +56,9 @@ $(function () {
                 templateUrl: url_prefix + 'online',
                 controller: js_prefix + 'online.js'
             },
-            'settings': {
-                templateUrl: url_prefix + 'settings',
-                controller: js_prefix + '/settings.js'
+            'post_edit_md': {
+                templateUrl: url_prefix + 'post/edit',
+                controller: js_prefix + 'post_edit_nk.js'
             },
             'qrcode': {
                 templateUrl: url_prefix + 'settings/qrcode',
