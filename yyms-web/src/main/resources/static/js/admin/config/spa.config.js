@@ -60,9 +60,9 @@ $(function () {
                 templateUrl: url_prefix + 'post/edit',
                 controller: js_prefix + 'post_edit_nk.js'
             },
-            'qrcode': {
-                templateUrl: url_prefix + 'settings/qrcode',
-                controller: js_prefix + '/qrcode.js'
+            'post_edit_md': {
+                templateUrl: url_prefix + 'post/edit/md',
+                controller: js_prefix + 'post_edit_md.js'
             },
             'comment': {
                 templateUrl: url_prefix + 'comment',
