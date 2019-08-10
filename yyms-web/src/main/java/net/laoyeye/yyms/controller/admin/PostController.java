@@ -16,6 +16,6 @@ public class PostController {
     @GetMapping("/edit")
     public String index(Model model) {
 
-        return "admin/post_edit_md";
+        return "admin/post_edit_nk";
     }
 }

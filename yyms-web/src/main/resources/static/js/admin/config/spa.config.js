@@ -56,7 +56,7 @@ $(function () {
                 templateUrl: url_prefix + 'online',
                 controller: js_prefix + 'online.js'
             },
-            'post_edit_md': {
+            'post_edit_nk': {
                 templateUrl: url_prefix + 'post/edit',
                 controller: js_prefix + 'post_edit_nk.js'
             },
