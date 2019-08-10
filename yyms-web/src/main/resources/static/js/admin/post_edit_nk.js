@@ -38,7 +38,7 @@ layui.use(['element', 'form', 'layer', 'upload'], function () {
 
     upload.render({
         elem: '#coverImg' //绑定元素
-        , url: common.url.prefix + '/blog/upload/cover' //上传接口
+        , url: '/blog/upload/cover' //上传接口
         , done: function (res) {
             if (res.code === 200) {
                 $("#coverImg").html('<p><img style="width: 144px;height: 90px;" src="' + res.data + '"></p>');
@@ -82,7 +82,7 @@ $(function () {
             /*'flash', 'insertfile', */'table', 'hr', 'emoticons', 'pagebreak',
             'link', 'unlink', 'about'
         ],
-        uploadJson: common.url.prefix + '/blog/upload',
+        uploadJson: '/blog/upload',
         dialogOffset: 0, //对话框距离页面顶部的位置，默认为0居中，
         allowImageUpload: true,
         allowMediaUpload: true,
