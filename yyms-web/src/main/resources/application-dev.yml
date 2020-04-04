@@ -1,11 +1,6 @@
 #服务器配置
 server:
   port: 8080
-  tomcat:
-      basedir: C:/test
-      uri-encoding: utf-8
-      max-connections: 2000
-      max-threads: 2000
 #项目配置
 spring:
   #数据连接配置
@@ -15,6 +10,11 @@ spring:
     hikari:
       username: xxxx
       password: xxxxx
+  servlet:
+    multipart:
+      max-request-size: 5MB
+      max-file-size: 5MB
+      location: C:/test
 logging:
   level:
     root: info

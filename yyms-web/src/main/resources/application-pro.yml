@@ -1,11 +1,6 @@
 #服务器配置
 server:
   port: 8080
-  tomcat:
-      basedir: /usr/tomcat/temp
-      uri-encoding: utf-8
-      max-connections: 2000
-      max-threads: 2000
 #项目配置
 #不分表数据源配置，注意修改启动类和sysLogDO主键生成策略
 #spring:
@@ -47,6 +42,11 @@ server:
 
 # 多库单表
 spring:
+  servlet:
+    multipart:
+      max-request-size: 5MB
+      max-file-size: 5MB
+      location: /usr/tomcat/temp
   shardingsphere:
     datasource:
       names: ds0,ds1
@@ -77,6 +77,9 @@ spring:
             props:
               worker:
                 id: 123
+    props:
+      sql:
+        show: true
 logging:
   level:
     root: info

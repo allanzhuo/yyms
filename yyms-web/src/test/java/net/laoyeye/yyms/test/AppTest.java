@@ -1,9 +1,11 @@
 package net.laoyeye.yyms.test;
 
-import net.laoyeye.pojo.Result;
+import java.util.List;
+import java.util.Optional;
 import net.laoyeye.yyms.AppStart;
-import net.laoyeye.yyms.pojo.domain.SysMenuDO;
+import net.laoyeye.yyms.pojo.domain.SysLogDO;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
+import net.laoyeye.yyms.repository.SysLogRepository;
 import net.laoyeye.yyms.repository.SysMenuRepository;
 import net.laoyeye.yyms.repository.SysUserRepository;
 import net.laoyeye.yyms.service.MenuService;
@@ -12,9 +14,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  * @description: 测试类
@@ -30,6 +29,9 @@ public class AppTest {
     private SysMenuRepository sysMenuRepository;
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private SysLogRepository sysLogRepository;
 
     @Test
     public void hello() {
@@ -72,10 +74,19 @@ public class AppTest {
 
     @Test
     public void testUser() {
-//
+
+        //
 //        List<SysMenuDO> all = sysMenuRepository.findAllByOrderBySortAsc();
 //        System.out.println(all);
 //        Result result = menuService.listInitMenus();
 //        System.out.println(result);
+
+        Optional<SysLogDO> optional  = sysLogRepository.findById(444271380247588864L);
+        System.out.println(optional.get());
+
+
+        List<SysLogDO> list = sysLogRepository.findByUserName("zhangzhuo");
+        System.out.println(list);
+
     }
 }
