@@ -5,10 +5,12 @@ import java.util.Optional;
 import net.laoyeye.yyms.AppStart;
 import net.laoyeye.yyms.pojo.domain.SysLogDO;
 import net.laoyeye.yyms.pojo.domain.SysUserDO;
+import net.laoyeye.yyms.pojo.domain.document.TestDO;
 import net.laoyeye.yyms.repository.SysLogRepository;
 import net.laoyeye.yyms.repository.SysMenuRepository;
 import net.laoyeye.yyms.repository.SysUserRepository;
 import net.laoyeye.yyms.service.MenuService;
+import net.laoyeye.yyms.service.TestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class AppTest {
 
     @Autowired
     private SysLogRepository sysLogRepository;
+
+    @Autowired
+    private TestService testService;
 
     @Test
     public void hello() {
@@ -89,4 +94,11 @@ public class AppTest {
         System.out.println(list);
 
     }
+
+    @Test
+    public void testEs() {
+        TestDO testDO = testService.queryTest("1");
+        System.out.println(testDO);
+    }
+
 }
