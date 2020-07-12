@@ -12,4 +12,6 @@ public interface TestService {
 
     TestDO queryTest(String id);
 
+    TestDO queryCondition();
+
 }

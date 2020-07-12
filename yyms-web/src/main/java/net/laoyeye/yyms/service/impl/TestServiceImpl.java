@@ -24,4 +24,9 @@ public class TestServiceImpl implements TestService {
         Optional<TestDO> byId = testRepository.findById(id);
         return byId.get();
     }
+
+    @Override
+    public TestDO queryCondition() {
+        return null;
+    }
 }
